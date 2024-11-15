@@ -1,4 +1,4 @@
-package com.app;
+package com.model;
 
 import java.io.FileWriter;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.app;
+package com.model;
 
 /**
  * The Word class represents a word with its attributes, including its
