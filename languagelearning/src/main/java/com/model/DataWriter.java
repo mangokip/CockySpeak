@@ -1,4 +1,4 @@
-package com.app;
+package com.model;
 
 import java.io.File;
 import java.io.FileReader;

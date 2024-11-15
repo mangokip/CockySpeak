@@ -1,4 +1,4 @@
-package com.app;
+package com.model;
 
 /**
  * The Genre enum represents the different grammatical categories
