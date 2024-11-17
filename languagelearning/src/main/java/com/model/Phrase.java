@@ -1,5 +1,4 @@
 package com.model;
-
 /**
  * The Phrase class represents a phrase with its original text, 
  * translation, and pronunciation guide.
