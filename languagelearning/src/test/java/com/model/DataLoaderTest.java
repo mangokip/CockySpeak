@@ -18,18 +18,18 @@ class DataLoaderTest {
 
     @BeforeEach
     public void setup() {
-        userList = DataLoader.loadUsersFromResource("languagelearning/src/test/java/com/data/words.json");
+        userList = DataLoader.loadUsersFromResource("languagelearning/src/test/resources/data/user.json");
 
     }
 
     @AfterEach
     public void tearDown() {
-        DataWriter.saveUsers(userList, "languagelearning/src/test/java/com/data/words.json");
+        DataWriter.saveUsers(userList, "languagelearning/src/test/resources/data/user.json");
     }
 
     @Test
     public void testGetUsersSize() {
-        userList = DataLoader.loadUsersFromResource("languagelearning/src/test/java/com/data/words.json");
+        userList = DataLoader.loadUsersFromResource("languagelearning/src/test/resources/data/user.json");
         assertEquals(12, userList.size(), "User list size should match the test setup with only 1 user.");
     }
 
@@ -37,14 +37,14 @@ class DataLoaderTest {
     @Test
     public void testGetUsersSizeZero() {
         userList.clear();
-        DataWriter.saveUsers(userList, "languagelearning/src/test/java/com/data/words.json");
-        userList = DataLoader.loadUsersFromResource("languagelearning/src/test/java/com/data/words.json");
+        DataWriter.saveUsers(userList, "languagelearning/src/test/resources/data/user.json");
+        userList = DataLoader.loadUsersFromResource("languagelearning/src/test/resources/data/user.json");
         assertEquals(0, userList.size(), "User list size should be zero after clearing and saving an empty list.");
     }
 
     @Test
     public void testLoadWords() {
-        Map<String, List<Word>> languageWords = DataLoader.loadWordsFromResource("languagelearning/src/test/resources/data/words.json");
+        Map<String, List<Word>> languageWords = DataLoader.loadWordsFromResource("languagelearning/src/test/resources/data/user.json");
         assertNotNull(languageWords);
         assertTrue(languageWords.size() > 0);
 
