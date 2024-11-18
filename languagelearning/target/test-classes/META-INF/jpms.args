@@ -1,4 +1,0 @@
---patch-module
-com.language=_
---add-reads
-com.language=ALL-UNNAMED
