@@ -1,34 +1,34 @@
-/home/bryce-klein/CSCE247/CockySpeak/languagelearning/src/main/java/com/narration/Narriator.java
-/home/bryce-klein/CSCE247/CockySpeak/languagelearning/src/main/java/com/language/App.java
-/home/bryce-klein/CSCE247/CockySpeak/languagelearning/src/main/java/com/model/IntermediateState.java
-/home/bryce-klein/CSCE247/CockySpeak/languagelearning/src/main/java/com/model/DataWriter.java
-/home/bryce-klein/CSCE247/CockySpeak/languagelearning/src/main/java/com/model/CockySpeakUI.java
-/home/bryce-klein/CSCE247/CockySpeak/languagelearning/src/main/java/com/model/LanguageList.java
-/home/bryce-klein/CSCE247/CockySpeak/languagelearning/src/main/java/com/controllers/PrimaryController.java
-/home/bryce-klein/CSCE247/CockySpeak/languagelearning/src/main/java/com/model/State.java
-/home/bryce-klein/CSCE247/CockySpeak/languagelearning/src/main/java/com/model/User.java
-/home/bryce-klein/CSCE247/CockySpeak/languagelearning/src/main/java/com/model/WordList.java
-/home/bryce-klein/CSCE247/CockySpeak/languagelearning/src/main/java/com/model/CockySpeak.java
-/home/bryce-klein/CSCE247/CockySpeak/languagelearning/src/main/java/com/model/Question.java
-/home/bryce-klein/CSCE247/CockySpeak/languagelearning/src/main/java/com/model/Phrase.java
-/home/bryce-klein/CSCE247/CockySpeak/languagelearning/src/main/java/com/model/Lesson.java
-/home/bryce-klein/CSCE247/CockySpeak/languagelearning/src/main/java/com/model/UserList.java
-/home/bryce-klein/CSCE247/CockySpeak/languagelearning/src/main/java/com/model/DataLoader.java
-/home/bryce-klein/CSCE247/CockySpeak/languagelearning/src/main/java/com/controllers/SecondaryController.java
-/home/bryce-klein/CSCE247/CockySpeak/languagelearning/src/main/java/com/model/DataConstants.java
-/home/bryce-klein/CSCE247/CockySpeak/languagelearning/src/main/java/com/model/BeginnerState.java
-/home/bryce-klein/CSCE247/CockySpeak/languagelearning/src/main/java/com/model/ProgressTracker.java
-/home/bryce-klein/CSCE247/CockySpeak/languagelearning/src/main/java/com/narration/VoiceList.java
-/home/bryce-klein/CSCE247/CockySpeak/languagelearning/src/main/java/com/model/Flashcard.java
-/home/bryce-klein/CSCE247/CockySpeak/languagelearning/src/main/java/com/model/TrueFalse.java
-/home/bryce-klein/CSCE247/CockySpeak/languagelearning/src/main/java/com/model/FillBlank.java
-/home/bryce-klein/CSCE247/CockySpeak/languagelearning/src/main/java/module-info.java
-/home/bryce-klein/CSCE247/CockySpeak/languagelearning/src/main/java/com/model/ExpertState.java
-/home/bryce-klein/CSCE247/CockySpeak/languagelearning/src/main/java/com/model/VocabularyMatching.java
-/home/bryce-klein/CSCE247/CockySpeak/languagelearning/src/main/java/com/model/PhraseList.java
-/home/bryce-klein/CSCE247/CockySpeak/languagelearning/src/main/java/com/narration/Main.java
-/home/bryce-klein/CSCE247/CockySpeak/languagelearning/src/main/java/com/model/MultipleChoice.java
-/home/bryce-klein/CSCE247/CockySpeak/languagelearning/src/main/java/com/model/Notification.java
-/home/bryce-klein/CSCE247/CockySpeak/languagelearning/src/main/java/com/model/Genre.java
-/home/bryce-klein/CSCE247/CockySpeak/languagelearning/src/main/java/com/model/Language.java
-/home/bryce-klein/CSCE247/CockySpeak/languagelearning/src/main/java/com/model/Word.java
+C:\Users\wdinh\CSCE 247\CockySpeak-1\languagelearning\src\main\java\com\model\Phrase.java
+C:\Users\wdinh\CSCE 247\CockySpeak-1\languagelearning\src\main\java\com\model\Language.java
+C:\Users\wdinh\CSCE 247\CockySpeak-1\languagelearning\src\main\java\com\model\State.java
+C:\Users\wdinh\CSCE 247\CockySpeak-1\languagelearning\src\main\java\com\language\App.java
+C:\Users\wdinh\CSCE 247\CockySpeak-1\languagelearning\src\main\java\com\model\BeginnerState.java
+C:\Users\wdinh\CSCE 247\CockySpeak-1\languagelearning\src\main\java\com\narration\VoiceList.java
+C:\Users\wdinh\CSCE 247\CockySpeak-1\languagelearning\src\main\java\com\model\Flashcard.java
+C:\Users\wdinh\CSCE 247\CockySpeak-1\languagelearning\src\main\java\com\narration\Main.java
+C:\Users\wdinh\CSCE 247\CockySpeak-1\languagelearning\src\main\java\com\model\ExpertState.java
+C:\Users\wdinh\CSCE 247\CockySpeak-1\languagelearning\src\main\java\com\model\Question.java
+C:\Users\wdinh\CSCE 247\CockySpeak-1\languagelearning\src\main\java\com\model\ProgressTracker.java
+C:\Users\wdinh\CSCE 247\CockySpeak-1\languagelearning\src\main\java\com\model\VocabularyMatching.java
+C:\Users\wdinh\CSCE 247\CockySpeak-1\languagelearning\src\main\java\com\model\User.java
+C:\Users\wdinh\CSCE 247\CockySpeak-1\languagelearning\src\main\java\com\model\Word.java
+C:\Users\wdinh\CSCE 247\CockySpeak-1\languagelearning\src\main\java\com\model\Lesson.java
+C:\Users\wdinh\CSCE 247\CockySpeak-1\languagelearning\src\main\java\com\model\LanguageList.java
+C:\Users\wdinh\CSCE 247\CockySpeak-1\languagelearning\src\main\java\com\model\CockySpeak.java
+C:\Users\wdinh\CSCE 247\CockySpeak-1\languagelearning\src\main\java\com\model\MultipleChoice.java
+C:\Users\wdinh\CSCE 247\CockySpeak-1\languagelearning\src\main\java\module-info.java
+C:\Users\wdinh\CSCE 247\CockySpeak-1\languagelearning\src\main\java\com\model\CockySpeakUI.java
+C:\Users\wdinh\CSCE 247\CockySpeak-1\languagelearning\src\main\java\com\model\TrueFalse.java
+C:\Users\wdinh\CSCE 247\CockySpeak-1\languagelearning\src\main\java\com\model\Notification.java
+C:\Users\wdinh\CSCE 247\CockySpeak-1\languagelearning\src\main\java\com\model\UserList.java
+C:\Users\wdinh\CSCE 247\CockySpeak-1\languagelearning\src\main\java\com\model\PhraseList.java
+C:\Users\wdinh\CSCE 247\CockySpeak-1\languagelearning\src\main\java\com\model\WordList.java
+C:\Users\wdinh\CSCE 247\CockySpeak-1\languagelearning\src\main\java\com\model\Genre.java
+C:\Users\wdinh\CSCE 247\CockySpeak-1\languagelearning\src\main\java\com\model\DataLoader.java
+C:\Users\wdinh\CSCE 247\CockySpeak-1\languagelearning\src\main\java\com\controllers\SecondaryController.java
+C:\Users\wdinh\CSCE 247\CockySpeak-1\languagelearning\src\main\java\com\model\DataWriter.java
+C:\Users\wdinh\CSCE 247\CockySpeak-1\languagelearning\src\main\java\com\narration\Narriator.java
+C:\Users\wdinh\CSCE 247\CockySpeak-1\languagelearning\src\main\java\com\controllers\PrimaryController.java
+C:\Users\wdinh\CSCE 247\CockySpeak-1\languagelearning\src\main\java\com\model\DataConstants.java
+C:\Users\wdinh\CSCE 247\CockySpeak-1\languagelearning\src\main\java\com\model\FillBlank.java
+C:\Users\wdinh\CSCE 247\CockySpeak-1\languagelearning\src\main\java\com\model\IntermediateState.java
