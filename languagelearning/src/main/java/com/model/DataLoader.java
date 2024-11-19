@@ -66,73 +66,113 @@ public class DataLoader extends DataConstants {
                 content.append(line).append("\n");
             }
 
-            System.out.println("File content loaded: " + content.toString());  // Confirm file content here
             JSONArray usersJSON = (JSONArray) new JSONParser().parse(content.toString());
-            System.out.println("Parsed JSON array: " + usersJSON.toString());  // Confirm JSON parsing here
 
-            for (int i = 0; i < usersJSON.size(); i++) {
-                JSONObject userJSON = (JSONObject) usersJSON.get(i);
-
-                String username = (String) userJSON.get(USER_NAME);
-                String password = (String) userJSON.get(PASSWORD);
-                String email = (String) userJSON.get(EMAIL);
-
-                if (username == null || password == null || email == null) {
-                    System.err.println("User data missing or invalid at index " + i);
-                    continue;
-                }
-
-                User user = new User(username, password, email);
-                users.add(user);
-                System.out.println("Successfully loaded user: " + user.getUserName());
-            }
-
-            System.out.println("Total users loaded: " + users.size());
-            return users;
-        } catch (IOException | ParseException e) {
-            System.err.println("Error loading users: " + e.getMessage());
-            e.printStackTrace();
-        }
-
-        return users;
-    }
-
-    /**
-     * TESTER
-     *
-     */
-    public static ArrayList<User> loadUsersFromResource(String filePath) {
-        ArrayList<User> users = new ArrayList<>();
-        System.out.println("Attempting to load users from resource: " + filePath);
-        try (InputStream inputStream = DataLoader.class.getResourceAsStream(filePath); InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8); BufferedReader reader = new BufferedReader(inputStreamReader)) {
-            if (inputStream == null) {
-                System.err.println("Resource file not found: " + filePath);
-                return users;
-            }
-            StringBuilder content = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                content.append(line).append("\n");
-            }
-            System.out.println("File content loaded: " + content.toString());  // Confirm file content here
-            JSONArray usersJSON = (JSONArray) new JSONParser().parse(content.toString());
-            System.out.println("Parsed JSON array: " + usersJSON.toString());  // Confirm JSON parsing here
             for (Object obj : usersJSON) {
                 JSONObject userJSON = (JSONObject) obj;
                 String username = (String) userJSON.get(USER_NAME);
                 String password = (String) userJSON.get(PASSWORD);
                 String email = (String) userJSON.get(EMAIL);
-                users.add(new User(username, password, email));
-                System.out.println("Successfully loaded user: " + username);
+
+                if (username == null || password == null || email == null) {
+                    System.err.println("Invalid user entry in file");
+                    continue;
+                }
+
+                User user = new User(username, password, email);
+                users.add(user);
             }
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
-        System.out.println("Total users loaded in method: " + users.size());  // Verify loaded users count
+
         return users;
     }
 
     /**
+     * Loads users from a resource path
+     *
+     * @param filePath the resource path of the JSON file
+     * @return ArrayList<User> of users
+     */
+    public static ArrayList<User> loadUsersFromResource(String filePath) {
+        ArrayList<User> users = new ArrayList<>();
+
+        try (InputStream inputStream = DataLoader.class.getClassLoader().getResourceAsStream(filePath)) {
+            if (inputStream == null) {
+                System.err.println("Resource file not found: " + filePath);
+                return users;
+            }
+
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
+                StringBuilder content = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    content.append(line).append("\n");
+                }
+
+                JSONArray usersJSON = (JSONArray) new JSONParser().parse(content.toString());
+
+                for (Object obj : usersJSON) {
+                    JSONObject userJSON = (JSONObject) obj;
+                    String username = (String) userJSON.get("username");
+                    String password = (String) userJSON.get("password");
+                    String email = (String) userJSON.get("email");
+
+                    if (username == null || password == null || email == null) {
+                        System.err.println("Invalid user entry in resource");
+                        continue;
+                    }
+
+                    users.add(new User(username, password, email));
+                }
+            }
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+
+        return users;
+    }
+
+    /**
+     * Loads phrases from the JSON file and returns them as a list of Phrase
+     * objects.
+     *
+     * @return List of Phrase objects
+     */
+    public static List<Phrase> loadPhrases() {
+        List<Phrase> phrases = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(PHRASE_FILE))) {
+            StringBuilder content = new StringBuilder();
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                content.append(line).append("\n");
+            }
+
+            JSONObject phrasesJSON = (JSONObject) new JSONParser().parse(content.toString());
+            JSONArray phrasesArray = (JSONArray) phrasesJSON.get("Spanish");
+
+            for (Object obj : phrasesArray) {
+                JSONObject phraseJSON = (JSONObject) obj;
+
+                String text = (String) phraseJSON.get("text");
+                String translation = (String) phraseJSON.get("translation");
+                String pronounce = (String) phraseJSON.get("pronounce");
+
+                if (text != null && translation != null && pronounce != null) {
+                    phrases.add(new Phrase(text, translation, pronounce));
+                }
+            }
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+
+        return phrases;
+    }
+
+      /**
      * Loads words from the JSON file and returns them as a list of Word
      * objects.
      *
@@ -299,69 +339,41 @@ public class DataLoader extends DataConstants {
     }
 
     /**
-     * Loads phrases from the JSON file and returns them as a list of Phrase
+     * Loads phrases from a resource path and returns them as a list of Phrase
      * objects.
      *
+     * @param filePath the resource path of the JSON file
      * @return List of Phrase objects
      */
-    public static List<Phrase> loadPhrases() {
-        List<Phrase> phrases = new ArrayList<>();
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(PHRASE_FILE))) {
-            StringBuilder content = new StringBuilder();
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                content.append(line).append("\n");
-            }
-
-            JSONObject phrasesJSON = (JSONObject) new JSONParser().parse(content.toString());
-            JSONArray phrasesArray = (JSONArray) phrasesJSON.get("Spanish");
-
-            for (Object obj : phrasesArray) {
-                JSONObject phraseJSON = (JSONObject) obj;
-
-                String text = (String) phraseJSON.get("text");
-                String translation = (String) phraseJSON.get("translation");
-                String pronounce = (String) phraseJSON.get("pronounce");
-
-                if (text != null && translation != null && pronounce != null) {
-                    phrases.add(new Phrase(text, translation, pronounce));
-                    System.out.println("Loaded phrase: " + text);
-                } else {
-                    System.out.println("Error: One or more fields are null for phrase entry.");
-                }
-            }
-        } catch (IOException | ParseException e) {
-            System.err.println("Error loading phrases: " + e.getMessage());
-        }
-
-        return phrases;
-    }
-
     public static List<Phrase> loadPhrasesFromResource(String filePath) {
         List<Phrase> phrases = new ArrayList<>();
 
-        try (InputStream inputStream = DataLoader.class.getResourceAsStream(filePath); InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8); BufferedReader reader = new BufferedReader(inputStreamReader)) {
-
-            StringBuilder content = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                content.append(line).append("\n");
+        try (InputStream inputStream = DataLoader.class.getClassLoader().getResourceAsStream(filePath)) {
+            if (inputStream == null) {
+                System.err.println("Resource file not found: " + filePath);
+                return phrases;
             }
 
-            JSONObject phrasesJSON = (JSONObject) new JSONParser().parse(content.toString());
-            JSONArray phrasesArray = (JSONArray) phrasesJSON.get("Spanish");
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
+                StringBuilder content = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    content.append(line).append("\n");
+                }
 
-            for (Object obj : phrasesArray) {
-                JSONObject phraseJSON = (JSONObject) obj;
+                JSONObject phrasesJSON = (JSONObject) new JSONParser().parse(content.toString());
+                JSONArray phrasesArray = (JSONArray) phrasesJSON.get("Spanish");
 
-                String text = (String) phraseJSON.get("text");
-                String translation = (String) phraseJSON.get("translation");
-                String pronounce = (String) phraseJSON.get("pronounce");
+                for (Object obj : phrasesArray) {
+                    JSONObject phraseJSON = (JSONObject) obj;
 
-                if (text != null && translation != null && pronounce != null) {
-                    phrases.add(new Phrase(text, translation, pronounce));
+                    String text = (String) phraseJSON.get("text");
+                    String translation = (String) phraseJSON.get("translation");
+                    String pronounce = (String) phraseJSON.get("pronounce");
+
+                    if (text != null && translation != null && pronounce != null) {
+                        phrases.add(new Phrase(text, translation, pronounce));
+                    }
                 }
             }
         } catch (IOException | ParseException e) {
@@ -402,40 +414,51 @@ public class DataLoader extends DataConstants {
                     Flashcard phraseFlashcard = new Flashcard(text, translation, pronunciation);
                     flashcards.add(phraseFlashcard);
                 }
-            } else {
-                System.err.println("No phrases found under 'Spanish' key in the JSON file.");
             }
         } catch (IOException | ParseException e) {
-            System.err.println("Error loading phrases: " + e.getMessage());
+            e.printStackTrace();
         }
 
         return flashcards;
     }
 
+    /**
+     * Loads phrases from a resource path and returns them as a list of Flashcard
+     * objects.
+     *
+     * @param filePath the resource path of the JSON file
+     * @return List of Flashcard objects
+     */
     public static List<Flashcard> loadPhraseCardsFromResource(String filePath) {
         List<Flashcard> flashcards = new ArrayList<>();
 
-        try (InputStream inputStream = DataLoader.class.getResourceAsStream(filePath); InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8); BufferedReader reader = new BufferedReader(inputStreamReader)) {
-
-            StringBuilder content = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                content.append(line).append("\n");
+        try (InputStream inputStream = DataLoader.class.getClassLoader().getResourceAsStream(filePath)) {
+            if (inputStream == null) {
+                System.err.println("Resource file not found: " + filePath);
+                return flashcards;
             }
 
-            JSONObject phrasesJSON = (JSONObject) new JSONParser().parse(content.toString());
-            JSONArray phrasesArray = (JSONArray) phrasesJSON.get("Spanish");
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
+                StringBuilder content = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    content.append(line).append("\n");
+                }
 
-            if (phrasesArray != null) {
-                for (Object obj : phrasesArray) {
-                    JSONObject phraseObject = (JSONObject) obj;
+                JSONObject phrasesJSON = (JSONObject) new JSONParser().parse(content.toString());
+                JSONArray phrasesArray = (JSONArray) phrasesJSON.get("Spanish");
 
-                    String text = (String) phraseObject.get("text");
-                    String translation = (String) phraseObject.get("translation");
-                    String pronunciation = (String) phraseObject.get("pronounce");
+                if (phrasesArray != null) {
+                    for (Object obj : phrasesArray) {
+                        JSONObject phraseObject = (JSONObject) obj;
 
-                    Flashcard phraseFlashcard = new Flashcard(text, translation, pronunciation);
-                    flashcards.add(phraseFlashcard);
+                        String text = (String) phraseObject.get("text");
+                        String translation = (String) phraseObject.get("translation");
+                        String pronunciation = (String) phraseObject.get("pronounce");
+
+                        Flashcard phraseFlashcard = new Flashcard(text, translation, pronunciation);
+                        flashcards.add(phraseFlashcard);
+                    }
                 }
             }
         } catch (IOException | ParseException e) {
@@ -446,9 +469,7 @@ public class DataLoader extends DataConstants {
     }
 
     /**
-     * Main method to test the DataLoader class. Loads lessons from the JSON
-     * file and prints the file's content to the console. If no lessons are
-     * loaded or the file is not found, it prints an appropriate message.
+     * Main method to test the DataLoader class.
      *
      * @param args command-line arguments (not used)
      */
@@ -456,6 +477,5 @@ public class DataLoader extends DataConstants {
         DataLoader dataLoader = new DataLoader();
         dataLoader.loadLessons();
         loadUsers();
-
     }
 }
