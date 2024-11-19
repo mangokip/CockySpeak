@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.controllers.ProfileController" spacing="10" alignment="CENTER">
+    <children>
+        <Label text="Profile" style="-fx-font-size: 20; -fx-font-weight: bold;"/>
+        <Label text="Name: John Doe"/>
+        <Label text="Progress: 75%"/>
+        <Button text="Back to Home" onAction="#goToHome"/>
+    </children>
+</VBox>
