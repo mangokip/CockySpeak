@@ -1,5 +1,9 @@
 package com.language;
 
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.scene.paint.*;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
