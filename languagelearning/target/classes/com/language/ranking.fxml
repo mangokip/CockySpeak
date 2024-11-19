@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.controllers.RankingController" spacing="10" alignment="CENTER">
+    <children>
+        <Label text="Ranking" style="-fx-font-size: 20; -fx-font-weight: bold;"/>
+        <ListView fx:id="rankingList" prefWidth="300" prefHeight="500"/>
+        <Button text="Back to Home" onAction="#goToHome"/>
+    </children>
+</VBox>
