@@ -13,31 +13,6 @@
     </properties>
 
     <dependencies>
-<<<<<<< HEAD
-        <!-- JavaFX Dependencies -->
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-controls</artifactId>
-            <version>${javafx.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-fxml</artifactId>
-            <version>${javafx.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-base</artifactId>
-            <version>${javafx.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-graphics</artifactId>
-            <version>${javafx.version}</version>
-        </dependency>
-
-        <!-- JSON Simple for JSON Handling -->
-=======
         <!-- JavaFX Controls -->
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -53,7 +28,6 @@
         </dependency>
 
         <!-- JSON Handling -->
->>>>>>> 33a929dfaf758641fb208df37213f98483cefadc
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
