@@ -34,11 +34,7 @@
             <version>1.1.1</version>
         </dependency>
 
-<<<<<<< HEAD
-        <!-- JLayer for MP3 Playback -->
-=======
         <!-- Sound Libraries -->
->>>>>>> 33a929dfaf758641fb208df37213f98483cefadc
         <dependency>
             <groupId>javazoom</groupId>
             <artifactId>jlayer</artifactId>
@@ -48,23 +44,8 @@
         <!-- AWS SDK Dependencies -->
         <dependency>
             <groupId>software.amazon.awssdk</groupId>
-<<<<<<< HEAD
-            <artifactId>sdk-core</artifactId>
-            <version>2.20.143</version>
-        </dependency>
-        <dependency>
-            <groupId>software.amazon.awssdk</groupId>
-            <artifactId>polly</artifactId>
-            <version>2.20.143</version>
-        </dependency>
-        <dependency>
-            <groupId>software.amazon.awssdk</groupId>
-            <artifactId>regions</artifactId>
-            <version>2.20.143</version>
-=======
             <artifactId>polly</artifactId>
             <version>2.20.123</version>
->>>>>>> 33a929dfaf758641fb208df37213f98483cefadc
         </dependency>
 
         <!-- SLF4J Logging -->
@@ -106,11 +87,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-<<<<<<< HEAD
-                <version>3.8.1</version>
-=======
                 <version>3.11.0</version>
->>>>>>> 33a929dfaf758641fb208df37213f98483cefadc
                 <configuration>
                     <release>11</release>
                 </configuration>
@@ -121,29 +98,6 @@
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
-<<<<<<< HEAD
-                <configuration>
-                    <mainClass>com.language.App</mainClass>
-                    <options>
-                        <option>--module-path</option>
-                        <option>${project.build.directory}/classes</option>
-                        <option>--add-modules</option>
-                        <option>javafx.controls,javafx.fxml,javafx.graphics,javafx.base</option>
-                    </options>
-                </configuration>
-            </plugin>
-
-            <!-- Maven Surefire Plugin for JUnit 5 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
-                <configuration>
-                    <includes>
-                        <include>**/*Test.java</include>
-                    </includes>
-                </configuration>
-=======
                 <executions>
                     <execution>
                         <id>default-cli</id>
@@ -155,7 +109,6 @@
                         </configuration>
                     </execution>
                 </executions>
->>>>>>> 33a929dfaf758641fb208df37213f98483cefadc
             </plugin>
         </plugins>
     </build>
