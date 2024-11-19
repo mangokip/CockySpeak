@@ -1,0 +1,96 @@
+/* Root style for the application */
+.root {
+    -fx-font-size: 16pt;
+    -fx-font-family: "Helvetica";
+    -fx-background-color: #6bc9c8;
+    -fx-text-fill: #ffffff;
+  }
+  
+  /* Label styling for text elements */
+  .label {
+    -fx-text-fill: #ffffff;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 24px;
+  }
+  
+  /* Button styling for interactive elements */
+  .button {
+    -fx-background-color: #f06179;
+    -fx-text-fill: #ffffff;
+    -fx-font-family: "Helvetica";
+    -fx-font-size: 14pt;
+    -fx-padding: 10px;
+    -fx-background-radius: 15px;
+  }
+  
+  /* Special styling for navigation buttons */
+  .nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-font-size: 12pt;
+  }
+  
+  /* Styling for the flashcard box */
+  .flashcard {
+    -fx-background-color: #fdd75c;
+    -fx-background-radius: 15px;
+    -fx-border-radius: 15px;
+    -fx-padding: 20px;
+    -fx-font-size: 24pt;
+    -fx-font-family: "Arial";
+    -fx-text-fill: black;
+    -fx-alignment: center;
+  }
+  
+  /* Highlighted text on flashcards */
+  .flashcard-highlight {
+    -fx-text-fill: #f06179;
+    -fx-font-weight: bold;
+  }
+  
+  /* Input field styling */
+  .text-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #fdd75c;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+    -fx-text-fill: #000000;
+    -fx-font-family: "Arial";
+  }
+  
+  /* Tab styling for Login/Sign-Up */
+  .tab {
+    -fx-background-color: #fdd75c;
+    -fx-text-fill: #000000;
+    -fx-font-weight: bold;
+    -fx-padding: 10px;
+    -fx-font-size: 14pt;
+  }
+  
+  .tab:selected {
+    -fx-background-color: #f06179;
+    -fx-text-fill: #ffffff;
+  }
+  
+  /* Dropdown styling */
+  .combo-box {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #fdd75c;
+    -fx-border-radius: 5px;
+    -fx-font-size: 14pt;
+  }
+  
+  /* Profile and Navigation Styling */
+  .profile-section {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #f06179;
+    -fx-border-radius: 10px;
+    -fx-padding: 10px;
+  }
+  
+  .nav-bar {
+    -fx-background-color: #fdd75c;
+    -fx-font-size: 12pt;
+    -fx-alignment: center;
+  }
+  
