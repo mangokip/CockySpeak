@@ -93,4 +93,8 @@
     -fx-font-size: 12pt;
     -fx-alignment: center;
   }
+
+  .loginVbox{
+    -fx-background-color: linear-gradient(to bottom right, #00a8ff, #0072ff);
+}
   
