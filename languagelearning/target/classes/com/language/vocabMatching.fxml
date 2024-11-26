@@ -69,3 +69,31 @@
         </VBox>
     </children>
 </StackPane>
+
+<!-- Bottom Navigation Bar -->
+    <HBox alignment="CENTER" prefHeight="60.0" spacing="20" styleClass="bottom-bar" style="-fx-background-color: #f0f0f0; -fx-padding: 10;">
+        <!-- Home Button -->
+        <VBox alignment="CENTER" onMouseClicked="#handleHome" spacing="5" styleClass="nav-button">
+            <Label styleClass="icon" text="🏠" />
+            <Label styleClass="nav-text" text="Home" />
+        </VBox>
+
+        <!-- Ranking Button -->
+        <VBox alignment="CENTER" onMouseClicked="#handleRanking" spacing="5" styleClass="nav-button">
+            <Label styleClass="icon" text="🏆" />
+            <Label styleClass="nav-text" text="Ranking" />
+        </VBox>
+
+        <!-- Flashcards Button -->
+        <VBox alignment="CENTER" onMouseClicked="#handleFlashcards" spacing="5" styleClass="nav-button">
+            <Label styleClass="icon" text="📘" />
+            <Label styleClass="nav-text" text="Flashcards" />
+        </VBox>
+
+        <!-- Profile Button -->
+        <VBox alignment="CENTER" onMouseClicked="#handleProfile" spacing="5" styleClass="nav-button">
+            <Label styleClass="icon" text="👤" />
+            <Label styleClass="nav-text" text="Profile" />
+        </VBox>
+    </HBox>
+</VBox>
