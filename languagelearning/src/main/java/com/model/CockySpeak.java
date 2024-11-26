@@ -138,6 +138,7 @@ public class CockySpeak {
         return true;
     }
 
+
     /**
      * Logs out the current user and saves progress.
      */
@@ -275,5 +276,10 @@ public class CockySpeak {
     public Language getCurrentLanguage() {
         return currentLanguage;
     }
+
+    public List<Flashcard> getFlashcards() {
+        return this.flashcards;
+    }
+    
 
 }
