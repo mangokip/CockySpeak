@@ -160,3 +160,16 @@
 .nav-button:active .nav-text {
 -fx-text-fill: #007bff; /* Matches active button icon color */
 }
+
+.loginSubPane{
+  -fx-background-color: #fdd75c;
+  -fx-background-radius: 20px;
+  -fx-border-radius: 20px;
+}
+
+.errorMessage {
+  -fx-text-fill: red;
+  -fx-font-size: 10px;
+  -fx-font-weight: bold;
+  -fx-font-style: italic;
+}
