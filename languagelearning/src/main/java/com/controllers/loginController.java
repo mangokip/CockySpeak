@@ -38,11 +38,17 @@ public class loginController {
 
         try{
             cockySpeak.login(userName, password);
-            App.setRoot("flashcard");
+            App.setRoot("flashcards");
         } catch (Exception e) {
             errorMessage.setVisible(true);
         }
     }
+
+    @FXML
+    private void handleSignupButtonAction(ActionEvent event) throws IOException {
+        App.setRoot("signup");
+    }
+
     @FXML
     private void switchToSecondary() throws IOException {
         Narriator.playSound("Je mapell HELLO WORLD!");

@@ -15,7 +15,7 @@
    <children>
       <Pane layoutY="174.0" prefHeight="402.0" prefWidth="430.0" styleClass="loginSubPane">
          <children>
-            <Button fx:id="signupButton" layoutX="88.0" layoutY="265.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="92.0" text="Signup" />
+            <Button fx:id="signupButton" layoutX="88.0" layoutY="265.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="92.0" text="Signup" onAction="#handleSignupButtonAction" />
             <TextField fx:id="userNameTextField" layoutX="88.0" layoutY="91.0" promptText="UserName" />
             <TextField fx:id="passwordTextField" layoutX="88.0" layoutY="173.0" promptText="Password" />
             <Button fx:id="loginButton" layoutX="250.0" layoutY="265.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="92.0" text="Login" onAction="#handleLoginButtonAction" />
