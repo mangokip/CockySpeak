@@ -59,6 +59,7 @@ public class FlashcardViewController {
 
         // Display the first flashcard
         updateFlashcardDisplay();
+        flipCard.toFront();
     }
 
     @FXML
