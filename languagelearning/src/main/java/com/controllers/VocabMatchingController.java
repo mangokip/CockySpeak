@@ -3,96 +3,87 @@ package com.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
+import javafx.scene.input.MouseEvent;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class VocabMatchingController {
 
-    // Sections
     @FXML
-    private VBox matchingSection;
-    @FXML
-    private VBox feedbackSection;
+    private GridPane matchingGrid;
 
-    // Buttons
     @FXML
     private Button submitButton;
-    @FXML
-    private Button nextButton;
-
-    // Matching Toggle Buttons
-    @FXML
-    private ToggleButton togglePerro;
-    @FXML
-    private ToggleButton toggleAgua;
-    @FXML
-    private ToggleButton toggleCasa;
-    @FXML
-    private ToggleButton toggleLibro;
-    @FXML
-    private ToggleButton toggleManzana;
 
     @FXML
+    private Label feedbackLabel;
+
+    // Store correct and user matches
+    private final Map<Button, String> correctMatches = new HashMap<>();
+    private final Map<Button, String> userMatches = new HashMap<>();
+
     public void initialize() {
-        setupMatchingSection();
+        // Example: Set correct matches. Replace these with dynamic data from your model.
+        correctMatches.put(new Button("Apple"), "Manzana");
+        correctMatches.put(new Button("Dog"), "Perro");
+        correctMatches.put(new Button("House"), "Casa");
+
+        feedbackLabel.setVisible(false);
     }
 
     /**
-     * Sets up the logic for the matching section.
+     * Handles button clicks for word selections.
+     * Updates the user’s choices.
      */
-    private void setupMatchingSection() {
-        submitButton.setOnAction(event -> {
-            if (validateAnswers()) {
-                // Switch to feedback section on correct answers
-                matchingSection.setVisible(false);
-                feedbackSection.setVisible(true);
-            } else {
-                System.out.println("Incorrect answers. Please try again.");
+    @FXML
+    private void handleSelection(MouseEvent event) {
+        Button selectedButton = (Button) event.getSource();
+        String translation = selectedButton.getText();
+
+        // Assume English words are in the first column of matchingGrid
+        int rowIndex = GridPane.getRowIndex(selectedButton);
+
+        // Get English word from the corresponding button in the first column
+        Button englishWordButton = (Button) matchingGrid.getChildren().get(rowIndex * 2); 
+        String englishWord = englishWordButton.getText();
+
+        userMatches.put(englishWordButton, translation);
+    }
+
+    /**
+     * Handles the submit button click.
+     * Checks user's matches and provides feedback.
+     */
+    @FXML
+    private void handleSubmit() {
+        if (checkMatches()) {
+            feedbackLabel.setText("Correct! Great job.");
+            feedbackLabel.setStyle("-fx-text-fill: green;");
+        } else {
+            feedbackLabel.setText("Incorrect matches. Try again!");
+            feedbackLabel.setStyle("-fx-text-fill: red;");
+        }
+        feedbackLabel.setVisible(true);
+    }
+
+    /**
+     * Checks if the user's matches are correct.
+     *
+     * @return true if all matches are correct, false otherwise.
+     */
+    private boolean checkMatches() {
+        for (Map.Entry<Button, String> entry : correctMatches.entrySet()) {
+            Button englishWordButton = entry.getKey();
+            String correctTranslation = entry.getValue();
+
+            String userTranslation = userMatches.getOrDefault(englishWordButton, "");
+
+            if (!correctTranslation.equals(userTranslation)) {
+                return false;
             }
-        });
-
-        nextButton.setOnAction(event -> {
-            System.out.println("Navigating to next module...");
-            // Implement navigation logic for the next module here
-        });
-    }
-
-    /**
-     * Validates the user's matching answers.
-     * @return true if all answers are correct, false otherwise
-     */
-    private boolean validateAnswers() {
-        // Add logic here to check if the toggle buttons are correctly selected.
-        return togglePerro.isSelected() &&
-               toggleAgua.isSelected() &&
-               toggleCasa.isSelected() &&
-               toggleLibro.isSelected() &&
-               toggleManzana.isSelected();
-    }
-
-    // Handlers for Bottom Navigation
-
-    @FXML
-    private void handleHome() {
-        System.out.println("Navigating to Home...");
-        // Add navigation logic to go back to the home screen
-    }
-
-    @FXML
-    private void handleRanking() {
-        System.out.println("Navigating to Ranking...");
-        // Add navigation logic to go to the ranking screen
-    }
-
-    @FXML
-    private void handleFlashcards() {
-        System.out.println("Navigating to Flashcards...");
-        // Add navigation logic to go to flashcards
-    }
-
-    @FXML
-    private void handleProfile() {
-        System.out.println("Navigating to Profile...");
-        // Add navigation logic to go to profile screen
+        }
+        return true;
     }
 }
