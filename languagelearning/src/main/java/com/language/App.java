@@ -1,6 +1,12 @@
 package com.language;
 
+<<<<<<< HEAD
 import java.io.IOException;
+=======
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.scene.paint.*;
+>>>>>>> 75c4ac6 (adding stuff that works for mac)
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
