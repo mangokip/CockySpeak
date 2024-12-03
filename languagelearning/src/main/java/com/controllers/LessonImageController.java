@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Ellipse;
 import javafx.scene.paint.Color;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -16,7 +17,8 @@ public class LessonImageController {
     private ImageView flagImageView;
     
     @FXML
-    private StackPane firstCircleButton;
+    private Ellipse startbutton;
+    private static boolean level1Completed = false;
 
     @FXML
     public void initialize() {
@@ -45,7 +47,7 @@ public class LessonImageController {
     // }
 
     @FXML
-private void starbuttonclick() {
+private void starbutton() {
     navigateToScreen("/fxml/VocabMatching.fxml");
 }
 
@@ -53,7 +55,7 @@ private void starbuttonclick() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Scene scene = new Scene(loader.load());
-            Stage stage = (Stage) firstCircleButton.getScene().getWindow();
+            Stage stage = (Stage) startbutton.getScene().getWindow();
             stage.setScene(scene);
         } catch (IOException e) {
             System.err.println("Navigation failed: " + e.getMessage());

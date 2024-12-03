@@ -185,7 +185,7 @@
       <HBox alignment="CENTER" prefHeight="60.0" prefWidth="430.0" spacing="20" styleClass="bottom-bar">
          <!-- Home Button -->
          <VBox alignment="CENTER" onMouseClicked="#handleHome" spacing="5" styleClass="nav-button">
-            <Label styleClass="icon" text="🏠" />
+            <Label fx:id="HomeButton" onMouseClicked="#HomeButton" styleClass="icon" text="🏠" />
             <Label styleClass="nav-text" text="Home" />
          </VBox>
 
@@ -212,4 +212,3 @@
       <Button mnemonicParsing="false" text="Button" />
    </children>
 </fx:root>
-

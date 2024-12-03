@@ -173,3 +173,22 @@
   -fx-font-weight: bold;
   -fx-font-style: italic;
 }
+
+/* Lesson circle states */
+.lesson-circle-locked {
+  -fx-fill: #808080; /* Gray for locked lessons */
+  -fx-stroke: black;
+  -fx-stroke-type: inside;
+}
+
+.lesson-circle-available {
+  -fx-fill: #1E90FF; /* DodgerBlue for available lessons */
+  -fx-stroke: black;
+  -fx-stroke-type: inside;
+}
+
+.lesson-circle-completed {
+  -fx-fill: #FFD700; /* Gold for completed lessons */
+  -fx-stroke: black;
+  -fx-stroke-type: inside;
+}
