@@ -2,7 +2,7 @@ package com.model;
 
 public class CockySpeakUI {
 
-    private static CockySpeak cockySpeak = new CockySpeak(); // Initialize CockySpeak
+    private static CockySpeak cockySpeak = CockySpeak.getInstance(); // Initialize CockySpeak
 
     public static void main(String[] args) {
         scenarioJimSmith();

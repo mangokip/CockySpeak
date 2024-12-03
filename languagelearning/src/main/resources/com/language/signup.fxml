@@ -5,6 +5,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="430.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.signupController">
    
@@ -12,13 +14,18 @@
       <URL value="@styles.css" />
    </stylesheets>
    <children>
+   <ImageView fitHeight="140.0" fitWidth="169.0" layoutX="130.0" layoutY="21.0">
+         <image>
+            <Image url="@images/Cockylogo.png" />
+         </image>
+   </ImageView>
       <Pane layoutY="174.0" prefHeight="402.0" prefWidth="430.0" styleClass="signupSubPane">
          <children>
             <TextField fx:id="usernameField" layoutX="88.0" layoutY="40.0" promptText="Username" styleClass="signupField" />
             <TextField fx:id="emailField" layoutX="88.0" layoutY="100.0" promptText="Email" styleClass="signupField" />
             <TextField fx:id="passwordField" layoutX="88.0" layoutY="160.0" promptText="Password" styleClass="signupField" />
-            <Button fx:id="signupButton" layoutX="88.0" layoutY="265.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="92.0" text="Sign Up" onAction="#handleSignupAction" />
-            <Button fx:id="backButton" layoutX="250.0" layoutY="265.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="92.0" text="Back" onAction="#handleBackAction" />
+            <Button fx:id="signupButton" layoutX="250.0" layoutY="259.0" mnemonicParsing="false" onAction="#handleSignupAction" prefHeight="53.0" prefWidth="92.0" text="Sign Up" />
+            <Button fx:id="backButton" layoutX="88.0" layoutY="259.0" mnemonicParsing="false" onAction="#handleBackAction" prefHeight="53.0" prefWidth="92.0" text="Login" />
             <Label fx:id="errorMessage" layoutX="88.0" layoutY="220.0" styleClass="errorMessage" text="Error signing up!" visible="false" />
          </children>
       </Pane>
