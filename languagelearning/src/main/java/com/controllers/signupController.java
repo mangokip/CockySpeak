@@ -3,6 +3,7 @@ package com.controllers;
 import java.io.IOException;
 
 import com.language.App;
+import com.model.CockySpeak;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,19 +20,19 @@ public class signupController {
     @FXML private Button backButton;
     @FXML private Label errorMessage;
 
+    private CockySpeak cockySpeak = CockySpeak.getInstance();
+
     @FXML
-    private void handleSignupAction(ActionEvent event) {
+    private void handleSignupAction(ActionEvent event) throws IOException {
         String username = usernameField.getText();
         String email = emailField.getText();
         String password = passwordField.getText();
 
         // TODO: Add signup logic here
-        if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
-            errorMessage.setVisible(true);
+        if (cockySpeak.register(username, password, email)) {
+            App.setRoot("login");
         } else {
-            errorMessage.setVisible(false);
-            System.out.println("Signup successful with username: " + username);
-            // Navigate to another screen if needed
+            errorMessage.setText("Username already exists.");
         }
     }
 
