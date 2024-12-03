@@ -52,7 +52,6 @@ public class FlashcardMenuController {
     @FXML
     void starbuttonclick(MouseEvent event) throws IOException {
         App.setRoot("flashcard");
-
     }
 
     @FXML
