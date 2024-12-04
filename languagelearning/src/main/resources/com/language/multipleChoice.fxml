@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.MultipleChoiceController" prefHeight="750.0" prefWidth="430.0">
+   
+   <!-- Top Section for the Question -->
+   <top>
+      <Pane prefHeight="200.0" prefWidth="430.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="questionLabel" layoutX="30.0" layoutY="50.0" prefHeight="100.0" prefWidth="370.0" 
+                   style="-fx-text-fill: #ffffff; -fx-font-family: 'Arial Rounded MT Bold'; -fx-font-size: 24.0;" 
+                   text="Question goes here?" wrapText="true" textAlignment="CENTER" />
+         </children>
+      </Pane>
+   </top>
+
+   <!-- Center Section for Multiple Choice Buttons -->
+   <center>
+      <VBox alignment="CENTER" spacing="20.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="option1Button" mnemonicParsing="false" onMouseClicked="#handleOption" prefHeight="60.0" prefWidth="320.0" text="Option 1" styleClass="quiz-option" />
+            <Button fx:id="option2Button" mnemonicParsing="false" onMouseClicked="#handleOption" prefHeight="60.0" prefWidth="320.0" text="Option 2" styleClass="quiz-option" />
+            <Button fx:id="option3Button" mnemonicParsing="false" onMouseClicked="#handleOption" prefHeight="60.0" prefWidth="320.0" text="Option 3" styleClass="quiz-option" />
+            <Button fx:id="option4Button" mnemonicParsing="false" onMouseClicked="#handleOption" prefHeight="60.0" prefWidth="320.0" text="Option 4" styleClass="quiz-option" />
+         </children>
+      </VBox>
+   </center>
+
+   <!-- Bottom Navigation Bar -->
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="71.0" prefWidth="430.0" spacing="20" styleClass="bottom-bar">
+         <!-- Home Button -->
+         <VBox alignment="CENTER" onMouseClicked="#handleHome" spacing="5" styleClass="nav-button">
+            <Label styleClass="icon" text="🏠" />
+            <Label styleClass="nav-text" text="Home" />
+         </VBox>
+
+         <!-- Ranking Button -->
+         <VBox alignment="CENTER" onMouseClicked="#handleRanking" spacing="5" styleClass="nav-button">
+            <Label styleClass="icon" text="🏆" />
+            <Label styleClass="nav-text" text="Ranking" />
+         </VBox>
+
+         <!-- Flashcards Button -->
+         <VBox alignment="CENTER" onMouseClicked="#handleFlashcards" spacing="5" styleClass="nav-button">
+            <Label styleClass="icon" text="📘" />
+            <Label styleClass="nav-text" text="Flashcards" />
+         </VBox>
+
+         <!-- Profile Button -->
+         <VBox alignment="CENTER" onMouseClicked="#handleProfile" spacing="5" styleClass="nav-button">
+            <Label styleClass="icon" text="👤" />
+            <Label styleClass="nav-text" text="Profile" />
+         </VBox>
+      </HBox>
+   </bottom>
+
+   <!-- Add stylesheets -->
+   <stylesheets>
+      <URL value="@../styles.css" />
+      <URL value="@styles.css" />
+   </stylesheets>
+</BorderPane>
