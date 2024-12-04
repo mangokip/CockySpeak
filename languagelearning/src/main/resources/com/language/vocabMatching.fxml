@@ -24,4 +24,15 @@
             </VBox>
             <VBox alignment="CENTER" onMouseClicked="#handleFlashcards" spacing="5" styleClass="nav-button">
                 <Label styleClass="icon" text="📘" />
-                <Label styleClass="
+                <Label styleClass="nav-text" text="Flashcards" />
+            </VBox>
+            <VBox alignment="CENTER" onMouseClicked="#handleProfile" spacing="5" styleClass="nav-button">
+                <Label styleClass="icon" text="👤" />
+                <Label styleClass="nav-text" text="Profile" />
+            </VBox>
+        </HBox>
+    </bottom>
+    <stylesheets>
+        <URL value="@styles.css" />
+    </stylesheets>
+</View>
