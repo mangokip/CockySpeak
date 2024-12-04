@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 
 public class TrueFalseController {
+
     @FXML
     private Label questionLabel;
 
@@ -18,47 +19,40 @@ public class TrueFalseController {
     @FXML
     private Label feedbackLabel;
 
-    private boolean correctAnswer;
+    private boolean correctAnswer; // Set this dynamically when loading a question
 
-    /**
-     * Initializes the question and correct answer.
-     * This would typically be set based on the current question data.
-     */
     public void initialize() {
-        questionLabel.setText("Is 'Casa' the correct translation for 'House'?");
-        correctAnswer = true; // Example correct answer, this should come from your model.
-        feedbackLabel.setVisible(false);
+        feedbackLabel.setVisible(false); // Hide feedback initially
     }
 
-    /**
-     * Handles the True button click.
-     */
+    // Handle True button click
     @FXML
     private void handleTrueButton(MouseEvent event) {
         checkAnswer(true);
     }
 
-    /**
-     * Handles the False button click.
-     */
+    // Handle False button click
     @FXML
     private void handleFalseButton(MouseEvent event) {
         checkAnswer(false);
     }
 
-    /**
-     * Checks if the user's answer is correct and provides feedback.
-     *
-     * @param userAnswer The user's selected answer (true or false).
-     */
+    // Method to check the user's answer
     private void checkAnswer(boolean userAnswer) {
+        feedbackLabel.setVisible(true);
         if (userAnswer == correctAnswer) {
-            feedbackLabel.setText("Correct! Well done.");
+            feedbackLabel.setText("Correct!");
             feedbackLabel.setStyle("-fx-text-fill: green;");
         } else {
-            feedbackLabel.setText("Incorrect. Try again.");
+            feedbackLabel.setText("Incorrect!");
             feedbackLabel.setStyle("-fx-text-fill: red;");
         }
-        feedbackLabel.setVisible(true);
+    }
+
+    // Method to load a question and set correctAnswer
+    public void loadQuestion(String question, boolean isCorrect) {
+        questionLabel.setText(question);
+        correctAnswer = isCorrect;
+        feedbackLabel.setVisible(false);
     }
 }

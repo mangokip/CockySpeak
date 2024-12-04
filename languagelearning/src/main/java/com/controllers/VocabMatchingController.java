@@ -2,8 +2,9 @@ package com.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.control.Label;
+import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
 
 import java.util.HashMap;
@@ -14,76 +15,37 @@ public class VocabMatchingController {
     @FXML
     private GridPane matchingGrid;
 
-    @FXML
-    private Button submitButton;
-
-    @FXML
-    private Label feedbackLabel;
-
-    // Store correct and user matches
-    private final Map<Button, String> correctMatches = new HashMap<>();
-    private final Map<Button, String> userMatches = new HashMap<>();
+    private Map<Button, String> wordPairs = new HashMap<>(); // Store word-button associations for checking
 
     public void initialize() {
-        // Example: Set correct matches. Replace these with dynamic data from your model.
-        correctMatches.put(new Button("Apple"), "Manzana");
-        correctMatches.put(new Button("Dog"), "Perro");
-        correctMatches.put(new Button("House"), "Casa");
-
-        feedbackLabel.setVisible(false);
+        // Example to populate grid; replace with dynamic data
+        addWordPair("Casa", "House");
+        addWordPair("Perro", "Dog");
+        addWordPair("Gato", "Cat");
     }
 
-    /**
-     * Handles button clicks for word selections.
-     * Updates the user’s choices.
-     */
+    private void addWordPair(String word, String translation) {
+        Button wordButton = new Button(word);
+        Button translationButton = new Button(translation);
+
+        wordButton.setOnAction(this::handleWordClick);
+        translationButton.setOnAction(this::handleWordClick);
+
+        matchingGrid.add(wordButton, 0, matchingGrid.getRowCount());
+        matchingGrid.add(translationButton, 1, matchingGrid.getRowCount());
+        
+        wordPairs.put(wordButton, translation);
+        wordPairs.put(translationButton, word);
+    }
+
     @FXML
-    private void handleSelection(MouseEvent event) {
-        Button selectedButton = (Button) event.getSource();
-        String translation = selectedButton.getText();
+    private void handleWordClick(ActionEvent event) {
+        Button clickedButton = (Button) event.getSource();
+        String text = clickedButton.getText();
+        clickedButton.setStyle("-fx-background-color: yellow;"); // Highlight selected
 
-        // Assume English words are in the first column of matchingGrid
-        int rowIndex = GridPane.getRowIndex(selectedButton);
-
-        // Get English word from the corresponding button in the first column
-        Button englishWordButton = (Button) matchingGrid.getChildren().get(rowIndex * 2); 
-        String englishWord = englishWordButton.getText();
-
-        userMatches.put(englishWordButton, translation);
-    }
-
-    /**
-     * Handles the submit button click.
-     * Checks user's matches and provides feedback.
-     */
-    @FXML
-    private void handleSubmit() {
-        if (checkMatches()) {
-            feedbackLabel.setText("Correct! Great job.");
-            feedbackLabel.setStyle("-fx-text-fill: green;");
-        } else {
-            feedbackLabel.setText("Incorrect matches. Try again!");
-            feedbackLabel.setStyle("-fx-text-fill: red;");
-        }
-        feedbackLabel.setVisible(true);
-    }
-
-    /**
-     * Checks if the user's matches are correct.
-     *
-     * @return true if all matches are correct, false otherwise.
-     */
-    private boolean checkMatches() {
-        for (Map.Entry<Button, String> entry : correctMatches.entrySet()) {
-            Button englishWordButton = entry.getKey();
-            String correctTranslation = entry.getValue();
-
-            String userTranslation = userMatches.getOrDefault(englishWordButton, "");
-
-            if (!correctTranslation.equals(userTranslation)) {
-                return false;
-            }
-        }
-        return true;
+        // Match logic placeholder, adjust as needed.
+        String expectedMatch = wordPairs.get(clickedButton);
+        // Provide feedback logic, call other methods accordingly.
     }
 }
