@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<?import com.gluonhq.charm.glisten.mvc.View?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="430.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.VocabMatchingController">
-   <stylesheets>
-      <URL value="@styles.css" />
-   </stylesheets>
-   <children>
-      <!-- Vocab Matching -->
-      <VBox alignment="CENTER" spacing="20.0" layoutY="100.0">
-         <Label text="Match the word with the definition" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
-         <Button text="Word 1" onAction="#matchWord1" prefWidth="200" styleClass="button"/>
-         <Button text="Definition A" onAction="#matchDef1" prefWidth="200" styleClass="button"/>
-      </VBox>
-
-      <!-- Logo -->
-      <ImageView fitHeight="140.0" fitWidth="169.0" layoutX="130.0" layoutY="21.0">
-         <image>
-            <Image url="@images/Cockylogo.png" />
-         </image>
-      </ImageView>
-   </children>
-</Pane>
+<View fx:id="vocabMatching" prefHeight="750.0" prefWidth="430.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.VocabMatchingController">
+    <center>
+        <VBox alignment="CENTER" spacing="20">
+            <ListView fx:id="wordList" prefHeight="200.0" />
+            <Button fx:id="submitButton" text="Submit" onAction="#handleSubmit" />
+        </VBox>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER" prefHeight="71.0" prefWidth="430.0" spacing="20" styleClass="bottom-bar">
+            <VBox alignment="CENTER" onMouseClicked="#handleHome" spacing="5" styleClass="nav-button">
+                <Label styleClass="icon" text="🏠" />
+                <Label styleClass="nav-text" text="Home" />
+            </VBox>
+            <VBox alignment="CENTER" onMouseClicked="#handleRanking" spacing="5" styleClass="nav-button">
+                <Label styleClass="icon" text="🏆" />
+                <Label styleClass="nav-text" text="Ranking" />
+            </VBox>
+            <VBox alignment="CENTER" onMouseClicked="#handleFlashcards" spacing="5" styleClass="nav-button">
+                <Label styleClass="icon" text="📘" />
+                <Label styleClass="
