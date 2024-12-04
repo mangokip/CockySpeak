@@ -8,50 +8,58 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.VocabMatchingController" style="-fx-background-color: #add8e6;">
-    <children>
-        <!-- Matching Game Section -->
-        <VBox fx:id="matchingSection" spacing="10" alignment="CENTER" visible="true">
-            <Label text="CockySpeak" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
-            <Label text="Vocab Matching" style="-fx-font-size: 20px; -fx-padding: 10;" />
+<View fx:id="menu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="430.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.VocabMatchingController">
 
-             <!-- Grid for Matching -->
-    <GridPane fx:id="matchingGrid" hgap="10" vgap="10" alignment="CENTER">
-        <!-- English words in the first column -->
-        <Label text="Apple" GridPane.rowIndex="0" GridPane.columnIndex="0" style="-fx-font-size: 16px;" />
-        <Label text="Dog" GridPane.rowIndex="1" GridPane.columnIndex="0" style="-fx-font-size: 16px;" />
-        <Label text="House" GridPane.rowIndex="2" GridPane.columnIndex="0" style="-fx-font-size: 16px;" />
+   <!-- Top Section: Header with Title and Subtitle -->
+   <top>
+      <Pane prefHeight="150.0" prefWidth="430.0" BorderPane.alignment="CENTER">
+         <children>
+            <!-- Title Label -->
+            <Label layoutX="30.0" layoutY="40.0" prefHeight="80.0" prefWidth="370.0" style="-fx-text-fill: #ffffff; -fx-font-family: 'Arial Rounded MT Bold'; -fx-font-size: 34.0;" text="Vocab Matching" />
+            
+            <!-- Subtitle Label -->
+            <Label layoutX="75.0" layoutY="120.0" prefHeight="20.0" prefWidth="280.0" style="-fx-text-fill: #ffe5e5; -fx-font-family: 'Arial'; -fx-font-size: 16.0; -fx-font-style: italic;" text="Match words with their meanings!" />
+         </children>
+      </Pane>
+   </top>
 
-        <!-- Drop-downs or buttons for translations in the second column -->
-        <Button text="Manzana" GridPane.rowIndex="0" GridPane.columnIndex="1" style="-fx-font-size: 16px;" />
-        <Button text="Perro" GridPane.rowIndex="1" GridPane.columnIndex="1" style="-fx-font-size: 16px;" />
-        <Button text="Casa" GridPane.rowIndex="2" GridPane.columnIndex="1" style="-fx-font-size: 16px;" />
-    </GridPane>
+   <!-- Center Section: Matching Grid -->
+   <center>
+      <GridPane fx:id="matchingGrid" hgap="10" vgap="10" alignment="CENTER" prefHeight="400.0" prefWidth="430.0">
+         <!-- Buttons will be dynamically added in the controller -->
+      </GridPane>
+   </center>
 
-    <!-- Submit Button -->
-    <Button fx:id="submitButton" text="Submit" onAction="#handleSubmit" style="-fx-background-color: #ff7f7f; -fx-font-size: 16px; -fx-text-fill: white;" prefWidth="150"/>
-
-    <!-- Feedback Label -->
-    <Label fx:id="feedbackLabel" text="" style="-fx-font-size: 18px; -fx-text-fill: green;" visible="false" />
-
-    <!-- Bottom Navigation Bar -->
-    <HBox alignment="CENTER" prefHeight="60.0" prefWidth="430.0" spacing="20" style="-fx-background-color: #f0f0f0;" styleClass="bottom-bar">
-        <VBox alignment="CENTER" onMouseClicked="#handleHome" spacing="5" styleClass="nav-button">
+   <!-- Bottom Section: Navigation Bar -->
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="71.0" prefWidth="430.0" spacing="20" styleClass="bottom-bar">
+         <!-- Home Button -->
+         <VBox alignment="CENTER" onMouseClicked="#handleHome" spacing="5" styleClass="nav-button">
             <Label styleClass="icon" text="🏠" />
             <Label styleClass="nav-text" text="Home" />
-        </VBox>
-        <VBox alignment="CENTER" onMouseClicked="#handleRanking" spacing="5" styleClass="nav-button">
+         </VBox>
+
+         <!-- Ranking Button -->
+         <VBox alignment="CENTER" onMouseClicked="#handleRanking" spacing="5" styleClass="nav-button">
             <Label styleClass="icon" text="🏆" />
             <Label styleClass="nav-text" text="Ranking" />
-        </VBox>
-        <VBox alignment="CENTER" onMouseClicked="#handleFlashcards" spacing="5" styleClass="nav-button">
+         </VBox>
+
+         <!-- Flashcards Button -->
+         <VBox alignment="CENTER" onMouseClicked="#handleFlashcards" spacing="5" styleClass="nav-button">
             <Label styleClass="icon" text="📘" />
             <Label styleClass="nav-text" text="Flashcards" />
-        </VBox>
-        <VBox alignment="CENTER" onMouseClicked="#handleProfile" spacing="5" styleClass="nav-button">
+         </VBox>
+
+         <!-- Profile Button -->
+         <VBox alignment="CENTER" onMouseClicked="#handleProfile" spacing="5" styleClass="nav-button">
             <Label styleClass="icon" text="👤" />
             <Label styleClass="nav-text" text="Profile" />
-        </VBox>
-    </HBox>
-    </children>
-</StackPane>
+         </VBox>
+      </HBox>
+   </bottom>
+
+   <stylesheets>
+      <URL value="@../styles.css" />
+   </stylesheets>
+</View>

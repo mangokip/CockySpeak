@@ -6,47 +6,68 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controller.TrueFalseController" style="-fx-background-color: #add8e6;" spacing="20" alignment="CENTER" prefHeight="600.0" prefWidth="430.0">
-    
-    <!-- Header Section -->
-    <Label text="CockySpeak" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-padding: 10;" />
+<View fx:id="menu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="430.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.TrueFalseController">
 
-    <!-- Question Display -->
-    <Label fx:id="questionLabel" text="Question goes here..." style="-fx-font-size: 18px; -fx-background-color: #ff7f7f; -fx-text-fill: white; -fx-padding: 15;" />
+   <!-- Top Section: Header with Title and Subtitle -->
+   <top>
+      <Pane prefHeight="150.0" prefWidth="430.0" BorderPane.alignment="CENTER">
+         <children>
+            <!-- Title Label -->
+            <Label layoutX="30.0" layoutY="40.0" prefHeight="80.0" prefWidth="370.0" style="-fx-text-fill: #ffffff; -fx-font-family: 'Arial Rounded MT Bold'; -fx-font-size: 34.0;" text="True or False" />
+            
+            <!-- Subtitle Label -->
+            <Label layoutX="75.0" layoutY="120.0" prefHeight="20.0" prefWidth="280.0" style="-fx-text-fill: #ffe5e5; -fx-font-family: 'Arial'; -fx-font-size: 16.0; -fx-font-style: italic;" text="Test Your Knowledge!" />
+         </children>
+      </Pane>
+   </top>
 
-    <!-- True/False Buttons -->
-    <HBox spacing="15" alignment="CENTER">
-        <Button fx:id="trueButton" text="True" onAction="#handleTrueFalseSelection" style="-fx-background-color: white; -fx-font-size: 16px; -fx-border-color: black; -fx-text-fill: black;" prefWidth="100"/>
-        <Button fx:id="falseButton" text="False" onAction="#handleTrueFalseSelection" style="-fx-background-color: white; -fx-font-size: 16px; -fx-border-color: black; -fx-text-fill: black;" prefWidth="100"/>
-    </HBox>
+   <!-- Center Section: Question and Answer Buttons -->
+   <center>
+      <VBox alignment="CENTER" spacing="20" prefHeight="400.0" prefWidth="430.0">
+         <!-- Question Label -->
+         <Label fx:id="questionLabel" styleClass="question-label" text="Is 'Casa' the correct translation for 'House'?" wrapText="true" />
 
-    <!-- Submit Button -->
-    <Button fx:id="submitButton" text="Submit" onAction="#handleSubmit" style="-fx-background-color: #ff7f7f; -fx-font-size: 16px; -fx-text-fill: white;" prefWidth="150" disable="true"/>
+         <!-- Buttons for True and False -->
+         <HBox alignment="CENTER" spacing="40">
+            <Button fx:id="trueButton" onMouseClicked="#handleTrueButton" text="True" styleClass="true-false-button" />
+            <Button fx:id="falseButton" onMouseClicked="#handleFalseButton" text="False" styleClass="true-false-button" />
+         </HBox>
 
-    <!-- Feedback Section -->
-    <VBox fx:id="feedbackSection" spacing="10" visible="false" alignment="CENTER">
-        <Label fx:id="feedbackLabel" text="Feedback here..." style="-fx-font-size: 18px; -fx-background-color: #90ee90; -fx-padding: 15;" />
-        <Button fx:id="nextButton" text="Next" onAction="#handleNext" style="-fx-background-color: #ff7f7f; -fx-font-size: 16px; -fx-text-fill: white;" prefWidth="150"/>
-    </VBox>
+         <!-- Feedback Label (Shown after answer) -->
+         <Label fx:id="feedbackLabel" visible="false" styleClass="feedback-label" text="Correct!" />
+      </VBox>
+   </center>
 
-    <!-- Bottom Navigation Bar -->
-    <HBox alignment="CENTER" prefHeight="60.0" prefWidth="430.0" spacing="20" style="-fx-background-color: #f0f0f0;" styleClass="bottom-bar">
-        <VBox alignment="CENTER" onMouseClicked="#handleHome" spacing="5" styleClass="nav-button">
+   <!-- Bottom Section: Navigation Bar -->
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="71.0" prefWidth="430.0" spacing="20" styleClass="bottom-bar">
+         <!-- Home Button -->
+         <VBox alignment="CENTER" onMouseClicked="#handleHome" spacing="5" styleClass="nav-button">
             <Label styleClass="icon" text="🏠" />
             <Label styleClass="nav-text" text="Home" />
-        </VBox>
-        <VBox alignment="CENTER" onMouseClicked="#handleRanking" spacing="5" styleClass="nav-button">
+         </VBox>
+
+         <!-- Ranking Button -->
+         <VBox alignment="CENTER" onMouseClicked="#handleRanking" spacing="5" styleClass="nav-button">
             <Label styleClass="icon" text="🏆" />
             <Label styleClass="nav-text" text="Ranking" />
-        </VBox>
-        <VBox alignment="CENTER" onMouseClicked="#handleFlashcards" spacing="5" styleClass="nav-button">
+         </VBox>
+
+         <!-- Flashcards Button -->
+         <VBox alignment="CENTER" onMouseClicked="#handleFlashcards" spacing="5" styleClass="nav-button">
             <Label styleClass="icon" text="📘" />
             <Label styleClass="nav-text" text="Flashcards" />
-        </VBox>
-        <VBox alignment="CENTER" onMouseClicked="#handleProfile" spacing="5" styleClass="nav-button">
+         </VBox>
+
+         <!-- Profile Button -->
+         <VBox alignment="CENTER" onMouseClicked="#handleProfile" spacing="5" styleClass="nav-button">
             <Label styleClass="icon" text="👤" />
             <Label styleClass="nav-text" text="Profile" />
-        </VBox>
-    </HBox>
+         </VBox>
+      </HBox>
+   </bottom>
 
-</VBox>
+   <stylesheets>
+      <URL value="@../styles.css" />
+   </stylesheets>
+</View>
