@@ -1,73 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.layout.VBox?>
 
-<View fx:id="menu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="430.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.TrueFalseController">
-
-   <!-- Top Section: Header with Title and Subtitle -->
-   <top>
-      <Pane prefHeight="150.0" prefWidth="430.0" BorderPane.alignment="CENTER">
-         <children>
-            <!-- Title Label -->
-            <Label layoutX="30.0" layoutY="40.0" prefHeight="80.0" prefWidth="370.0" style="-fx-text-fill: #ffffff; -fx-font-family: 'Arial Rounded MT Bold'; -fx-font-size: 34.0;" text="True or False" />
-            
-            <!-- Subtitle Label -->
-            <Label layoutX="75.0" layoutY="120.0" prefHeight="20.0" prefWidth="280.0" style="-fx-text-fill: #ffe5e5; -fx-font-family: 'Arial'; -fx-font-size: 16.0; -fx-font-style: italic;" text="Test Your Knowledge!" />
-         </children>
-      </Pane>
-   </top>
-
-   <!-- Center Section: Question and Answer Buttons -->
-   <center>
-      <VBox alignment="CENTER" spacing="20" prefHeight="400.0" prefWidth="430.0">
-         <!-- Question Label -->
-         <Label fx:id="questionLabel" styleClass="question-label" text="Is 'Casa' the correct translation for 'House'?" wrapText="true" />
-
-         <!-- Buttons for True and False -->
-         <HBox alignment="CENTER" spacing="40">
-            <Button fx:id="trueButton" onMouseClicked="#handleTrueButton" text="True" styleClass="true-false-button" />
-            <Button fx:id="falseButton" onMouseClicked="#handleFalseButton" text="False" styleClass="true-false-button" />
-         </HBox>
-
-         <!-- Feedback Label (Shown after answer) -->
-         <Label fx:id="feedbackLabel" visible="false" styleClass="feedback-label" text="Correct!" />
-      </VBox>
-   </center>
-
-   <!-- Bottom Section: Navigation Bar -->
-   <bottom>
-      <HBox alignment="CENTER" prefHeight="71.0" prefWidth="430.0" spacing="20" styleClass="bottom-bar">
-         <!-- Home Button -->
-         <VBox alignment="CENTER" onMouseClicked="#handleHome" spacing="5" styleClass="nav-button">
-            <Label styleClass="icon" text="🏠" />
-            <Label styleClass="nav-text" text="Home" />
-         </VBox>
-
-         <!-- Ranking Button -->
-         <VBox alignment="CENTER" onMouseClicked="#handleRanking" spacing="5" styleClass="nav-button">
-            <Label styleClass="icon" text="🏆" />
-            <Label styleClass="nav-text" text="Ranking" />
-         </VBox>
-
-         <!-- Flashcards Button -->
-         <VBox alignment="CENTER" onMouseClicked="#handleFlashcards" spacing="5" styleClass="nav-button">
-            <Label styleClass="icon" text="📘" />
-            <Label styleClass="nav-text" text="Flashcards" />
-         </VBox>
-
-         <!-- Profile Button -->
-         <VBox alignment="CENTER" onMouseClicked="#handleProfile" spacing="5" styleClass="nav-button">
-            <Label styleClass="icon" text="👤" />
-            <Label styleClass="nav-text" text="Profile" />
-         </VBox>
-      </HBox>
-   </bottom>
-
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="430.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.TrueFalseController">
    <stylesheets>
-      <URL value="@../styles.css" />
+      <URL value="@styles.css" />
    </stylesheets>
-</View>
+   <children>
+      <!-- True/False Question -->
+      <VBox alignment="CENTER" spacing="20.0" layoutY="100.0">
+         <Label text="Is 5 greater than 3?" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+         <Button text="True" onAction="#answerTrue" prefWidth="200" styleClass="button"/>
+         <Button text="False" onAction="#answerFalse" prefWidth="200" styleClass="button"/>
+      </VBox>
+
+      <!-- Logo -->
+      <ImageView fitHeight="140.0" fitWidth="169.0" layoutX="130.0" layoutY="21.0">
+         <image>
+            <Image url="@images/Cockylogo.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>
