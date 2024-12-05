@@ -18,6 +18,7 @@ public class CockySpeak {
     private DataWriter writer = new DataWriter();
     private List<Flashcard> flashcards;
     private Flashcard selectedWord;
+    private static CockySpeak instance;
 
     /**
      * Basic constructor
