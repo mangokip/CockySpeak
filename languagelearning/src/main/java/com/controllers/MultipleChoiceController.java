@@ -1,70 +1,85 @@
 package com.controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Button;
 
 public class MultipleChoiceController {
 
-    @FXML
-    private Label questionLabel;
+    // FXML elements for question and answers
+    @FXML private Label questionLabel;
+    @FXML private Label resultLabel;
+    @FXML private RadioButton option1;
+    @FXML private RadioButton option2;
+    @FXML private RadioButton option3;
+    @FXML private RadioButton option4;
+    @FXML private ToggleGroup choicesGroup;
 
-    @FXML
-    private Button option1Button;
+    // FXML elements for bottom navigation
+    @FXML private Button homeButton;
+    @FXML private Button rankingButton;
+    @FXML private Button flashcardsButton;
+    @FXML private Button profileButton;
 
+    // Initialize the scene, set question, options, and default state
     @FXML
-    private Button option2Button;
-
-    @FXML
-    private Button option3Button;
-
-    @FXML
-    private Button option4Button;
-
     public void initialize() {
-        // Load the question and options dynamically
-        questionLabel.setText("What is the correct translation for 'Hola'?");
-        option1Button.setText("Hello");
-        option2Button.setText("Goodbye");
-        option3Button.setText("Please");
-        option4Button.setText("Thank you");
+        // Set up the question and options
+        questionLabel.setText("What is the Spanish word for 'Hello'?");
+        option1.setText("Hola");
+        option2.setText("Adiós");
+        option3.setText("Gracias");
+        option4.setText("Por favor");
+
+        // Clear the result label when the screen is first loaded
+        resultLabel.setText("");
     }
 
+    // Submit the answer and check correctness
     @FXML
-    private void handleOption(MouseEvent event) {
-        Button selectedButton = (Button) event.getSource();
-        String userAnswer = selectedButton.getText();
+    public void submitAnswer() {
+        // Get the selected option from the ToggleGroup
+        RadioButton selectedOption = (RadioButton) choicesGroup.getSelectedToggle();
 
-        if (validateAnswer(userAnswer)) {
-            System.out.println("Correct answer!");
+        // If an option is selected
+        if (selectedOption != null) {
+            String answer = selectedOption.getText();
+
+            // Check if the selected option is correct
+            if (answer.equals("Hola")) {
+                resultLabel.setText("Correct!");
+                resultLabel.setStyle("-fx-text-fill: green;");
+            } else {
+                resultLabel.setText("Incorrect, try again.");
+                resultLabel.setStyle("-fx-text-fill: red;");
+            }
         } else {
-            System.out.println("Incorrect answer!");
+            // If no option is selected, prompt the user to select an answer
+            resultLabel.setText("Please select an answer.");
+            resultLabel.setStyle("-fx-text-fill: red;");
         }
     }
 
-    private boolean validateAnswer(String userAnswer) {
-        // This is an example. Replace with actual validation logic.
-        return "Hello".equals(userAnswer);
+    // Handlers for bottom bar navigation
+    @FXML
+    public void handleHome() {
+        // Navigate to Home
     }
 
     @FXML
-    private void handleHome(MouseEvent event) {
-        System.out.println("Navigating to Home");
+    public void handleRanking() {
+        // Navigate to Ranking
     }
 
     @FXML
-    private void handleRanking(MouseEvent event) {
-        System.out.println("Navigating to Ranking");
+    public void handleFlashcards() {
+        // Navigate to Flashcards
     }
 
     @FXML
-    private void handleFlashcards(MouseEvent event) {
-        System.out.println("Navigating to Flashcards");
-    }
-
-    @FXML
-    private void handleProfile(MouseEvent event) {
-        System.out.println("Navigating to Profile");
+    public void handleProfile() {
+        // Navigate to Profile
     }
 }

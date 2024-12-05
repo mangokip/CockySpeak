@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import java.net.URL?>
 
 <View fx:id="trueFalse" prefHeight="750.0" prefWidth="430.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.TrueFalseController">
     <center>
@@ -34,6 +35,7 @@
         </HBox>
     </bottom>
     <stylesheets>
+        <URL value="@../styles.css" />
         <URL value="@styles.css" />
     </stylesheets>
 </View>
