@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.mvc.View?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<View fx:id="menu" prefHeight="750.0" prefWidth="430.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.SettingsController">
+
+   <!-- Bottom Navigation Bar -->
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="71.0" prefWidth="430.0" spacing="20" styleClass="bottom-bar">
+         <VBox alignment="CENTER" onMouseClicked="#handleHome" spacing="5" styleClass="nav-button">
+            <Label styleClass="icon" text="🏠" />
+            <Label styleClass="nav-text" text="Home" />
+         </VBox>
+         <VBox alignment="CENTER" onMouseClicked="#handleRanking" spacing="5" styleClass="nav-button">
+            <Label styleClass="icon" text="🏆" />
+            <Label styleClass="nav-text" text="Ranking" />
+         </VBox>
+         <VBox alignment="CENTER" onMouseClicked="#handleFlashcards" spacing="5" styleClass="nav-button">
+            <Label styleClass="icon" text="📘" />
+            <Label styleClass="nav-text" text="Flashcards" />
+         </VBox>
+         <VBox alignment="CENTER" onMouseClicked="#handleProfile" spacing="5" styleClass="nav-button">
+            <Label styleClass="icon" text="👤" />
+            <Label styleClass="nav-text" text="Profile" />
+         </VBox>
+      </HBox>
+   </bottom>
+   
+   <top>
+      <Pane prefHeight="667.0" prefWidth="430.0">
+         <children>
+            <Label layoutX="134.0" layoutY="14.0" prefHeight="51.0" prefWidth="135.0" styleClass="bottom-bar" text="Settings" />
+
+            <!-- Username Section -->
+            <VBox layoutX="50.0" layoutY="80.0" spacing="5">
+               <Button onAction="#showUsernameFields" prefHeight="40.0" prefWidth="303.0" text="Change Username" />
+               <VBox fx:id="usernameFields" managed="false" spacing="3" visible="false" style="-fx-padding: 5; -fx-background-color: transparent;">
+                  <Label text="Current Username:" style="-fx-font-size: 12;" />
+                  <TextField fx:id="currentUsername" prefHeight="20.0" />
+                  <Label text="New Username:" style="-fx-font-size: 12;" />
+                  <TextField fx:id="newUsername" prefHeight="20.0" />
+                  <Button onAction="#confirmUsernameChange" text="Confirm" prefHeight="30.0" />
+               </VBox>
+            </VBox>
+
+            <!-- Password Section -->
+            <VBox layoutX="50.0" layoutY="160.0" spacing="5">
+               <Button onAction="#showPasswordFields" prefHeight="40.0" prefWidth="303.0" text="Change Password" />
+               <VBox fx:id="passwordFields" managed="false" spacing="3" visible="false" style="-fx-padding: 5; -fx-background-color: transparent;">
+                  <Label text="Current Password:" style="-fx-font-size: 12;" />
+                  <TextField fx:id="currentPassword" prefHeight="20.0" />
+                  <Label text="New Password:" style="-fx-font-size: 12;" />
+                  <TextField fx:id="newPassword" prefHeight="20.0" />
+                  <Button onAction="#confirmPasswordChange" text="Confirm" prefHeight="30.0" />
+               </VBox>
+            </VBox>
+
+            <!-- Email Section -->
+            <VBox layoutX="50.0" layoutY="240.0" spacing="5">
+               <Button onAction="#showEmailFields" prefHeight="40.0" prefWidth="303.0" text="Change Email" />
+               <VBox fx:id="emailFields" managed="false" spacing="3" visible="false" style="-fx-padding: 5; -fx-background-color: transparent;">
+                  <Label text="Current Email:" style="-fx-font-size: 12;" />
+                  <TextField fx:id="currentEmail" prefHeight="20.0" />
+                  <Label text="New Email:" style="-fx-font-size: 12;" />
+                  <TextField fx:id="newEmail" prefHeight="20.0" />
+                  <Button onAction="#confirmEmailChange" text="Confirm" prefHeight="30.0" />
+               </VBox>
+            </VBox>
+
+            <!-- Logout Section -->
+            <VBox layoutX="50.0" layoutY="320.0" spacing="5">
+               <Button onAction="#logout" prefHeight="40.0" prefWidth="303.0" text="Logout" />
+            </VBox>
+         </children>
+      </Pane>
+   </top>
+</View>
