@@ -1,0 +1,194 @@
+/* Root style for the application */
+.root {
+  -fx-font-size: 16pt;
+  -fx-font-family: "Helvetica";
+  -fx-background-color: #6bc9c8;
+  -fx-text-fill: #ffffff;
+}
+
+/* Label styling for text elements */
+.label {
+  -fx-text-fill: #ffffff;
+  -fx-font-family: "Arial Rounded MT Bold";
+  -fx-font-size: 24px;
+}
+
+.icon {
+  -fx-font-family: "Segoe UI Emoji, Noto Color Emoji, sans-serif";
+}
+
+
+/* Button styling for interactive elements */
+.button {
+  -fx-background-color: #f06179;
+  -fx-text-fill: #ffffff;
+  -fx-font-family: "Helvetica";
+  -fx-font-size: 14pt;
+  -fx-padding: 10px;
+  -fx-background-radius: 15px;
+}
+
+/* Special styling for navigation buttons */
+.nav-button {
+  -fx-background-color: transparent;
+  -fx-text-fill: black;
+  -fx-font-size: 12pt;
+}
+
+/* Styling for the flashcard box */
+.flashcard {
+  -fx-background-color: #fdd75c;
+  -fx-background-radius: 15px;
+  -fx-border-radius: 15px;
+  -fx-padding: 20px;
+  -fx-font-size: 24pt;
+  -fx-font-family: "Arial";
+  -fx-text-fill: black;
+  -fx-alignment: center;
+}
+
+.flashcard > .label {
+  -fx-text-alignment: center; /* Centers text */
+  -fx-wrap-text: true; /* Allows wrapping */
+  -fx-max-width: 280px; /* Constrains width */
+  -fx-font-size: 15px;
+  -fx-font-weight: bold;
+}
+
+/* Highlighted text on flashcards */
+.flashcard-highlight {
+  -fx-text-fill: #f06179;
+  -fx-font-weight: bold;
+}
+
+/* Input field styling */
+.text-field {
+  -fx-background-color: #ffffff;
+  -fx-border-color: #fdd75c;
+  -fx-border-radius: 5px;
+  -fx-padding: 5px;
+  -fx-text-fill: #000000;
+  -fx-font-family: "Arial";
+}
+
+/* Tab styling for Login/Sign-Up */
+.tab {
+  -fx-background-color: #fdd75c;
+  -fx-text-fill: #000000;
+  -fx-font-weight: bold;
+  -fx-padding: 10px;
+  -fx-font-size: 14pt;
+}
+
+.tab:selected {
+  -fx-background-color: #f06179;
+  -fx-text-fill: #ffffff;
+}
+
+/* Dropdown styling */
+.combo-box {
+  -fx-background-color: #ffffff;
+  -fx-border-color: #fdd75c;
+  -fx-border-radius: 5px;
+  -fx-font-size: 14pt;
+}
+
+/* Profile and Navigation Styling */
+.profile-section {
+  -fx-background-color: #ffffff;
+  -fx-border-color: #f06179;
+  -fx-border-radius: 10px;
+  -fx-padding: 10px;
+}
+
+.nav-bar {
+  -fx-background-color: #fdd75c;
+  -fx-font-size: 12pt;
+  -fx-alignment: center;
+}
+
+.loginVbox{
+  -fx-background-color: linear-gradient(to bottom right, #00a8ff, #0072ff);
+}
+
+/* Bottom Navigation Bar */
+.bottom-bar {
+-fx-background-color: #fdd75c; /* Yellow background */
+-fx-padding: 10px 0;
+-fx-alignment: center;
+-fx-spacing: 10px;
+-fx-border-color: #ccc; /* Optional: adds a border line */
+-fx-border-width: 1px 0 0 0;
+}
+
+/* Navigation Button */
+.nav-button {
+-fx-background-color: transparent;
+-fx-text-fill: #666; /* Default text color */
+-fx-font-size: 12pt;
+-fx-alignment: center;
+-fx-padding: 5px;
+}
+
+.nav-button .icon {
+-fx-font-family: "Segoe UI Emoji, Noto Color Emoji, sans-serif";
+-fx-font-size: 24px;
+-fx-fill: #333; /* Dark Gray */
+-fx-padding: 5px;
+-fx-alignment: center;
+}
+
+
+
+/* Active Navigation Button */
+.nav-button:active {
+-fx-text-fill: #007bff; /* Active text color (blue) */
+}
+
+.nav-button:active .icon {
+-fx-fill: #007bff; /* Active icon color */
+-fx-font-size: 26px; /* Slightly larger icon for active state */
+}
+
+/* Navigation Text */
+.nav-button .nav-text {
+-fx-font-size: 10pt;
+-fx-text-fill: #666;
+}
+
+/* Active Navigation Text */
+.nav-button:active .nav-text {
+-fx-text-fill: #007bff; /* Matches active button icon color */
+}
+
+.loginSubPane{
+  -fx-background-color: #fdd75c;
+  -fx-background-radius: 20px;
+  -fx-border-radius: 20px;
+}
+
+.errorMessage {
+  -fx-text-fill: red;
+  -fx-font-size: 10px;
+  -fx-font-weight: bold;
+  -fx-font-style: italic;
+}
+
+/* Lesson circle states */
+.lesson-circle-locked {
+  -fx-fill: #808080; /* Gray for locked lessons */
+  -fx-stroke: black;
+  -fx-stroke-type: inside;
+}
+
+.lesson-circle-available {
+  -fx-fill: #1E90FF; /* DodgerBlue for available lessons */
+  -fx-stroke: black;
+  -fx-stroke-type: inside;
+}
+
+.lesson-circle-completed {
+  -fx-fill: #FFD700; /* Gold for completed lessons */
+  -fx-stroke: black;
+  -fx-stroke-type: inside;
+}

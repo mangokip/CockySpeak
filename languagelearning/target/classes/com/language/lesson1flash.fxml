@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Copyright (c) 2017, Gluon and/or its affiliates.
+    All rights reserved. Use is subject to license terms.
+
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions
+    are met:
+   - Redistributions of source code must retain the above copyright
+     notice, this list of conditions and the following disclaimer.
+   - Redistributions in binary form must reproduce the above copyright
+     notice, this list of conditions and the following disclaimer in
+     the documentation and/or other materials provided with the distribution.
+   - Neither the name of Oracle Corporation and Gluon nor the names of its
+     contributors may be used to endorse or promote products derived
+     from this software without specific prior written permission.
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import com.gluonhq.charm.glisten.mvc.View?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<View fx:id="view" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="430.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.FlashcardViewController">
+   <center>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox layoutX="-140.0" prefHeight="241.0" prefWidth="309.0" styleClass="flashcard">
+               <children>
+                  <Label fx:id="foreignLabel" styleClass="flashcard" stylesheets="@styles.css" text="Foreign Label" textFill="#07acff">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <!-- English Label -->
+                  <Label fx:id="englishLabel" styleClass="flashcard" text="English Label" textFill="#ff7a00" visible="false">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Label fx:id="currentFlashcardNumber" alignment="CENTER" layoutX="-30.0" layoutY="335.0" prefWidth="80.0" styleClass="flashcard-highlight" text="1 / 1" wrapText="false">
+    <font>
+        <Font name="System Bold" size="15.0" />
+    </font>
+</Label>
+
+            <Button fx:id="flipCard" layoutX="-74.0" layoutY="269.0" mnemonicParsing="false" onAction="#flip" prefHeight="60.0" prefWidth="168.0" text="Flip!" />
+
+         </children>
+      </Pane>
+   </center>
+   <bottom>
+           <!-- Bottom Navigation Bar -->
+      <HBox alignment="CENTER" prefHeight="71.0" prefWidth="430.0" spacing="20" styleClass="bottom-bar">
+         <!-- Home Button -->
+         <VBox alignment="CENTER" onMouseClicked="#handleHome" spacing="5" styleClass="nav-button">
+            <Label onMouseClicked="#handleHome" styleClass="icon" text="🏠" />
+            <Label styleClass="nav-text" text="Home" />
+         </VBox>
+
+         <!-- Ranking Button -->
+         <VBox alignment="CENTER" onMouseClicked="#handleRanking" spacing="5" styleClass="nav-button">
+            <Label onMouseClicked="#handleRanking" styleClass="icon" text="🏆" />
+            <Label styleClass="nav-text" text="Ranking" />
+         </VBox>
+
+         <!-- Flashcards Button -->
+         <VBox alignment="CENTER" onMouseClicked="#handleFlashcards" spacing="5" styleClass="nav-button">
+            <Label onMouseClicked="#handleFlashcards" styleClass="icon" text="📘" />
+            <Label styleClass="nav-text" text="Flashcards" />
+         </VBox>
+
+         <!-- Profile Button -->
+         <VBox alignment="CENTER" onMouseClicked="#handleProfile" spacing="5" styleClass="nav-button">
+            <Label onMouseClicked="#handleProfile" styleClass="icon" text="👤" />
+            <Label styleClass="nav-text" text="Profile" />
+         </VBox>
+      </HBox>
+
+   </bottom>
+   <top>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </top>
+   <left>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="previousCard" layoutX="14.0" layoutY="382.0" mnemonicParsing="false" onAction="#previous" text="Previous" />
+         </children>
+      </Pane>
+   </left>
+   <right>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="nextCard" layoutX="100.0" layoutY="378.0" mnemonicParsing="false" onAction="#next" text="Next" />
+            <Button fx:id="listenCard" layoutX="66.0" layoutY="180.0" mnemonicParsing="false" onAction="#listen" prefHeight="45.0" prefWidth="56.0" text="Button" />
+         </children>
+      </Pane>
+   </right>
+</View>
