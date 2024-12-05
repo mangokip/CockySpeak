@@ -3,16 +3,14 @@ package com.controllers;
 import java.io.IOException;
 
 import com.language.App;
-import com.narration.Narriator;
 import com.model.CockySpeak;
-
+import com.narration.Narriator;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.TextField;
 
 
 public class loginController {
@@ -37,7 +35,7 @@ public class loginController {
         // errorMessage.setVisible(true);
 
         if(cockySpeak.login(userName, password)) {
-            App.setRoot("signup");
+            App.setRoot("profile");
         } else {
             errorMessage.setVisible(true);
         }
