@@ -1,87 +1,112 @@
 package com.controllers;
 
+import java.io.IOException;
+
+import com.language.App;
+import com.model.CockySpeak;
+
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 
 public class ProfileController {
 
-    // FXML elements for the profile screen
     @FXML
-    private ImageView logoImage; // Logo ImageView
-    @FXML
-    private ImageView avatarImage; // Avatar ImageView
-    @FXML
-    private PieChart progressChart; // Progress PieChart
-    @FXML
-    private PieChart.Data progressSlice; // PieChart Data for progress
-    @FXML
-    private Label xpLabel; // Label for XP
-    @FXML
-    private Label streakLabel; // Label for streak (e.g., 2 Days)
+    private ImageView profilePicture;
 
-    // Initialize the profile screen
     @FXML
-private void initialize() {
-    // Set the images for the logo and avatar
-    logoImage.setImage(new Image(getClass().getResource("/images/Cockylogo.png").toExternalForm()));
-    avatarImage.setImage(new Image(getClass().getResource("/images/Avatar.png").toExternalForm()));
+    private Label nameLabel;
 
-    // Set progress chart data
-    progressSlice = new PieChart.Data("Progress", 70); // Update to 70% progress
-    progressChart.getData().add(progressSlice);
-
-    // Set initial XP and streak labels
-    xpLabel.setText("XP: 1200");
-    streakLabel.setText("Streak: 2 Days");
-
-    // Apply CSS styles
-    logoImage.getStyleClass().add("logo-image");
-    avatarImage.getStyleClass().add("avatar-image");
-    progressChart.getStyleClass().add("progress-chart");
-    xpLabel.getStyleClass().add("profile-label");
-    streakLabel.getStyleClass().add("profile-label");
-}
-    // Action when clicking the "Settings" button
     @FXML
-    private void goToSettings() {
-        // Add your logic to navigate to settings page
-        System.out.println("Navigating to Settings...");
+    private PieChart progressChart;
+
+    private CockySpeak cockySpeak = CockySpeak.getInstance();
+
+    @FXML
+    public void initialize() {
+        // Load profile picture
+        try {
+            profilePicture.setImage(new Image(App.class.getResourceAsStream("/com/language/images/chicken.png")));
+
+        } catch (Exception e) {
+            System.err.println("Error loading profile picture. Setting default.");
+            profilePicture.setImage(new Image(App.class.getResourceAsStream("/com/language/images/Cockylogo.png")));
+
+        }
+
+        // Set the username or default to "Guest"
+        if (cockySpeak.getCurrentUser() != null) {
+            nameLabel.setText(cockySpeak.getCurrentUser().getUserName());
+        } else {
+            nameLabel.setText("Guest");
+        }
+
+        // Populate the progress chart
+        populateChart();
     }
 
-    // Action when clicking the "Logout" button
+    private void populateChart() {
+        progressChart.getData().clear();
+        if (cockySpeak.getCurrentUser() != null && cockySpeak.getCurrentLanguage() != null) {
+            var tracker = cockySpeak.getCurrentUser().getLanguageProgressTracker(cockySpeak.getCurrentLanguage());
+            if (tracker != null) {
+                int completed = tracker.getCompletedLessons();
+                int remaining = Math.max(0, 10 - completed); // Example total lessons: 10
+                progressChart.getData().addAll(
+                    new PieChart.Data("Completed", completed),
+                    new PieChart.Data("Remaining", remaining)
+                );
+            } else {
+                progressChart.getData().addAll(
+                    new PieChart.Data("No Data", 1)
+                );
+            }
+        } else {
+            progressChart.getData().addAll(
+                new PieChart.Data("No Data", 1)
+            );
+        }
+    }
+
     @FXML
     private void handleLogout() {
-        // Add your logic for handling logout (e.g., logout the user and redirect)
-        System.out.println("Logging out...");
+        cockySpeak.logout();
+        try {
+            App.setRoot("login"); // Navigate back to login screen
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    // Handle the navigation actions for the bottom bar buttons
-
-    // Action for Home button in the bottom navigation bar
     @FXML
-    private void handleHome(MouseEvent event) {
-        System.out.println("Navigating to Home...");
+    private void openSettings() {
+        try {
+            App.setRoot("settings"); // Navigate to settings screen
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    void handleFlashcards(MouseEvent event) throws IOException {
+        App.setRoot("flashcard");
     }
 
-    // Action for Ranking button in the bottom navigation bar
     @FXML
-    private void handleRanking(MouseEvent event) {
-        System.out.println("Navigating to Ranking...");
+    void handleHome(MouseEvent event) throws IOException {
+        App.setRoot("home");
     }
 
-    // Action for Flashcards button in the bottom navigation bar
     @FXML
-    private void handleFlashcards(MouseEvent event) {
-        System.out.println("Navigating to Flashcards...");
+    void handleProfile(MouseEvent event) throws IOException {
+        App.setRoot("profile");
     }
 
-    // Action for Profile button in the bottom navigation bar
     @FXML
-    private void handleProfile(MouseEvent event) {
-        System.out.println("Navigating to Profile...");
+    void handleRanking(MouseEvent event) throws IOException {
+        App.setRoot("ranking");
     }
+   
 }
