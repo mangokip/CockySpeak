@@ -2,84 +2,83 @@ package com.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Button;
 
 public class MultipleChoiceController {
 
-    // FXML elements for question and answers
-    @FXML private Label questionLabel;
-    @FXML private Label resultLabel;
-    @FXML private RadioButton option1;
-    @FXML private RadioButton option2;
-    @FXML private RadioButton option3;
-    @FXML private RadioButton option4;
-    @FXML private ToggleGroup choicesGroup;
-
-    // FXML elements for bottom navigation
-    @FXML private Button homeButton;
-    @FXML private Button rankingButton;
-    @FXML private Button flashcardsButton;
-    @FXML private Button profileButton;
-
-    // Initialize the scene, set question, options, and default state
     @FXML
-    public void initialize() {
-        // Set up the question and options
-        questionLabel.setText("What is the Spanish word for 'Hello'?");
-        option1.setText("Hola");
-        option2.setText("Adiós");
-        option3.setText("Gracias");
-        option4.setText("Por favor");
+    private Label questionLabel;
+    
+    @FXML
+    private Label feedbackLabel;
 
-        // Clear the result label when the screen is first loaded
-        resultLabel.setText("");
+    @FXML
+    private Button optionA;
+
+    @FXML
+    private Button optionB;
+
+    @FXML
+    private Button optionC;
+
+    @FXML
+    private Button optionD;
+
+    // Correct answer: "Gracias"
+    private String correctAnswer = "Gracias";
+
+    @FXML
+    private void handleOptionA() {
+        checkAnswer(optionA);
     }
 
-    // Submit the answer and check correctness
     @FXML
-    public void submitAnswer() {
-        // Get the selected option from the ToggleGroup
-        RadioButton selectedOption = (RadioButton) choicesGroup.getSelectedToggle();
+    private void handleOptionB() {
+        checkAnswer(optionB);
+    }
 
-        // If an option is selected
-        if (selectedOption != null) {
-            String answer = selectedOption.getText();
+    @FXML
+    private void handleOptionC() {
+        checkAnswer(optionC);
+    }
 
-            // Check if the selected option is correct
-            if (answer.equals("Hola")) {
-                resultLabel.setText("Correct!");
-                resultLabel.setStyle("-fx-text-fill: green;");
-            } else {
-                resultLabel.setText("Incorrect, try again.");
-                resultLabel.setStyle("-fx-text-fill: red;");
-            }
+    @FXML
+    private void handleOptionD() {
+        checkAnswer(optionD);
+    }
+
+    /**
+     * This method checks the selected answer against the correct one and provides feedback.
+     */
+    private void checkAnswer(Button selectedOption) {
+        if (selectedOption.getText().equals(correctAnswer)) {
+            feedbackLabel.setText("Correct! Great job!");
+            feedbackLabel.setStyle("-fx-text-fill: green; -fx-font-weight: bold;");
         } else {
-            // If no option is selected, prompt the user to select an answer
-            resultLabel.setText("Please select an answer.");
-            resultLabel.setStyle("-fx-text-fill: red;");
+            feedbackLabel.setText("Incorrect! Try again.");
+            feedbackLabel.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
         }
+        feedbackLabel.setVisible(true);
     }
 
-    // Handlers for bottom bar navigation
+    // Placeholder methods for the bottom bar
     @FXML
-    public void handleHome() {
-        // Navigate to Home
-    }
-
-    @FXML
-    public void handleRanking() {
-        // Navigate to Ranking
+    private void handleHome() {
+        System.out.println("Home clicked");
     }
 
     @FXML
-    public void handleFlashcards() {
-        // Navigate to Flashcards
+    private void handleRanking() {
+        System.out.println("Ranking clicked");
     }
 
     @FXML
-    public void handleProfile() {
-        // Navigate to Profile
+    private void handleFlashcards() {
+        System.out.println("Flashcards clicked");
+    }
+
+    @FXML
+    private void handleProfile() {
+        System.out.println("Profile clicked");
     }
 }
