@@ -62,7 +62,6 @@
                 <Label styleClass="icon" text="👤" />
                 <Label styleClass="nav-text" text="Profile" />
             </VBox>
-            
         </HBox>
     </bottom>
 
