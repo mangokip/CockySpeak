@@ -31,25 +31,32 @@
       </HBox>
    </VBox>
 
-   <!-- Bottom Navigation Bar -->
-   <bottom>
-      <HBox alignment="CENTER" prefHeight="71.0" prefWidth="430.0" spacing="20" styleClass="bottom-bar">
-         <VBox alignment="CENTER" onMouseClicked="#handleHome" spacing="5" styleClass="nav-button">
-            <Label styleClass="icon" text="🏠" />
-            <Label styleClass="nav-text" text="Home" />
-         </VBox>
-         <VBox alignment="CENTER" onMouseClicked="#handleRanking" spacing="5" styleClass="nav-button">
-            <Label styleClass="icon" text="🏆" />
-            <Label styleClass="nav-text" text="Ranking" />
-         </VBox>
-         <VBox alignment="CENTER" onMouseClicked="#handleFlashcards" spacing="5" styleClass="nav-button">
-            <Label styleClass="icon" text="📘" />
-            <Label styleClass="nav-text" text="Flashcards" />
-         </VBox>
-         <VBox alignment="CENTER" onMouseClicked="#handleProfile" spacing="5" styleClass="nav-button">
-            <Label styleClass="icon" text="👤" />
-            <Label styleClass="nav-text" text="Profile" />
-         </VBox>
-      </HBox>
-   </bottom>
+    <!-- Bottom Navigation Bar -->
+    <bottom>
+        <HBox alignment="CENTER" prefHeight="71.0" prefWidth="430.0" spacing="20" styleClass="bottom-bar" style="-fx-background-color: #FFCC00;">
+            <VBox alignment="CENTER" onMouseClicked="#handleHome" spacing="5" styleClass="nav-button">
+                <Label styleClass="icon" text="🏠" />
+                <Label styleClass="nav-text" text="Home" />
+            </VBox>
+            <VBox alignment="CENTER" onMouseClicked="#handleRanking" spacing="5" styleClass="nav-button">
+                <Label styleClass="icon" text="🏆" />
+                <Label styleClass="nav-text" text="Ranking" />
+            </VBox>
+            <VBox alignment="CENTER" onMouseClicked="#handleFlashcards" spacing="5" styleClass="nav-button">
+                <Label styleClass="icon" text="📘" />
+                <Label styleClass="nav-text" text="Flashcards" />
+            </VBox>
+            <VBox alignment="CENTER" onMouseClicked="#handleProfile" spacing="5" styleClass="nav-button">
+                <Label styleClass="icon" text="👤" />
+                <Label styleClass="nav-text" text="Profile" />
+            </VBox>
+            
+        </HBox>
+    </bottom>
+
+    <!-- Stylesheets -->
+    <stylesheets>
+        <URL value="@../styles.css" />
+        <URL value="@styles.css" />
+    </stylesheets>
 </View>
