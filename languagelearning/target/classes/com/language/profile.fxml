@@ -32,10 +32,7 @@
                 <Label styleClass="icon" text="👤" />
                 <Label styleClass="nav-text" text="Profile" />
             </VBox>
-            <VBox alignment="CENTER" onMouseClicked="#handleSettings" spacing="5" styleClass="nav-button">
-                <Label styleClass="icon" text="⚙️" />
-                <Label styleClass="nav-text" text="Settings" />
-            </VBox>
+            
         </HBox>
     </bottom>
     <stylesheets>
