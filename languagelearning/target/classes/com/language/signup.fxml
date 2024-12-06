@@ -4,9 +4,12 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="430.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.signupController">
    
@@ -14,20 +17,34 @@
       <URL value="@styles.css" />
    </stylesheets>
    <children>
-   <ImageView fitHeight="140.0" fitWidth="169.0" layoutX="130.0" layoutY="21.0">
+      <Pane layoutY="210.0" prefHeight="402.0" prefWidth="430.0" style="-fx-border-color: f06179; -fx-border-width: 2;" styleClass="signupSubPane" stylesheets="@styles.css">
+         <children>
+            <TextField fx:id="usernameField" layoutX="88.0" layoutY="78.0" promptText="Username" styleClass="signupField" />
+            <TextField fx:id="emailField" layoutX="88.0" layoutY="134.0" promptText="Email" styleClass="signupField" />
+            <TextField fx:id="passwordField" layoutX="88.0" layoutY="188.0" promptText="Password" styleClass="signupField" />
+            <Button fx:id="signupButton" layoutX="148.0" layoutY="368.0" mnemonicParsing="false" onAction="#handleSignupAction" prefHeight="53.0" prefWidth="135.0" text="Sign Up" />
+            <Label fx:id="errorMessage" layoutX="88.0" layoutY="220.0" styleClass="errorMessage" text="Error signing up!" visible="false" />
+            <Line endX="-14.600051879882812" endY="6.0" layoutX="253.0" layoutY="58.0" startX="-85.80000305175781" startY="6.0" stroke="#4b44ff" strokeWidth="2.0" />
+            <Button fx:id="backButton" layoutX="66.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleBackAction" prefHeight="56.0" prefWidth="82.0" style="-fx-background-color: 0; -fx-text-fill: #bbbbbb; -fx-font-size: 20;" text="Login">
+               <font>
+                  <Font size="20.0" />
+               </font></Button>
+            <Text fill="#4b44ff" layoutX="168.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Up">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Text fill="WHITE" layoutX="124.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Up" textAlignment="CENTER" wrappingWidth="163.0">
+         <font>
+            <Font name="Arial Bold" size="36.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="176.0" fitWidth="183.0" layoutX="124.0" layoutY="-7.0">
          <image>
             <Image url="@images/Cockylogo.png" />
          </image>
-   </ImageView>
-      <Pane layoutY="174.0" prefHeight="402.0" prefWidth="430.0" styleClass="signupSubPane">
-         <children>
-            <TextField fx:id="usernameField" layoutX="88.0" layoutY="40.0" promptText="Username" styleClass="signupField" />
-            <TextField fx:id="emailField" layoutX="88.0" layoutY="100.0" promptText="Email" styleClass="signupField" />
-            <TextField fx:id="passwordField" layoutX="88.0" layoutY="160.0" promptText="Password" styleClass="signupField" />
-            <Button fx:id="signupButton" layoutX="250.0" layoutY="259.0" mnemonicParsing="false" onAction="#handleSignupAction" prefHeight="53.0" prefWidth="92.0" text="Sign Up" />
-            <Button fx:id="backButton" layoutX="88.0" layoutY="259.0" mnemonicParsing="false" onAction="#handleBackAction" prefHeight="53.0" prefWidth="92.0" text="Login" />
-            <Label fx:id="errorMessage" layoutX="88.0" layoutY="220.0" styleClass="errorMessage" text="Error signing up!" visible="false" />
-         </children>
-      </Pane>
+      </ImageView>
    </children>
 </Pane>

@@ -2,7 +2,7 @@
 .root {
   -fx-font-size: 16pt;
   -fx-font-family: "Helvetica";
-  -fx-background-color: #6bc9c8;
+  -fx-background-color: #5BC2D9;
   -fx-text-fill: #ffffff;
 }
 
@@ -108,7 +108,7 @@
 }
 
 .loginVbox{
-  -fx-background-color: linear-gradient(to bottom right, #00a8ff, #0072ff);
+  -fx-background-color: linear-gradient(to bottom right, #5BC2D9, #0072ff);
 }
 
 /* Bottom Navigation Bar */
@@ -191,4 +191,10 @@
   -fx-fill: #FFD700; /* Gold for completed lessons */
   -fx-stroke: black;
   -fx-stroke-type: inside;
+}
+
+.signupSubPane{
+  -fx-background-color: #fdd75c;
+  -fx-background-radius: 20px;
+  -fx-border-radius: 20px;
 }
