@@ -1,0 +1,19 @@
+-------------------------------------------------------------------------------
+Test set: com.model.TrueFalseTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.048 s <<< FAILURE! -- in com.model.TrueFalseTest
+com.model.TrueFalseTest.testTrueAnswer -- Time elapsed: 0.008 s <<< ERROR!
+java.lang.NullPointerException
+	at java.base/java.io.Reader.<init>(Reader.java:168)
+	at java.base/java.io.InputStreamReader.<init>(InputStreamReader.java:123)
+	at com.language@1.0-SNAPSHOT/com.model.DataLoader.loadWordsFromResource(DataLoader.java:313)
+	at com.language@1.0-SNAPSHOT/com.model.WordList.loadWords(WordList.java:57)
+	at com.language@1.0-SNAPSHOT/com.model.WordList.<init>(WordList.java:24)
+	at com.language@1.0-SNAPSHOT/com.model.WordList.getInstance(WordList.java:39)
+	at com.language@1.0-SNAPSHOT/com.model.TrueFalseTest.<init>(TrueFalseTest.java:8)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+	at java.base/java.util.Optional.orElseGet(Optional.java:364)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+
