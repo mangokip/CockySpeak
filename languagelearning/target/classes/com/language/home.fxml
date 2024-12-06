@@ -89,7 +89,7 @@
                               <Insets bottom="491.0" left="40.0" />
                            </StackPane.margin>
                         </Ellipse>
-                        <Ellipse fx:id="lesson1Circle" fill="#4b8294" onMouseClicked="#startLesson" radiusX="30.0" radiusY="27.0" stroke="BLACK" strokeType="INSIDE">
+                        <Ellipse fx:id="lesson1Circle" fill="#4b8294" onMouseClicked="#handleVocabMatching" radiusX="30.0" radiusY="27.0" stroke="BLACK" strokeType="INSIDE">
                            <StackPane.margin>
                               <Insets bottom="500.0" left="40.0" />
                            </StackPane.margin>
@@ -161,7 +161,7 @@
                               <Insets bottom="-500.0" right="40.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="startbutton" accessibleRole="BUTTON" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#startLesson" prefHeight="51.0" prefWidth="57.0" text="★" textFill="#686868">
+                        <Label fx:id="startLesson" accessibleRole="BUTTON" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#handleVocabMatching" prefHeight="51.0" prefWidth="57.0" text="★" textFill="#686868">
                            <StackPane.margin>
                               <Insets bottom="500.0" left="40.0" />
                            </StackPane.margin>

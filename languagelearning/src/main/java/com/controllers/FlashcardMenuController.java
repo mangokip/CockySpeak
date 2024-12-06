@@ -540,9 +540,235 @@ public class FlashcardMenuController {
     private class CompletionCallback implements QuestionCompletionCallback {
         @Override
         public void onComplete(boolean isCorrect) {
-            onQuestionComplete(isCorrect);
+            FlashcardMenuController.this.onQuestionComplete(isCorrect);
         }
     }
+    
+    // private void onQuestionComplete(boolean isCorrect) {
+    //     if (isCorrect) {
+    //         questionCount++;
+    //         if (questionCount >= QUESTIONS_TO_COMPLETE) {
+    //             progressTracker.completeLesson();
+    //             updateCircleColors();
+    //             navigateToScreen("/fxml/flashcard");
+    //         } else {
+    //             startSpecificQuestion(questionCount + 1);  // Changed from startRandomizedQuestions()
+    //         }
+    //     }
+    // }
+
+    private void onQuestionComplete(boolean isCorrect) {
+        if (isCorrect) {
+            questionCount++;
+            System.out.println("Question " + questionCount + " completed successfully");
+            
+            updateSpecificCircle(questionCount, true);
+            
+            if (questionCount >= QUESTIONS_TO_COMPLETE) {
+                // All questions completed
+                progressTracker.completeLesson();
+                updateCircleColors();
+                
+                // Navigate to home after a delay
+                try {
+                    App.setRoot("home");  // You can remove this if you don't want to go home at all
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                // Instead of going home, directly go to next question type
+                try {
+                    String nextScreen;
+                    switch(questionCount) {
+                        case 1:
+                            nextScreen = "trueFalse";
+                            break;
+                        case 2:
+                            nextScreen = "multipleChoice";
+                            break;
+                        default:
+                            nextScreen = "home";
+                            break;
+                    }
+                    App.setRoot(nextScreen);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+    
+    // Update startSpecificQuestion in FlashcardMenuController:
+    private void startSpecificQuestion(int questionNumber) {
+        try {
+            String questionPath;
+            switch(questionNumber) {
+                case 1:
+                    questionPath = "vocabMatching";
+                    break;
+                case 2:
+                    questionPath = "trueFalse";
+                    break;
+                case 3:
+                    questionPath = "multipleChoice";
+                    break;
+                default:
+                    System.out.println("Invalid question number: " + questionNumber);
+                    return;
+            }
+            
+            System.out.println("Loading question " + questionNumber + ": " + questionPath);
+            
+            // Use the modified setRoot method that returns the FXMLLoader
+            FXMLLoader loader = App.setRoot(questionPath);
+            
+            // Get the controller and set the callback
+            QuestionController controller = loader.getController();
+            if (controller != null) {
+                System.out.println("Controller type: " + controller.getClass().getName());
+                System.out.println("Setting callback for question " + questionNumber);
+                controller.setCompletionCallback(new CompletionCallback());
+            } else {
+                System.err.println("Failed to get controller for " + questionPath);
+            }
+            
+        } catch (IOException e) {
+            System.err.println("Failed to load question screen: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    // New method to update specific circle
+    private void updateSpecificCircle(int questionNumber, boolean completed) {
+        Ellipse[] circles = {lesson1Circle, lesson2Circle, lesson3Circle, lesson4Circle, lesson5Circle, lesson6Circle};
+        if (questionNumber > 0 && questionNumber <= circles.length && circles[questionNumber - 1] != null) {
+            circles[questionNumber - 1].getStyleClass().removeAll(
+                "lesson-circle-locked", 
+                "lesson-circle-available", 
+                "lesson-circle-completed"
+            );
+            
+            if (completed) {
+                circles[questionNumber - 1].getStyleClass().add("lesson-circle-completed");
+                if (questionNumber < circles.length) {
+                    // Make next circle available
+                    circles[questionNumber].getStyleClass().removeAll(
+                        "lesson-circle-locked", 
+                        "lesson-circle-available", 
+                        "lesson-circle-completed"
+                    );
+                    circles[questionNumber].getStyleClass().add("lesson-circle-available");
+                }
+            }
+        }
+    }
+    
+    // // Modified startSpecificQuestion method
+    // private void startSpecificQuestion(int questionNumber) {
+    //     try {
+    //         String questionPath;
+    //         switch(questionNumber) {
+    //             case 1:
+    //                 questionPath = "vocabMatching.fxml";
+    //                 break;
+    //             case 2:
+    //                 questionPath = "trueFalse.fxml";
+    //                 break;
+    //             case 3:
+    //                 questionPath = "multipleChoice.fxml";
+    //                 break;
+    //             default:
+    //                 System.out.println("Invalid question number: " + questionNumber);
+    //                 return;
+    //         }
+            
+    //         System.out.println("Loading question " + questionNumber + ": " + questionPath);
+    //         FXMLLoader loader = new FXMLLoader(getClass().getResource(questionPath));
+    //         Scene scene = new Scene(loader.load());
+    //         Stage stage = (Stage) startbutton.getScene().getWindow();
+    //         scene.getStylesheets().add(getClass().getResource("/styles/styles.css").toExternalForm());
+            
+    //         Object controller = loader.getController();
+    //         CompletionCallback callback = new CompletionCallback();
+            
+    //         if (controller instanceof QuestionController) {
+    //             ((QuestionController) controller).setCompletionCallback(callback);
+    //             System.out.println("Callback set for question " + questionNumber);
+    //         }
+            
+    //         stage.setScene(scene);
+    //     } catch (IOException e) {
+    //         System.err.println("Failed to load question screen: " + e.getMessage());
+    //         e.printStackTrace();
+    //     }
+    // }
+    
+
+    @FXML
+private void startLesson(MouseEvent event) {
+    if (event.getSource() instanceof Ellipse) {
+        Ellipse clickedEllipse = (Ellipse) event.getSource();
+        String ellipseId = clickedEllipse.getId();
+        int lessonNumber = extractLessonNumber(ellipseId);
+        
+        System.out.println("Attempting to start lesson " + lessonNumber);
+        System.out.println("Progress tracker is " + (progressTracker == null ? "null" : "not null"));
+        System.out.println("Current user is " + (cockySpeak.getCurrentUser() == null ? "null" : "not null"));
+        
+        if (progressTracker != null && canStartLesson(lessonNumber)) {
+            questionCount = 0;
+            // Instead of random, use specific lesson type based on number
+            startSpecificQuestion(lessonNumber);
+        } else {
+            System.out.println("Cannot start lesson: Progress tracker is null or lesson cannot be started.");
+        }
+    }
+}
+
+// private void startSpecificQuestion(int lessonNumber) {
+//     try {
+//         String questionPath;
+//         switch(lessonNumber) {
+//             case 1:
+//                 questionPath = "vocabMatching.fxml";
+//                 break;
+//             case 2:
+//                 questionPath = "trueFalse.fxml";
+//                 break;
+//             case 3:
+//                 questionPath = "multipleChoice.fxml";
+//                 break;
+//             default:
+//                 System.out.println("Invalid lesson number");
+//                 return;
+//         }
+        
+//         FXMLLoader loader = new FXMLLoader(getClass().getResource(questionPath));
+//         Scene scene = new Scene(loader.load());
+//         Stage stage = (Stage) startbutton.getScene().getWindow();
+//         scene.getStylesheets().add(getClass().getResource("/styles/styles.css").toExternalForm());
+        
+//         Object controller = loader.getController();
+//         CompletionCallback callback = new CompletionCallback();
+        
+//         if (controller instanceof VocabController) {
+//             ((VocabController) controller).setCompletionCallback(callback);
+//         } else if (controller instanceof TrueFalseController) {
+//             ((TrueFalseController) controller).setCompletionCallback(callback);
+//         } else if (controller instanceof MultipleChoiceController) {
+//             ((MultipleChoiceController) controller).setCompletionCallback(callback);
+//         }
+        
+//         stage.setScene(scene);
+//     } catch (IOException e) {
+//         System.err.println("Failed to load question screen: " + e.getMessage());
+//         e.printStackTrace();
+//     }
+// }
+
+@FXML
+private void handleVocabMatching(MouseEvent event) throws IOException {
+    App.setRoot("vocabMatching");
+}
 
     @FXML
     public void initialize() {
@@ -597,25 +823,25 @@ public class FlashcardMenuController {
         }
     }
 
-    @FXML
-    private void startLesson(MouseEvent event) {
-        if (event.getSource() instanceof Ellipse) {
-            Ellipse clickedEllipse = (Ellipse) event.getSource();
-            String ellipseId = clickedEllipse.getId();
-            int lessonNumber = extractLessonNumber(ellipseId);
+    // @FXML
+    // private void startLesson(MouseEvent event) {
+    //     if (event.getSource() instanceof Ellipse) {
+    //         Ellipse clickedEllipse = (Ellipse) event.getSource();
+    //         String ellipseId = clickedEllipse.getId();
+    //         int lessonNumber = extractLessonNumber(ellipseId);
             
-            System.out.println("Attempting to start lesson " + lessonNumber);
-            System.out.println("Progress tracker is " + (progressTracker == null ? "null" : "not null"));
-            System.out.println("Current user is " + (cockySpeak.getCurrentUser() == null ? "null" : "not null"));
+    //         System.out.println("Attempting to start lesson " + lessonNumber);
+    //         System.out.println("Progress tracker is " + (progressTracker == null ? "null" : "not null"));
+    //         System.out.println("Current user is " + (cockySpeak.getCurrentUser() == null ? "null" : "not null"));
             
-            if (progressTracker != null && canStartLesson(lessonNumber)) {
-                questionCount = 0;
-                startRandomizedQuestions();
-            } else {
-                System.out.println("Cannot start lesson: Progress tracker is null or lesson cannot be started.");
-            }
-        }
-    }
+    //         if (progressTracker != null && canStartLesson(lessonNumber)) {
+    //             questionCount = 0;
+    //             startRandomizedQuestions();
+    //         } else {
+    //             System.out.println("Cannot start lesson: Progress tracker is null or lesson cannot be started.");
+    //         }
+    //     }
+    // }
 
     private boolean canStartLesson(int lessonNumber) {
         if (lessonNumber == 1) return true;
@@ -623,46 +849,46 @@ public class FlashcardMenuController {
                progressTracker.getCompletedLessons() >= (lessonNumber - 1);
     }
 
-    private void startRandomizedQuestions() {
-        try {
-            String[] questionTypes = {"/fxml/vocabMatching.fxml", "/fxml/trueFalse.fxml", "/fxml/multipleChoice.fxml"};
-            int randomIndex = (int) (Math.random() * questionTypes.length);
-            String randomQuestion = questionTypes[randomIndex];
+    // private void startRandomizedQuestions() {
+    //     try {
+    //         String[] questionTypes = {"/fxml/vocabMatching.fxml", "/fxml/trueFalse.fxml", "/fxml/multipleChoice.fxml"};
+    //         int randomIndex = (int) (Math.random() * questionTypes.length);
+    //         String randomQuestion = questionTypes[randomIndex];
             
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(randomQuestion));
-            Scene scene = new Scene(loader.load());
-            Stage stage = (Stage) startbutton.getScene().getWindow();
-            scene.getStylesheets().add(getClass().getResource("/styles/styles.css").toExternalForm());
+    //         FXMLLoader loader = new FXMLLoader(getClass().getResource(randomQuestion));
+    //         Scene scene = new Scene(loader.load());
+    //         Stage stage = (Stage) startbutton.getScene().getWindow();
+    //         scene.getStylesheets().add(getClass().getResource("/styles/styles.css").toExternalForm());
             
-            Object controller = loader.getController();
-            CompletionCallback callback = new CompletionCallback();
+    //         Object controller = loader.getController();
+    //         CompletionCallback callback = new CompletionCallback();
             
-            if (controller instanceof VocabController) {
-                ((VocabController) controller).setCompletionCallback(callback);
-            } else if (controller instanceof TrueFalseController) {
-                ((TrueFalseController) controller).setCompletionCallback(callback);
-            } else if (controller instanceof MultipleChoiceController) {
-                ((MultipleChoiceController) controller).setCompletionCallback(callback);
-            }
+    //         if (controller instanceof VocabController) {
+    //             ((VocabController) controller).setCompletionCallback(callback);
+    //         } else if (controller instanceof TrueFalseController) {
+    //             ((TrueFalseController) controller).setCompletionCallback(callback);
+    //         } else if (controller instanceof MultipleChoiceController) {
+    //             ((MultipleChoiceController) controller).setCompletionCallback(callback);
+    //         }
             
-            stage.setScene(scene);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    //         stage.setScene(scene);
+    //     } catch (IOException e) {
+    //         e.printStackTrace();
+    //     }
+    // }
 
-    private void onQuestionComplete(boolean isCorrect) {
-        if (isCorrect) {
-            questionCount++;
-            if (questionCount >= QUESTIONS_TO_COMPLETE) {
-                progressTracker.completeLesson();
-                updateCircleColors();
-                navigateToScreen("/fxml/flashcard");
-            } else {
-                startRandomizedQuestions();
-            }
-        }
-    }
+    // private void onQuestionComplete(boolean isCorrect) {
+    //     if (isCorrect) {
+    //         questionCount++;
+    //         if (questionCount >= QUESTIONS_TO_COMPLETE) {
+    //             progressTracker.completeLesson();
+    //             updateCircleColors();
+    //             navigateToScreen("/fxml/flashcard");
+    //         } else {
+    //             startRandomizedQuestions();
+    //         }
+    //     }
+    // }
 
     private void updateCircleColors() {
         if (progressTracker == null) return;
@@ -725,6 +951,9 @@ public class FlashcardMenuController {
     @FXML void handleRanking(MouseEvent event) throws IOException {
         App.setRoot("ranking");
     }
+
+    //ranking
+    //vocabMatching
 }
 
 

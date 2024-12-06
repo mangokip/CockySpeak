@@ -25,18 +25,18 @@
 
                 <HBox alignment="CENTER" spacing="20">
                     <Button fx:id="word3Button" text="Thank you" onAction="#handle3WordAction" prefWidth="150" />
-                    <Button fx:id="word4Button" text="Please" onAction="#handl4eWordAction" prefWidth="150" />
+                    <Button fx:id="word4Button" text="Please" onAction="#handle4WordAction" prefWidth="150" />
                 </HBox>
 
                 <!-- Spanish Words Section -->
                 <HBox alignment="CENTER" spacing="20">
-                    <Button fx:id="spanish1Button" text="Hola" onAction="#handleSpanishAction" prefWidth="150" />
-                    <Button fx:id="spanish2Button" text="Adiós" onAction="#handleSpanishAction" prefWidth="150" />
+                    <Button fx:id="spanish1Button" text="Hola" onAction="#handleSpanish1Action" prefWidth="150" />
+                    <Button fx:id="spanish2Button" text="Adiós" onAction="#handleSpanish2Action" prefWidth="150" />
                 </HBox>
 
                 <HBox alignment="CENTER" spacing="20">
-                    <Button fx:id="spanish3Button" text="Gracias" onAction="#handleSpanishAction" prefWidth="150" />
-                    <Button fx:id="spanish4Button" text="Por favor" onAction="#handleSpanishAction" prefWidth="150" />
+                    <Button fx:id="spanish3Button" text="Gracias" onAction="#handleSpanish3Action" prefWidth="150" />
+                    <Button fx:id="spanish4Button" text="Por favor" onAction="#handleSpanish4Action" prefWidth="150" />
                 </HBox>
 
                 <!-- Submit Button -->

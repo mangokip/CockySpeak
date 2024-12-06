@@ -3,6 +3,8 @@ package com.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
+import com.language.App;
+import java.io.IOException;
 
 public class MultipleChoiceController implements QuestionController {
 
@@ -51,9 +53,28 @@ public class MultipleChoiceController implements QuestionController {
      * This method checks the selected answer against the correct one and provides feedback.
      */
     private void checkAnswer(Button selectedOption) {
-        if (selectedOption.getText().equals(correctAnswer)) {
+        boolean isCorrect = selectedOption.getText().equals(correctAnswer);
+        if (isCorrect) {
             feedbackLabel.setText("Correct! Great job!");
             feedbackLabel.setStyle("-fx-text-fill: green; -fx-font-weight: bold;");
+            
+            // Add delay then go to next screen
+            new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        javafx.application.Platform.runLater(() -> {
+                            try {
+                                // After multiple choice, go to home
+                                App.setRoot("home");
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        });
+                    }
+                },
+                2000 // 2 second delay
+            );
         } else {
             feedbackLabel.setText("Incorrect! Try again.");
             feedbackLabel.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
@@ -61,32 +82,22 @@ public class MultipleChoiceController implements QuestionController {
         feedbackLabel.setVisible(true);
     }
 
-    // Placeholder methods for the bottom bar
-    @FXML
-    private void handleHome() {
-        System.out.println("Home clicked");
+    // Navigation handlers
+    @FXML void handleHome() throws IOException {
+        App.setRoot("home");
     }
 
-    @FXML
-    private void handleRanking() {
-        System.out.println("Ranking clicked");
+    @FXML void handleRanking() throws IOException {
+        App.setRoot("ranking");
     }
 
-    @FXML
-    private void handleFlashcards() {
-        System.out.println("Flashcards clicked");
+    @FXML void handleFlashcards() throws IOException {
+        App.setRoot("flashcard");
     }
 
-    @FXML
-    private void handleProfile() {
-        System.out.println("Profile clicked");
+    @FXML void handleProfile() throws IOException {
+        App.setRoot("profile");
     }
-
-    //
-    //
-    //
-    //
-
     
     private QuestionCompletionCallback callback;
 
@@ -95,11 +106,33 @@ public class MultipleChoiceController implements QuestionController {
         this.callback = callback;
     }
 
-    // Call this when question is answered:
     private void onQuestionAnswered(boolean isCorrect) {
         if (callback != null) {
             callback.onComplete(isCorrect);
         }
     }
 }
+
+    //
+    //
+    //
+    //
+
+    
+//     private QuestionCompletionCallback callback;
+
+//     @Override
+//     public void setCompletionCallback(QuestionCompletionCallback callback) {
+//         this.callback = callback;
+//     }
+
+//     // Call this when question is answered:
+//     private void onQuestionAnswered(boolean isCorrect) {
+//         if (callback != null) {
+//             callback.onComplete(isCorrect);
+//         }
+//     }
+
+    
+// }
 
