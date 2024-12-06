@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 
-public class MultipleChoiceController {
+public class MultipleChoiceController implements QuestionController {
 
     @FXML
     private Label questionLabel;
@@ -81,4 +81,25 @@ public class MultipleChoiceController {
     private void handleProfile() {
         System.out.println("Profile clicked");
     }
+
+    //
+    //
+    //
+    //
+
+    
+    private QuestionCompletionCallback callback;
+
+    @Override
+    public void setCompletionCallback(QuestionCompletionCallback callback) {
+        this.callback = callback;
+    }
+
+    // Call this when question is answered:
+    private void onQuestionAnswered(boolean isCorrect) {
+        if (callback != null) {
+            callback.onComplete(isCorrect);
+        }
+    }
 }
+

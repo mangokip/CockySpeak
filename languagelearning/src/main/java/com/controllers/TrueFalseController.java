@@ -47,7 +47,6 @@ public class TrueFalseController {
         } else {
             feedbackLabel.setText("Incorrect!");
             feedbackLabel.setStyle("-fx-text-fill: red;");
-        }
     }
 
     // Method to load a question and set correctAnswer
@@ -63,12 +62,13 @@ package com.controllers;
 
 import com.model.TrueFalse;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 
-public class TrueFalseController {
+public class TrueFalseController implements QuestionController {
 
     @FXML
     private Label questionLabel;
@@ -110,4 +110,33 @@ public class TrueFalseController {
         feedbackLabel.setText(isCorrect ? "Correct!" : "Incorrect!");
         feedbackLabel.setStyle("-fx-text-fill: " + (isCorrect ? "green;" : "red;"));
     }
+
+    
+        private QuestionCompletionCallback callback;
+    
+        @Override
+        public void setCompletionCallback(QuestionCompletionCallback callback) {
+            this.callback = callback;
+        }
+    
+        // Call this when question is answered:
+        private void onQuestionAnswered(boolean isCorrect) {
+            if (callback != null) {
+                callback.onComplete(isCorrect);
+            }
+        }
+        @FXML
+private void handleTrueAction(ActionEvent event) {
+    checkAnswer(true);
 }
+
+@FXML
+private void handleFalseAction(ActionEvent event) {
+    checkAnswer(false);
+}
+    }
+
+
+            
+
+    

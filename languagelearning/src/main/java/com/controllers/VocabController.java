@@ -1,11 +1,12 @@
 package com.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
-public class VocabController {
+public class VocabController implements QuestionController{
 
     @FXML private Button word1Button;
     @FXML private Button word2Button;
@@ -25,17 +26,26 @@ public class VocabController {
     private Button selectedSpanishButton = null;
 
     // Handles clicking of an English word (left-side button)
-    @FXML
-    private void handleWordAction(Button wordButton) {
-        // If there's already a selected button, unselect it
-        if (selectedEnglishButton != null) {
-            selectedEnglishButton.setStyle("");  // Reset button style
-        }
 
-        // Set this button as selected and change its style
-        selectedEnglishButton = wordButton;
-        selectedEnglishButton.setStyle("-fx-background-color: #FFEB3B;");  // Highlight the selected word
-    }
+
+
+
+    // @FXML
+    // private void handleWordAction(Button wordButton) {
+    //     // If there's already a selected button, unselect it
+    //     if (selectedEnglishButton != null) {
+    //         selectedEnglishButton.setStyle("");  // Reset button style
+    //     }
+
+    //     // Set this button as selected and change its style
+    //     selectedEnglishButton = wordButton;
+    //     selectedEnglishButton.setStyle("-fx-background-color: #FFEB3B;");  // Highlight the selected word
+    // }
+
+
+
+
+
 
     // Handles clicking of a Spanish word (right-side button)
     @FXML
@@ -74,12 +84,46 @@ public class VocabController {
         }
     }
 
+    
+
     // Handles the navigation buttons (similar to previous bottom bar)
     @FXML
     private void handleHome() {
         // Implement navigation logic to Home
         System.out.println("Navigating to Home");
     }
+
+    @FXML
+private void handleWord1Action(ActionEvent event) {
+    handleWordAction(word1Button);
+}
+
+@FXML
+private void handleWord2Action(ActionEvent event) {
+    handleWordAction(word2Button);
+}
+
+@FXML
+private void handleWord3Action(ActionEvent event) {
+    handleWordAction(word3Button);
+}
+
+@FXML
+private void handleWord4Action(ActionEvent event) {
+    handleWordAction(word4Button);
+}
+
+// Make this method private instead of FXML
+private void handleWordAction(Button wordButton) {
+     // If there's already a selected button, unselect it
+     if (selectedEnglishButton != null) {
+        selectedEnglishButton.setStyle("");  // Reset button style
+    }
+
+    // Set this button as selected and change its style
+    selectedEnglishButton = wordButton;
+    selectedEnglishButton.setStyle("-fx-background-color: #FFEB3B;");  // Highlight the selected word
+}
 
     @FXML
     private void handleRanking() {
@@ -105,4 +149,25 @@ public class VocabController {
         feedbackLabel.setText("");
         feedbackLabel.setVisible(false);
     }
-}
+
+
+    //
+    //
+    //
+    //
+    
+        private QuestionCompletionCallback callback;
+    
+        @Override
+        public void setCompletionCallback(QuestionCompletionCallback callback) {
+            this.callback = callback;
+        }
+    
+        // Call this when question is answered:
+        private void onQuestionAnswered(boolean isCorrect) {
+            if (callback != null) {
+                callback.onComplete(isCorrect);
+            }
+        }
+    }
+

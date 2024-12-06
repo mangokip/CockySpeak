@@ -189,6 +189,310 @@
 //}
 
 
+
+
+
+
+
+//Second version below of code
+
+
+
+// package com.controllers;
+
+// import java.io.IOException;
+// import javafx.fxml.FXML;
+// import javafx.fxml.FXMLLoader;
+// import javafx.scene.Scene;
+// import javafx.scene.control.Button;
+// import javafx.scene.image.ImageView;
+// import javafx.scene.input.MouseEvent;
+// import javafx.scene.paint.Color;
+// import javafx.scene.shape.Rectangle;
+// import javafx.scene.shape.Ellipse;
+// import javafx.scene.control.Label;
+// import javafx.stage.Stage;
+// import com.model.CockySpeak;
+// import com.model.Language;
+// import com.model.ProgressTracker;
+// import com.model.User;
+// import javafx.event.ActionEvent;
+// import com.language.App;
+
+// public class FlashcardMenuController {
+//     @FXML private ImageView flagImageView;
+//     @FXML private Label startbutton;
+//     @FXML private Ellipse lesson1Circle;
+//     @FXML private Ellipse lesson2Circle;
+//     @FXML private Ellipse lesson3Circle;
+//     @FXML private Ellipse lesson4Circle;
+//     @FXML private Ellipse lesson5Circle;
+//     @FXML private Ellipse lesson6Circle;
+//     @FXML private Label startbuttonLabel;
+    
+
+
+//     @FXML
+//     private Button lesson1Flashcards;
+
+
+//     @FXML
+//     void loadLessonFlashcards(ActionEvent event) throws IOException {
+//         App.setRoot("lesson1flash");
+//     }
+
+//     @FXML
+//     void handleFlashcards(MouseEvent event) throws IOException {
+//         App.setRoot("flashcard");
+//     }
+
+//     @FXML
+//     void handleHome(MouseEvent event) throws IOException {
+//         App.setRoot("home");
+//     }
+
+//     @FXML
+//     void handleProfile(MouseEvent event) throws IOException{
+//         App.setRoot("profile");
+//     }
+
+//     @FXML
+//     void handleRanking(MouseEvent event) throws IOException {
+//         App.setRoot("ranking");
+//     }
+    
+//     private CockySpeak cockySpeak = CockySpeak.getInstance();
+//     private ProgressTracker progressTracker;
+//     private Language spanish = new Language("Spanish");
+//     private static boolean level1Completed = false;
+
+//     @FXML
+//     public void initialize() {
+//         setupFlagImage();
+//         initializeProgressTracker();
+//         updateCircleColors();
+//     }
+    
+//     private void setupFlagImage() {
+//         if (flagImageView != null) {
+//             Rectangle clip = new Rectangle(
+//                 flagImageView.getFitWidth(), 
+//                 flagImageView.getFitHeight()
+//             );
+//             clip.setArcWidth(30);
+//             clip.setArcHeight(30);
+//             clip.setStroke(Color.TRANSPARENT);
+//             flagImageView.setClip(clip);
+//         }
+//     }
+    
+//     private void initializeProgressTracker() {
+//         if (cockySpeak.getCurrentUser() != null) {
+//             progressTracker = cockySpeak.getCurrentUser().getLanguageProgressTracker(spanish);
+//             if (progressTracker == null) {
+//                 User currentUser = cockySpeak.getCurrentUser();
+//                 currentUser.createLanguageProgress(spanish);
+//                 progressTracker = currentUser.getLanguageProgressTracker(spanish);
+//             }
+//         }
+//     }
+
+//     // @FXML 
+//     // void starbutton() {
+//     //     navigateToScreen("/fxml/VocabMatching.fxml");
+//     // }
+
+//     // @FXML
+//     // void starbuttonclick(MouseEvent event) {
+//     //     Object source = event.getSource();
+//     //     if (source instanceof Ellipse) {
+//     //         Ellipse clickedEllipse = (Ellipse) source;
+//     //         String ellipseId = clickedEllipse.getId();
+//     //         int lessonNumber = extractLessonNumber(ellipseId);
+            
+//     //         if (canStartLesson(lessonNumber)) {
+//     //             navigateToScreen("/fxml/VocabMatching.fxml");
+//     //         }
+//     //     }
+//     // }
+
+//     private boolean canStartLesson(int lessonNumber) {
+//         if (lessonNumber == 1) return true;
+//         return progressTracker != null && 
+//                progressTracker.getCompletedLessons() >= (lessonNumber - 1);
+//     }
+
+//     private int extractLessonNumber(String ellipseId) {
+//         return Integer.parseInt(ellipseId.replaceAll("\\D+", ""));
+//     }
+
+//     private void updateCircleColors() {
+//         if (progressTracker == null) return;
+        
+//         int completedLessons = progressTracker.getCompletedLessons();
+//         Ellipse[] circles = {lesson1Circle, lesson2Circle, lesson3Circle, lesson4Circle, lesson5Circle, lesson6Circle};
+        
+//         for (int i = 0; i < circles.length; i++) {
+//             if (circles[i] != null) {
+//                 circles[i].getStyleClass().removeAll(
+//                     "lesson-circle-locked", 
+//                     "lesson-circle-available", 
+//                     "lesson-circle-completed"
+//                 );
+                
+//                 if (i < completedLessons) {
+//                     circles[i].getStyleClass().add("lesson-circle-completed");
+//                 } else if (i == completedLessons) {
+//                     circles[i].getStyleClass().add("lesson-circle-available");
+//                 } else {
+//                     circles[i].getStyleClass().add("lesson-circle-locked");
+//                 }
+//             }
+//         }
+//     }
+
+//     public void onLessonComplete() {
+//         if (progressTracker != null) {
+//             progressTracker.completeLesson();
+//             level1Completed = true;
+//             updateCircleColors();
+//             navigateToScreen("/fxml/flashcard");
+//         }
+//     }
+    
+//     private void navigateToScreen(String fxmlPath) {
+//         try {
+//             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+//             Scene scene = new Scene(loader.load());
+//             Stage stage = (Stage) startbutton.getScene().getWindow();
+//             scene.getStylesheets().add(getClass().getResource("/styles/styles.css").toExternalForm());
+//             stage.setScene(scene);
+//         } catch (IOException e) {
+//             System.err.println("Navigation failed: " + e.getMessage());
+//             e.printStackTrace();
+//         }
+//     }
+
+//     @FXML
+// private void testLessonProgress(MouseEvent event) {
+//     // Initialize a test user and progress if needed
+//     if (progressTracker == null) {
+//         System.out.println("Initializing test progress tracker...");
+//         Language spanish = new Language("Spanish");
+//         User currentUser = cockySpeak.getCurrentUser();
+        
+//         if (currentUser == null) {
+//             System.out.println("Creating test user...");
+//             cockySpeak.register("TestUser", "test", "test@test.com");
+//             cockySpeak.login("TestUser", "test");
+//             currentUser = cockySpeak.getCurrentUser();
+//         }
+        
+//         System.out.println("Setting up Spanish language...");
+//         cockySpeak.setLanguage(spanish);
+//         progressTracker = currentUser.getLanguageProgressTracker(spanish);
+//     }
+    
+//     // Complete current lesson
+//     System.out.println("Current lesson progress: " + progressTracker.getCompletedLessons());
+//     progressTracker.completeLesson();
+//     System.out.println("After completion: " + progressTracker.getCompletedLessons());
+    
+//     // Update UI to show progress
+//     updateCircleColors();
+    
+//     // For testing: Print the state of each circle
+//     Ellipse[] circles = {lesson1Circle, lesson2Circle, lesson3Circle, lesson4Circle, lesson5Circle};
+//     for (int i = 0; i < circles.length; i++) {
+//         if (circles[i] != null) {
+//             System.out.println("Circle " + (i+1) + " style classes: " + 
+//                 circles[i].getStyleClass().toString());
+//         }
+//     }
+
+    
+//     // Simulate navigation when ready (commented out until screens are ready)
+//     /*
+//     try {
+//         navigateToScreen("/fxml/VocabMatching.fxml");
+//     } catch (Exception e) {
+//         System.out.println("Navigation not yet implemented: " + e.getMessage());
+//         // For now, just update the visual feedback
+//         updateCircleColors();
+//     }
+//     */
+// }
+
+//     // @FXML private void handleHome() { navigateToScreen("/fxml/Home.fxml"); }
+//     // @FXML private void handleRanking() { navigateToScreen("/fxml/Ranking.fxml"); }
+//     // @FXML private void handleFlashcards() { navigateToScreen("/fxml/Flashcards.fxml"); }
+//     // @FXML private void handleProfile() { navigateToScreen("/fxml/Profile.fxml"); }
+
+
+//     @FXML
+//     private void startLesson(MouseEvent event) {
+//         if (event.getSource() instanceof Ellipse) {
+//             Ellipse clickedEllipse = (Ellipse) event.getSource();
+//             String ellipseId = clickedEllipse.getId();
+//             int lessonNumber = extractLessonNumber(ellipseId);
+            
+//             if (canStartLesson(lessonNumber)) {
+//                 startRandomizedQuestions();
+//             }
+//         }
+//     }
+
+//     private class CompletionCallback implements QuestionCompletionCallback {
+//         @Override
+//         public void onComplete(boolean isCorrect) {
+//             onQuestionComplete(isCorrect);
+//         }
+//     }
+
+//     private void startRandomizedQuestions() {
+//         try {
+//             String[] questionTypes = {"/fxml/VocabMatching.fxml", "/fxml/TrueFalse.fxml", "/fxml/MultipleChoice.fxml"};
+//             int randomIndex = (int) (Math.random() * questionTypes.length);
+//             String randomQuestion = questionTypes[randomIndex];
+            
+//             FXMLLoader loader = new FXMLLoader(getClass().getResource(randomQuestion));
+//             Scene scene = new Scene(loader.load());
+//             Stage stage = (Stage) startbutton.getScene().getWindow();
+//             scene.getStylesheets().add(getClass().getResource("/styles/styles.css").toExternalForm());
+            
+//             // Get controller and set completion callback
+//             Object controller = loader.getController();
+//             if (controller instanceof VocabController) {
+//                 ((VocabController) controller).setCompletionCallback(this::onQuestionComplete);
+//             } else if (controller instanceof TrueFalseController) {
+//                 ((TrueFalseController) controller).setCompletionCallback(this::onQuestionComplete);
+//             } else if (controller instanceof MultipleChoiceController) {
+//                 ((MultipleChoiceController) controller).setCompletionCallback(this::onQuestionComplete);
+//             }
+            
+//             stage.setScene(scene);
+//         } catch (IOException e) {
+//             e.printStackTrace();
+//         }
+//     }
+
+//     private void onQuestionComplete(boolean isCorrect) {
+//         if (isCorrect) {
+//             questionCount++;
+//             if (questionCount >= QUESTIONS_TO_COMPLETE) {
+//                 progressTracker.completeLesson();
+//                 updateCircleColors();
+//                 navigateToScreen("/fxml/flashcard");
+//             } else {
+//                 startRandomizedQuestions();
+//             }
+//         }
+//     }
+
+//     private static final int QUESTIONS_TO_COMPLETE = 3;
+//     private int questionCount = 0;
+// }
+
 package com.controllers;
 
 import java.io.IOException;
@@ -209,6 +513,11 @@ import com.model.ProgressTracker;
 import com.model.User;
 import javafx.event.ActionEvent;
 import com.language.App;
+import com.controllers.VocabController;
+import com.controllers.TrueFalseController;
+import com.controllers.MultipleChoiceController;
+import com.controllers.QuestionController;
+import com.controllers.QuestionCompletionCallback;
 
 public class FlashcardMenuController {
     @FXML private ImageView flagImageView;
@@ -220,49 +529,49 @@ public class FlashcardMenuController {
     @FXML private Ellipse lesson5Circle;
     @FXML private Ellipse lesson6Circle;
     @FXML private Label startbuttonLabel;
-    
+    @FXML private Button lesson1Flashcards;
 
-
-    @FXML
-    private Button lesson1Flashcards;
-
-
-    @FXML
-    void loadLessonFlashcards(ActionEvent event) throws IOException {
-        App.setRoot("lesson1flash");
-    }
-
-    @FXML
-    void handleFlashcards(MouseEvent event) throws IOException {
-        App.setRoot("flashcard");
-    }
-
-    @FXML
-    void handleHome(MouseEvent event) throws IOException {
-        App.setRoot("home");
-    }
-
-    @FXML
-    void handleProfile(MouseEvent event) throws IOException{
-        App.setRoot("profile");
-    }
-
-    @FXML
-    void handleRanking(MouseEvent event) throws IOException {
-        App.setRoot("ranking");
-    }
-    
     private CockySpeak cockySpeak = CockySpeak.getInstance();
     private ProgressTracker progressTracker;
     private Language spanish = new Language("Spanish");
-    private static boolean level1Completed = false;
+    private static final int QUESTIONS_TO_COMPLETE = 3;
+    private int questionCount = 0;
+
+    private class CompletionCallback implements QuestionCompletionCallback {
+        @Override
+        public void onComplete(boolean isCorrect) {
+            onQuestionComplete(isCorrect);
+        }
+    }
 
     @FXML
     public void initialize() {
-        setupFlagImage();
-        initializeProgressTracker();
-        updateCircleColors();
+        try {
+            User currentUser = cockySpeak.getCurrentUser();
+            if (currentUser == null) {
+                System.err.println("No current user found - creating test user");
+                cockySpeak.register("TestUser", "test", "test@test.com");
+                cockySpeak.login("TestUser", "test");
+                currentUser = cockySpeak.getCurrentUser();
+            }
+    
+            if (currentUser != null) {
+                progressTracker = currentUser.getLanguageProgressTracker(spanish);
+                if (progressTracker == null) {
+                    System.out.println("Creating new progress tracker for Spanish");
+                    currentUser.createLanguageProgress(spanish);
+                    progressTracker = currentUser.getLanguageProgressTracker(spanish);
+                }
+                updateCircleColors();
+            } else {
+                System.err.println("Failed to create or get current user");
+            }
+        } catch (Exception e) {
+            System.err.println("Error during initialization: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
+
     
     private void setupFlagImage() {
         if (flagImageView != null) {
@@ -288,21 +597,22 @@ public class FlashcardMenuController {
         }
     }
 
-    @FXML 
-    void starbutton() {
-        navigateToScreen("/fxml/VocabMatching.fxml");
-    }
-
     @FXML
-    void starbuttonclick(MouseEvent event) {
-        Object source = event.getSource();
-        if (source instanceof Ellipse) {
-            Ellipse clickedEllipse = (Ellipse) source;
+    private void startLesson(MouseEvent event) {
+        if (event.getSource() instanceof Ellipse) {
+            Ellipse clickedEllipse = (Ellipse) event.getSource();
             String ellipseId = clickedEllipse.getId();
             int lessonNumber = extractLessonNumber(ellipseId);
             
-            if (canStartLesson(lessonNumber)) {
-                navigateToScreen("/fxml/VocabMatching.fxml");
+            System.out.println("Attempting to start lesson " + lessonNumber);
+            System.out.println("Progress tracker is " + (progressTracker == null ? "null" : "not null"));
+            System.out.println("Current user is " + (cockySpeak.getCurrentUser() == null ? "null" : "not null"));
+            
+            if (progressTracker != null && canStartLesson(lessonNumber)) {
+                questionCount = 0;
+                startRandomizedQuestions();
+            } else {
+                System.out.println("Cannot start lesson: Progress tracker is null or lesson cannot be started.");
             }
         }
     }
@@ -313,8 +623,45 @@ public class FlashcardMenuController {
                progressTracker.getCompletedLessons() >= (lessonNumber - 1);
     }
 
-    private int extractLessonNumber(String ellipseId) {
-        return Integer.parseInt(ellipseId.replaceAll("\\D+", ""));
+    private void startRandomizedQuestions() {
+        try {
+            String[] questionTypes = {"/fxml/vocabMatching.fxml", "/fxml/trueFalse.fxml", "/fxml/multipleChoice.fxml"};
+            int randomIndex = (int) (Math.random() * questionTypes.length);
+            String randomQuestion = questionTypes[randomIndex];
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(randomQuestion));
+            Scene scene = new Scene(loader.load());
+            Stage stage = (Stage) startbutton.getScene().getWindow();
+            scene.getStylesheets().add(getClass().getResource("/styles/styles.css").toExternalForm());
+            
+            Object controller = loader.getController();
+            CompletionCallback callback = new CompletionCallback();
+            
+            if (controller instanceof VocabController) {
+                ((VocabController) controller).setCompletionCallback(callback);
+            } else if (controller instanceof TrueFalseController) {
+                ((TrueFalseController) controller).setCompletionCallback(callback);
+            } else if (controller instanceof MultipleChoiceController) {
+                ((MultipleChoiceController) controller).setCompletionCallback(callback);
+            }
+            
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void onQuestionComplete(boolean isCorrect) {
+        if (isCorrect) {
+            questionCount++;
+            if (questionCount >= QUESTIONS_TO_COMPLETE) {
+                progressTracker.completeLesson();
+                updateCircleColors();
+                navigateToScreen("/fxml/flashcard");
+            } else {
+                startRandomizedQuestions();
+            }
+        }
     }
 
     private void updateCircleColors() {
@@ -342,15 +689,10 @@ public class FlashcardMenuController {
         }
     }
 
-    public void onLessonComplete() {
-        if (progressTracker != null) {
-            progressTracker.completeLesson();
-            level1Completed = true;
-            updateCircleColors();
-            navigateToScreen("/fxml/flashcard");
-        }
+    private int extractLessonNumber(String ellipseId) {
+        return Integer.parseInt(ellipseId.replaceAll("\\D+", ""));
     }
-    
+
     private void navigateToScreen(String fxmlPath) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
@@ -364,57 +706,25 @@ public class FlashcardMenuController {
         }
     }
 
-    @FXML
-private void testLessonProgress(MouseEvent event) {
-    // Initialize a test user and progress if needed
-    if (progressTracker == null) {
-        System.out.println("Initializing test progress tracker...");
-        Language spanish = new Language("Spanish");
-        User currentUser = cockySpeak.getCurrentUser();
-        
-        if (currentUser == null) {
-            System.out.println("Creating test user...");
-            cockySpeak.register("TestUser", "test", "test@test.com");
-            cockySpeak.login("TestUser", "test");
-            currentUser = cockySpeak.getCurrentUser();
-        }
-        
-        System.out.println("Setting up Spanish language...");
-        cockySpeak.setLanguage(spanish);
-        progressTracker = currentUser.getLanguageProgressTracker(spanish);
+    @FXML void loadLessonFlashcards(ActionEvent event) throws IOException {
+        App.setRoot("lesson1flash");
     }
-    
-    // Complete current lesson
-    System.out.println("Current lesson progress: " + progressTracker.getCompletedLessons());
-    progressTracker.completeLesson();
-    System.out.println("After completion: " + progressTracker.getCompletedLessons());
-    
-    // Update UI to show progress
-    updateCircleColors();
-    
-    // For testing: Print the state of each circle
-    Ellipse[] circles = {lesson1Circle, lesson2Circle, lesson3Circle, lesson4Circle, lesson5Circle};
-    for (int i = 0; i < circles.length; i++) {
-        if (circles[i] != null) {
-            System.out.println("Circle " + (i+1) + " style classes: " + 
-                circles[i].getStyleClass().toString());
-        }
+
+    @FXML void handleFlashcards(MouseEvent event) throws IOException {
+        App.setRoot("flashcard");
     }
-    
-    // Simulate navigation when ready (commented out until screens are ready)
-    /*
-    try {
-        navigateToScreen("/fxml/VocabMatching.fxml");
-    } catch (Exception e) {
-        System.out.println("Navigation not yet implemented: " + e.getMessage());
-        // For now, just update the visual feedback
-        updateCircleColors();
+
+    @FXML void handleHome(MouseEvent event) throws IOException {
+        App.setRoot("home");
     }
-    */
+
+    @FXML void handleProfile(MouseEvent event) throws IOException {
+        App.setRoot("profile");
+    }
+
+    @FXML void handleRanking(MouseEvent event) throws IOException {
+        App.setRoot("ranking");
+    }
 }
 
-    // @FXML private void handleHome() { navigateToScreen("/fxml/Home.fxml"); }
-    // @FXML private void handleRanking() { navigateToScreen("/fxml/Ranking.fxml"); }
-    // @FXML private void handleFlashcards() { navigateToScreen("/fxml/Flashcards.fxml"); }
-    // @FXML private void handleProfile() { navigateToScreen("/fxml/Profile.fxml"); }
-}
+
