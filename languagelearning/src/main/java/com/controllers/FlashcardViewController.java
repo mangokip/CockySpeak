@@ -38,7 +38,7 @@ public class FlashcardViewController {
     private Button previousCard;
 
     // CockySpeak instance
-    private CockySpeak cockySpeak = new CockySpeak();
+    private CockySpeak cockySpeak = CockySpeak.getInstance();
     private List<Flashcard> flashcards;
     private int currentIndex = 0; // Tracks the current flashcard index
     private boolean isForeignVisible = true; // Tracks which side is currently visible
@@ -59,6 +59,7 @@ public class FlashcardViewController {
 
         // Display the first flashcard
         updateFlashcardDisplay();
+        flipCard.toFront();
     }
 
     @FXML

@@ -23,7 +23,7 @@ public class CockySpeak {
     /**
      * Basic constructor
      */
-    public CockySpeak() {
+    private CockySpeak() {
         userList = UserList.getInstance();
         wordList = WordList.getInstance();
 
@@ -31,6 +31,13 @@ public class CockySpeak {
             userList.addUser(loadedUser.getUserName(), loadedUser.getPassword(), loadedUser.getEmail());
         }
         flashcards = Flashcard.generateFlashcards();
+    }
+
+    public static CockySpeak getInstance() {
+        if (instance == null) {
+            instance = new CockySpeak();
+        }
+        return instance;
     }
 
     /**
@@ -99,14 +106,12 @@ public class CockySpeak {
      * @param username  The username
      * @param password The password
      */
-    public void login(String username, String password) {
+    public boolean login(String username, String password) {
         if (userList.hasUser(username)) {
             User thisUser = userList.getUser(username);
             if (password.equals(thisUser.getPassword())) {
                 this.user = thisUser;
                 System.out.println("Welcome " + username);
-
-                
                 Language spanish = new Language("Spanish");
                 if (user.getLanguageProgressTracker(spanish) == null) {
                     user.createLanguageProgress(spanish);
@@ -114,12 +119,15 @@ public class CockySpeak {
 
                
                 writer.saveUsers(userList.getUsers());
+                return true;
 
             } else {
                 System.out.println("Invalid password");
+                return false;
             }
         } else {
             System.out.println("Username not found");
+            return false;
         }
     }
 

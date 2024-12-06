@@ -25,24 +25,35 @@ public class loginController {
     @FXML private Label errorMessage;
 
     //initalize cockyspeak
-    private CockySpeak cockySpeak = new CockySpeak();
+    private CockySpeak cockySpeak = CockySpeak.getInstance();
     private String userName;
     private String password;
 
 
     @FXML
-    private void handleLoginButtonAction(ActionEvent event) {
+    private void handleLoginButtonAction(ActionEvent event) throws IOException {
         userName = userNameTextField.getText();
         password = passwordTextField.getText();
         // errorMessage.setVisible(true);
 
-        try{
-            cockySpeak.login(userName, password);
-            App.setRoot("flashcard");
-        } catch (Exception e) {
+        if(cockySpeak.login(userName, password)) {
+            App.setRoot("signup");
+        } else {
             errorMessage.setVisible(true);
         }
+        // try{
+        //     cockySpeak.login(userName, password);
+        //     App.setRoot("flashcards");
+        // } catch (Exception e) {
+        //     errorMessage.setVisible(true);
+        // }
     }
+
+    @FXML
+    private void handleSignupButtonAction(ActionEvent event) throws IOException {
+        App.setRoot("signup");
+    }
+
     @FXML
     private void switchToSecondary() throws IOException {
         Narriator.playSound("Je mapell HELLO WORLD!");

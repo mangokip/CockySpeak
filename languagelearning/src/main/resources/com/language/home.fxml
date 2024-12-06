@@ -44,7 +44,7 @@
                         </HBox>
                      </children>
                   </StackPane>
-                  <StackPane id="FirstCircleButton" onMouseClicked="#handlebutton" prefHeight="679.0" prefWidth="306.0">
+                  <StackPane id="FirstCircleButton" prefHeight="679.0" prefWidth="306.0">
                      <children>
                         <Ellipse fill="#1f3232" radiusX="31.0" radiusY="30.0" stroke="BLACK" strokeType="INSIDE">
                            <StackPane.margin>
@@ -71,7 +71,7 @@
                               <Insets bottom="-500.0" right="40.0" />
                            </StackPane.margin>
                         </Circle>
-                        <Ellipse fill="#4b8294" radiusX="30.0" radiusY="27.0" stroke="BLACK" strokeType="INSIDE">
+                        <Ellipse fx:id="lesson2Circle" fill="#4b8294" onMouseClicked="#testLessonProgress" radiusX="30.0" radiusY="27.0" stroke="BLACK" strokeType="INSIDE">
                            <StackPane.margin>
                               <Insets bottom="300.0" right="40.0" />
                            </StackPane.margin>
@@ -89,7 +89,7 @@
                               <Insets bottom="491.0" left="40.0" />
                            </StackPane.margin>
                         </Ellipse>
-                        <Ellipse fx:id="lesson1Circle" fill="#4b8294" onMouseClicked="#starbuttonclick" radiusX="30.0" radiusY="27.0" stroke="BLACK" strokeType="INSIDE">
+                        <Ellipse fx:id="lesson1Circle" fill="#4b8294" onMouseClicked="#starbuttonclick" onMouseDragged="#testLessonProgress" radiusX="30.0" radiusY="27.0" stroke="BLACK" strokeType="INSIDE">
                            <StackPane.margin>
                               <Insets bottom="500.0" left="40.0" />
                            </StackPane.margin>
@@ -99,7 +99,7 @@
                               <Insets bottom="91.0" left="40.0" />
                            </StackPane.margin>
                         </Ellipse>
-                        <Ellipse fill="#4b8294" radiusX="30.0" radiusY="27.0" stroke="BLACK" strokeType="INSIDE">
+                        <Ellipse fx:id="lesson3Circle" fill="#4b8294" onMouseClicked="#testLessonProgress" radiusX="30.0" radiusY="27.0" stroke="BLACK" strokeType="INSIDE">
                            <StackPane.margin>
                               <Insets bottom="100.0" left="40.0" />
                            </StackPane.margin>
@@ -117,7 +117,7 @@
                               <Insets bottom="-109.0" right="40.0" />
                            </StackPane.margin>
                         </Ellipse>
-                        <Ellipse fill="#4b8294" radiusX="30.0" radiusY="27.0" stroke="BLACK" strokeType="INSIDE">
+                        <Ellipse fx:id="lesson4Circle" fill="#4b8294" onMouseClicked="#testLessonProgress" radiusX="30.0" radiusY="27.0" stroke="BLACK" strokeType="INSIDE">
                            <StackPane.margin>
                               <Insets bottom="-100.0" right="40.0" />
                            </StackPane.margin>
@@ -135,7 +135,7 @@
                               <Insets bottom="-309.0" left="40.0" />
                            </StackPane.margin>
                         </Ellipse>
-                        <Ellipse fill="#4b8294" radiusX="30.0" radiusY="27.0" stroke="BLACK" strokeType="INSIDE">
+                        <Ellipse fx:id="lesson5Circle" fill="#4b8294" onMouseClicked="#testLessonProgress" radiusX="30.0" radiusY="27.0" stroke="BLACK" strokeType="INSIDE">
                            <StackPane.margin>
                               <Insets bottom="-300.0" left="40.0" />
                            </StackPane.margin>
@@ -148,7 +148,7 @@
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Ellipse fill="#4b8294" radiusX="30.0" radiusY="27.0" stroke="BLACK" strokeType="INSIDE">
+                        <Ellipse fx:id="lesson6Circle" fill="#4b8294" onMouseClicked="#testLessonProgress" radiusX="30.0" radiusY="27.0" stroke="BLACK" strokeType="INSIDE">
                            <StackPane.margin>
                               <Insets bottom="-500.0" right="40.0" />
                            </StackPane.margin>

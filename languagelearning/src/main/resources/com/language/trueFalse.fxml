@@ -1,52 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.geometry.Insets?>
+<?import com.gluonhq.charm.glisten.mvc.View?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controller.TrueFalseController" style="-fx-background-color: #add8e6;" spacing="20" alignment="CENTER" prefHeight="600.0" prefWidth="430.0">
-    
-    <!-- Header Section -->
-    <Label text="CockySpeak" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-padding: 10;" />
-
-    <!-- Question Display -->
-    <Label fx:id="questionLabel" text="Question goes here..." style="-fx-font-size: 18px; -fx-background-color: #ff7f7f; -fx-text-fill: white; -fx-padding: 15;" />
-
-    <!-- True/False Buttons -->
-    <HBox spacing="15" alignment="CENTER">
-        <Button fx:id="trueButton" text="True" onAction="#handleTrueFalseSelection" style="-fx-background-color: white; -fx-font-size: 16px; -fx-border-color: black; -fx-text-fill: black;" prefWidth="100"/>
-        <Button fx:id="falseButton" text="False" onAction="#handleTrueFalseSelection" style="-fx-background-color: white; -fx-font-size: 16px; -fx-border-color: black; -fx-text-fill: black;" prefWidth="100"/>
-    </HBox>
-
-    <!-- Submit Button -->
-    <Button fx:id="submitButton" text="Submit" onAction="#handleSubmit" style="-fx-background-color: #ff7f7f; -fx-font-size: 16px; -fx-text-fill: white;" prefWidth="150" disable="true"/>
-
-    <!-- Feedback Section -->
-    <VBox fx:id="feedbackSection" spacing="10" visible="false" alignment="CENTER">
-        <Label fx:id="feedbackLabel" text="Feedback here..." style="-fx-font-size: 18px; -fx-background-color: #90ee90; -fx-padding: 15;" />
-        <Button fx:id="nextButton" text="Next" onAction="#handleNext" style="-fx-background-color: #ff7f7f; -fx-font-size: 16px; -fx-text-fill: white;" prefWidth="150"/>
-    </VBox>
-
-    <!-- Bottom Navigation Bar -->
-    <HBox alignment="CENTER" prefHeight="60.0" prefWidth="430.0" spacing="20" style="-fx-background-color: #f0f0f0;" styleClass="bottom-bar">
-        <VBox alignment="CENTER" onMouseClicked="#handleHome" spacing="5" styleClass="nav-button">
-            <Label styleClass="icon" text="🏠" />
-            <Label styleClass="nav-text" text="Home" />
+<View fx:id="trueFalse" prefHeight="750.0" prefWidth="430.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.TrueFalseController">
+    <center>
+        <VBox alignment="CENTER" spacing="30">
+            <Label fx:id="questionLabel" text="True or False Question" wrapText="true" />
+            <Button fx:id="trueButton" text="True" onAction="#handleTrueAction" />
+            <Button fx:id="falseButton" text="False" onAction="#handleFalseAction" />
         </VBox>
-        <VBox alignment="CENTER" onMouseClicked="#handleRanking" spacing="5" styleClass="nav-button">
-            <Label styleClass="icon" text="🏆" />
-            <Label styleClass="nav-text" text="Ranking" />
-        </VBox>
-        <VBox alignment="CENTER" onMouseClicked="#handleFlashcards" spacing="5" styleClass="nav-button">
-            <Label styleClass="icon" text="📘" />
-            <Label styleClass="nav-text" text="Flashcards" />
-        </VBox>
-        <VBox alignment="CENTER" onMouseClicked="#handleProfile" spacing="5" styleClass="nav-button">
-            <Label styleClass="icon" text="👤" />
-            <Label styleClass="nav-text" text="Profile" />
-        </VBox>
-    </HBox>
-
-</VBox>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER" prefHeight="71.0" prefWidth="430.0" spacing="20" styleClass="bottom-bar">
+            <VBox alignment="CENTER" onMouseClicked="#handleHome" spacing="5" styleClass="nav-button">
+                <Label styleClass="icon" text="🏠" />
+                <Label styleClass="nav-text" text="Home" />
+            </VBox>
+            <VBox alignment="CENTER" onMouseClicked="#handleRanking" spacing="5" styleClass="nav-button">
+                <Label styleClass="icon" text="🏆" />
+                <Label styleClass="nav-text" text="Ranking" />
+            </VBox>
+            <VBox alignment="CENTER" onMouseClicked="#handleFlashcards" spacing="5" styleClass="nav-button">
+                <Label styleClass="icon" text="📘" />
+                <Label styleClass="nav-text" text="Flashcards" />
+            </VBox>
+            <VBox alignment="CENTER" onMouseClicked="#handleProfile" spacing="5" styleClass="nav-button">
+                <Label styleClass="icon" text="👤" />
+                <Label styleClass="nav-text" text="Profile" />
+            </VBox>
+        </HBox>
+    </bottom>
+    <stylesheets>
+        <URL value="@styles.css" />
+    </stylesheets>
+</View>
