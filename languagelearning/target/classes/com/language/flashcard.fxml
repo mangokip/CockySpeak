@@ -83,7 +83,7 @@
          <children>
             <TextFlow layoutX="83.0" layoutY="68.0" prefHeight="200.0" prefWidth="200.0" />
             <!-- Title Text -->
-            <Label layoutX="-26.0" layoutY="100.0" prefHeight="100.0" prefWidth="483.0" style="-fx-text-fill: #ffffff; -fx-font-family: 'Arial Rounded MT Bold'; -fx-font-size: 42.0;" text="Flashcards" textFill="#ab0000">
+            <Label layoutX="3.0" layoutY="100.0" prefHeight="99.0" prefWidth="423.0" style="-fx-text-fill: #ffffff; -fx-font-family: 'Arial Rounded MT Bold'; -fx-font-size: 42.0;" text="Flashcards" textFill="#ab0000">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>

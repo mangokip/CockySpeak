@@ -2,7 +2,7 @@
 .root {
   -fx-font-size: 16pt;
   -fx-font-family: "Helvetica";
-  -fx-background-color: #6bc9c8;
+  -fx-background-color: #5BC2D9;
   -fx-text-fill: #ffffff;
 }
 
@@ -108,7 +108,7 @@
 }
 
 .loginVbox{
-  -fx-background-color: linear-gradient(to bottom right, #00a8ff, #0072ff);
+  -fx-background-color: linear-gradient(to bottom right, #5BC2D9, #0072ff);
 }
 
 /* Bottom Navigation Bar */
@@ -174,18 +174,27 @@
   -fx-font-style: italic;
 }
 
-/* Add specific styling for the signup screen */
-.signupSubPane {
+/* Lesson circle states */
+.lesson-circle-locked {
+  -fx-fill: #808080; /* Gray for locked lessons */
+  -fx-stroke: black;
+  -fx-stroke-type: inside;
+}
+
+.lesson-circle-available {
+  -fx-fill: #1E90FF; /* DodgerBlue for available lessons */
+  -fx-stroke: black;
+  -fx-stroke-type: inside;
+}
+
+.lesson-circle-completed {
+  -fx-fill: #FFD700; /* Gold for completed lessons */
+  -fx-stroke: black;
+  -fx-stroke-type: inside;
+}
+
+.signupSubPane{
   -fx-background-color: #fdd75c;
   -fx-background-radius: 20px;
   -fx-border-radius: 20px;
 }
-
-.signupField {
-  -fx-background-color: #ffffff;
-  -fx-border-color: #0072ff;
-  -fx-border-radius: 5px;
-  -fx-padding: 5px;
-  -fx-font-family: "Arial";
-}
-
