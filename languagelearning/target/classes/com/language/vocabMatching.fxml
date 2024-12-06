@@ -1,49 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import com.gluonhq.charm.glisten.mvc.View?>
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.BorderPane?>
-<?import java.net.URL?>
 
 <View fx:id="vocabMatchingView" prefHeight="750.0" prefWidth="430.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.VocabController">
     <!-- BorderPane Layout -->
     <BorderPane prefHeight="750.0" prefWidth="430.0">
         <!-- Center Section for the question and answer buttons -->
         <center>
-            <VBox alignment="CENTER" spacing="30">
+            <VBox alignment="CENTER" spacing="30" stylesheets="@styles.css">
                 
                 <!-- Question (Center-aligned) with text wrapping and max width adjustment -->
-                <Label fx:id="questionLabel" text="Match the English Word to its Spanish Translation" wrapText="true" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-max-width: 380px;" textAlignment="CENTER" alignment="CENTER"/>
+                <Label fx:id="questionLabel" alignment="CENTER" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-max-width: 380px;" text="Match the English Word to its Spanish Translation" textAlignment="CENTER" wrapText="true" />
 
                 <!-- English Words Section -->
                 <HBox alignment="CENTER" spacing="20">
-                    <Button fx:id="word1Button" text="Hello" onAction="#handleWordAction" prefWidth="150" />
-                    <Button fx:id="word2Button" text="Goodbye" onAction="#handleWordAction" prefWidth="150" />
+                    <Button fx:id="word1Button" onAction="#handleWordAction" prefWidth="150" text="Hello" />
+                    <Button fx:id="word2Button" onAction="#handleWordAction" prefWidth="150" text="Goodbye" />
                 </HBox>
 
                 <HBox alignment="CENTER" spacing="20">
-                    <Button fx:id="word3Button" text="Thank you" onAction="#handleWordAction" prefWidth="150" />
-                    <Button fx:id="word4Button" text="Please" onAction="#handleWordAction" prefWidth="150" />
+                    <Button fx:id="word3Button" onAction="#handleWordAction" prefWidth="150" text="Thank you" />
+                    <Button fx:id="word4Button" onAction="#handleWordAction" prefWidth="150" text="Please" />
                 </HBox>
 
                 <!-- Spanish Words Section -->
                 <HBox alignment="CENTER" spacing="20">
-                    <Button fx:id="spanish1Button" text="Hola" onAction="#handleSpanishAction" prefWidth="150" />
-                    <Button fx:id="spanish2Button" text="Adiós" onAction="#handleSpanishAction" prefWidth="150" />
+                    <Button fx:id="spanish1Button" onAction="#handleSpanishAction" prefWidth="150" text="Hola" />
+                    <Button fx:id="spanish2Button" onAction="#handleSpanishAction" prefWidth="150" text="Adiós" />
                 </HBox>
 
                 <HBox alignment="CENTER" spacing="20">
-                    <Button fx:id="spanish3Button" text="Gracias" onAction="#handleSpanishAction" prefWidth="150" />
-                    <Button fx:id="spanish4Button" text="Por favor" onAction="#handleSpanishAction" prefWidth="150" />
+                    <Button fx:id="spanish3Button" onAction="#handleSpanishAction" prefWidth="150" text="Gracias" />
+                    <Button fx:id="spanish4Button" onAction="#handleSpanishAction" prefWidth="150" text="Por favor" />
                 </HBox>
 
                 <!-- Submit Button -->
-                <Button fx:id="submitButton" text="Submit" onAction="#handleSubmit" style="-fx-background-color: #FFEB3B; -fx-font-size: 16px;" prefWidth="200"/>
+                <Button fx:id="submitButton" onAction="#handleSubmit" prefWidth="200" style="-fx-background-color: #FFEB3B; -fx-font-size: 16px;" text="Submit" />
 
                 <!-- Feedback Label -->
-                <Label fx:id="feedbackLabel" text="" visible="false" style="-fx-font-size: 16px; -fx-text-fill: green; -fx-font-weight: bold;"/>
+                <Label fx:id="feedbackLabel" style="-fx-font-size: 16px; -fx-text-fill: green; -fx-font-weight: bold;" text="" visible="false" />
             </VBox>
         </center>
 

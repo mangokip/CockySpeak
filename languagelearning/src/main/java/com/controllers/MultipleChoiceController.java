@@ -84,7 +84,7 @@ public class MultipleChoiceController {
 
     @FXML
     private void nextButtonAction() throws IOException {
-        App.setRoot("trueFalse");
+        App.setRoot("vocabMatching");
     }
 
     // Placeholder methods for the bottom bar

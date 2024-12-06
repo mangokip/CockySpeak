@@ -56,7 +56,7 @@ public class VocabController {
         if (selectedEnglishButton != null && selectedSpanishButton != null) {
             String englishWord = selectedEnglishButton.getText();
             String spanishWord = selectedSpanishButton.getText();
-
+    
             // Checking the matching logic
             if ((englishWord.equals("Hello") && spanishWord.equals("Hola")) ||
                 (englishWord.equals("Goodbye") && spanishWord.equals("Adiós")) ||
@@ -64,13 +64,16 @@ public class VocabController {
                 (englishWord.equals("Please") && spanishWord.equals("Por favor"))) {
                 feedbackLabel.setText("Correct Match!");
                 feedbackLabel.setStyle("-fx-text-fill: green;");
+                feedbackLabel.setVisible(true);  // Add this line
             } else {
                 feedbackLabel.setText("Incorrect Match! Try Again.");
                 feedbackLabel.setStyle("-fx-text-fill: red;");
+                feedbackLabel.setVisible(true);  // Add this line
             }
         } else {
             feedbackLabel.setText("Please select both words before submitting.");
             feedbackLabel.setStyle("-fx-text-fill: orange;");
+            feedbackLabel.setVisible(true);  // Add this line
         }
     }
 
@@ -105,4 +108,29 @@ public class VocabController {
         feedbackLabel.setText("");
         feedbackLabel.setVisible(false);
     }
+    @FXML
+private void handleWordAction(javafx.event.ActionEvent event) {
+    Button wordButton = (Button) event.getSource();
+    // If there's already a selected button, unselect it
+    if (selectedEnglishButton != null) {
+        selectedEnglishButton.setStyle("");  // Reset button style
+    }
+
+    // Set this button as selected and change its style
+    selectedEnglishButton = wordButton;
+    selectedEnglishButton.setStyle("-fx-background-color: #FFEB3B;");  // Highlight the selected word
+}
+
+@FXML
+private void handleSpanishAction(javafx.event.ActionEvent event) {
+    Button spanishButton = (Button) event.getSource();
+    // If there's already a selected button, unselect it
+    if (selectedSpanishButton != null) {
+        selectedSpanishButton.setStyle("");  // Reset button style
+    }
+
+    // Set this button as selected and change its style
+    selectedSpanishButton = spanishButton;
+    selectedSpanishButton.setStyle("-fx-background-color: #FFEB3B;");  // Highlight the selected word
+}
 }
