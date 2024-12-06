@@ -181,23 +181,20 @@
   -fx-stroke-type: inside;
 }
 
-<<<<<<< HEAD
-.signupField {
-  -fx-background-color: #ffffff;
-  -fx-border-color: #0072ff;
-  -fx-border-radius: 5px;
-  -fx-padding: 5px;
-  -fx-font-family: "Helvetica";
-=======
 .lesson-circle-available {
   -fx-fill: #1E90FF; /* DodgerBlue for available lessons */
   -fx-stroke: black;
   -fx-stroke-type: inside;
->>>>>>> 7544742231376b0b0eb72aad481cc750ab2011cf
 }
 
 .lesson-circle-completed {
   -fx-fill: #FFD700; /* Gold for completed lessons */
   -fx-stroke: black;
   -fx-stroke-type: inside;
+}
+
+.signupSubPane{
+  -fx-background-color: #fdd75c;
+  -fx-background-radius: 20px;
+  -fx-border-radius: 20px;
 }
