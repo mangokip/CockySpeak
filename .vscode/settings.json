@@ -1,7 +1,3 @@
 {
-<<<<<<< HEAD
-    "java.debug.settings.onBuildFailureProceed": true,
-=======
->>>>>>> 33a929dfaf758641fb208df37213f98483cefadc
     "java.configuration.updateBuildConfiguration": "interactive"
 }

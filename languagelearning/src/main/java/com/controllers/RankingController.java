@@ -8,6 +8,6 @@ public class RankingController {
 
     @FXML
     private void goToHome() throws IOException {
-        App.setRoot("primary");
+        App.setRoot("home");
     }
 }
