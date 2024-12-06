@@ -1,5 +1,7 @@
 package com.controllers;
 
+import com.language.App;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -51,31 +53,90 @@ public class VocabController {
     }
 
     // Handles the "Submit" action to check the match
-    @FXML
-    private void handleSubmit() {
-        if (selectedEnglishButton != null && selectedSpanishButton != null) {
-            String englishWord = selectedEnglishButton.getText();
-            String spanishWord = selectedSpanishButton.getText();
+    // @FXML
+    // private void handleSubmit() {
+    //     if (selectedEnglishButton != null && selectedSpanishButton != null) {
+    //         String englishWord = selectedEnglishButton.getText();
+    //         String spanishWord = selectedSpanishButton.getText();
     
-            // Checking the matching logic
-            if ((englishWord.equals("Hello") && spanishWord.equals("Hola")) ||
-                (englishWord.equals("Goodbye") && spanishWord.equals("Adiós")) ||
-                (englishWord.equals("Thank you") && spanishWord.equals("Gracias")) ||
-                (englishWord.equals("Please") && spanishWord.equals("Por favor"))) {
-                feedbackLabel.setText("Correct Match!");
-                feedbackLabel.setStyle("-fx-text-fill: green;");
-                feedbackLabel.setVisible(true);  // Add this line
-            } else {
-                feedbackLabel.setText("Incorrect Match! Try Again.");
-                feedbackLabel.setStyle("-fx-text-fill: red;");
-                feedbackLabel.setVisible(true);  // Add this line
+    //         // Checking the matching logic
+    //         if ((englishWord.equals("Hello") && spanishWord.equals("Hola")) ||
+    //             (englishWord.equals("Goodbye") && spanishWord.equals("Adiós")) ||
+    //             (englishWord.equals("Thank you") && spanishWord.equals("Gracias")) ||
+    //             (englishWord.equals("Please") && spanishWord.equals("Por favor"))) {
+    //             feedbackLabel.setText("Correct Match!");
+    //             feedbackLabel.setStyle("-fx-text-fill: green;");
+    //             feedbackLabel.setVisible(true);  // Add this line
+    //         } else {
+    //             feedbackLabel.setText("Incorrect Match! Try Again.");
+    //             feedbackLabel.setStyle("-fx-text-fill: red;");
+    //             feedbackLabel.setVisible(true);  // Add this line
+    //         }
+    //     } else {
+    //         feedbackLabel.setText("Please select both words before submitting.");
+    //         feedbackLabel.setStyle("-fx-text-fill: orange;");
+    //         feedbackLabel.setVisible(true);  // Add this line
+    //     }
+    // }
+
+
+
+
+@FXML
+private void handleSubmit() {
+    if (selectedEnglishButton != null && selectedSpanishButton != null) {
+        String englishWord = selectedEnglishButton.getText();
+        String spanishWord = selectedSpanishButton.getText();
+
+        // Checking the matching logic
+        if ((englishWord.equals("Hello") && spanishWord.equals("Hola")) ||
+            (englishWord.equals("Goodbye") && spanishWord.equals("Adiós")) ||
+            (englishWord.equals("Thank you") && spanishWord.equals("Gracias")) ||
+            (englishWord.equals("Please") && spanishWord.equals("Por favor"))) {
+            feedbackLabel.setText("Correct Match!");
+            feedbackLabel.setStyle("-fx-text-fill: green;");
+            feedbackLabel.setVisible(true);
+            
+            // Disable the matched buttons
+            selectedEnglishButton.setDisable(true);
+            selectedSpanishButton.setDisable(true);
+            
+            // Check if all buttons are disabled (meaning all matches are correct)
+            if (areAllButtonsDisabled()) {
+                try {
+                    // Wait a short moment to show the last "Correct!" message
+                    Thread.sleep(1000);
+                    App.setRoot("trueFalse");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         } else {
-            feedbackLabel.setText("Please select both words before submitting.");
-            feedbackLabel.setStyle("-fx-text-fill: orange;");
-            feedbackLabel.setVisible(true);  // Add this line
+            feedbackLabel.setText("Incorrect Match! Try Again.");
+            feedbackLabel.setStyle("-fx-text-fill: red;");
+            feedbackLabel.setVisible(true);
         }
+        
+        // Reset selections
+        selectedEnglishButton.setStyle("");
+        selectedSpanishButton.setStyle("");
+        selectedEnglishButton = null;
+        selectedSpanishButton = null;
+    } else {
+        feedbackLabel.setText("Please select both words before submitting.");
+        feedbackLabel.setStyle("-fx-text-fill: orange;");
+        feedbackLabel.setVisible(true);
     }
+}
+
+// Add this new method to check if all buttons are disabled
+private boolean areAllButtonsDisabled() {
+    return word1Button.isDisabled() && word2Button.isDisabled() && 
+           word3Button.isDisabled() && word4Button.isDisabled() && 
+           spanish1Button.isDisabled() && spanish2Button.isDisabled() && 
+           spanish3Button.isDisabled() && spanish4Button.isDisabled();
+}
+
 
     // Handles the navigation buttons (similar to previous bottom bar)
     @FXML
