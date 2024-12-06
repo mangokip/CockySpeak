@@ -198,3 +198,8 @@
   -fx-background-radius: 20px;
   -fx-border-radius: 20px;
 }
+
+.feedback-label{
+  -fx-font-size: 20px;
+  -fx-text-alignment: center;
+}
