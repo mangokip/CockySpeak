@@ -133,4 +133,12 @@ public class Lesson {
     public ArrayList<Question> getQuestions() {
         return questions;
     }
+
+    public Question getCurrentQuestion(int index) {
+        if (index >= 0 && index < questions.size()) {
+            return questions.get(index);
+        }
+        return null; // Or throw an exception if index is out of bounds
+    }
+    
 }
