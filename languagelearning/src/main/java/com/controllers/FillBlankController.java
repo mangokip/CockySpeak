@@ -1,13 +1,16 @@
 package com.controllers;
 
+import java.io.IOException;
 import java.util.List;
 
+import com.language.App;
 import com.model.FillBlank;
 import com.model.Word;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 
 public class FillBlankController {
 
@@ -22,6 +25,9 @@ public class FillBlankController {
     private FillBlank currentQuestion;
     private int selectedAnswer = -1;
 
+    /**
+     * Load a new FillBlank question and update the UI.
+     */
     public void loadNewQuestion(FillBlank question) {
         this.currentQuestion = question;
 
@@ -36,6 +42,7 @@ public class FillBlankController {
         resetButtonStyles();
     }
 
+    // Methods to handle answer options
     @FXML
     private void handleOption1() {
         selectedAnswer = 0;
@@ -85,5 +92,26 @@ public class FillBlankController {
         } else {
             System.out.println("No option selected. Please choose an answer.");
         }
+    }
+
+    // Navigation Methods for Bottom Bar
+    @FXML
+    private void handleHome(MouseEvent event) throws IOException {
+        App.setRoot("home"); // Navigate to Home
+    }
+
+    @FXML
+    private void handleRanking(MouseEvent event) throws IOException {
+        App.setRoot("ranking"); // Navigate to Ranking
+    }
+
+    @FXML
+    private void handleFlashcards(MouseEvent event) throws IOException {
+        App.setRoot("flashcard"); // Navigate to Flashcards
+    }
+
+    @FXML
+    private void handleProfile(MouseEvent event) throws IOException {
+        App.setRoot("profile"); // Navigate to Profile
     }
 }
