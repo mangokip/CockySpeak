@@ -61,6 +61,8 @@ public class TrueFalseController {
 
 package com.controllers;
 
+import com.model.Lesson;
+import com.model.Question;
 import com.model.TrueFalse;
 
 import javafx.fxml.FXML;
@@ -82,32 +84,61 @@ public class TrueFalseController {
     @FXML
     private Button falseButton;
 
-    private TrueFalse currentQuestion;
+    private Lesson currentLesson; // Reference to the Lesson instance
+    private int currentQuestionIndex = 0;
 
     public void initialize() {
         feedbackLabel.setVisible(false); // Hide feedback initially
     }
 
-    public void loadQuestion(TrueFalse question) {
-        this.currentQuestion = question;
-        questionLabel.setText(question.getPrompt());
-        feedbackLabel.setVisible(false);
+    // Set the Lesson instance for this controller
+    public void setLesson(Lesson lesson) {
+        this.currentLesson = lesson;
+        loadCurrentQuestion(); // Load the first question
+    }
+
+    private void loadCurrentQuestion() {
+        if (currentLesson != null && currentQuestionIndex < currentLesson.getQuestions().size()) {
+            Question question = currentLesson.getCurrentQuestion(currentQuestionIndex);
+            if (question instanceof TrueFalse) {
+                TrueFalse trueFalseQuestion = (TrueFalse) question;
+                questionLabel.setText(trueFalseQuestion.getPrompt());
+                feedbackLabel.setVisible(false);
+            }
+        } else {
+            endLesson();
+        }
     }
 
     @FXML
     private void handleTrueButton(MouseEvent event) {
-        checkAnswer(true);
+        processAnswer(true);
     }
 
     @FXML
     private void handleFalseButton(MouseEvent event) {
-        checkAnswer(false);
+        processAnswer(false);
     }
 
-    private void checkAnswer(boolean userAnswer) {
-        feedbackLabel.setVisible(true);
-        boolean isCorrect = currentQuestion.validateAnswer(userAnswer ? "1" : "2");
-        feedbackLabel.setText(isCorrect ? "Correct!" : "Incorrect!");
-        feedbackLabel.setStyle("-fx-text-fill: " + (isCorrect ? "green;" : "red;"));
+    private void processAnswer(boolean userAnswer) {
+        if (currentLesson == null) return;
+
+        Question question = currentLesson.getCurrentQuestion(currentQuestionIndex);
+        if (question instanceof TrueFalse) {
+            TrueFalse trueFalseQuestion = (TrueFalse) question;
+            boolean isCorrect = trueFalseQuestion.validateAnswer(userAnswer ? "1" : "2");
+            feedbackLabel.setVisible(true);
+            feedbackLabel.setText(isCorrect ? "Correct!" : "Incorrect!");
+            feedbackLabel.setStyle("-fx-text-fill: " + (isCorrect ? "green;" : "red;"));
+            currentQuestionIndex++;
+            loadCurrentQuestion(); // Load the next question
+        }
+    }
+
+    private void endLesson() {
+        questionLabel.setText("Lesson complete!");
+        trueButton.setDisable(true);
+        falseButton.setDisable(true);
+        feedbackLabel.setVisible(false);
     }
 }
