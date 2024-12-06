@@ -1,70 +1,84 @@
 package com.controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Button;
 
 public class MultipleChoiceController {
 
     @FXML
     private Label questionLabel;
+    
+    @FXML
+    private Label feedbackLabel;
 
     @FXML
-    private Button option1Button;
+    private Button optionA;
 
     @FXML
-    private Button option2Button;
+    private Button optionB;
 
     @FXML
-    private Button option3Button;
+    private Button optionC;
 
     @FXML
-    private Button option4Button;
+    private Button optionD;
 
-    public void initialize() {
-        // Load the question and options dynamically
-        questionLabel.setText("What is the correct translation for 'Hola'?");
-        option1Button.setText("Hello");
-        option2Button.setText("Goodbye");
-        option3Button.setText("Please");
-        option4Button.setText("Thank you");
+    // Correct answer: "Gracias"
+    private String correctAnswer = "Gracias";
+
+    @FXML
+    private void handleOptionA() {
+        checkAnswer(optionA);
     }
 
     @FXML
-    private void handleOption(MouseEvent event) {
-        Button selectedButton = (Button) event.getSource();
-        String userAnswer = selectedButton.getText();
+    private void handleOptionB() {
+        checkAnswer(optionB);
+    }
 
-        if (validateAnswer(userAnswer)) {
-            System.out.println("Correct answer!");
+    @FXML
+    private void handleOptionC() {
+        checkAnswer(optionC);
+    }
+
+    @FXML
+    private void handleOptionD() {
+        checkAnswer(optionD);
+    }
+
+    /**
+     * This method checks the selected answer against the correct one and provides feedback.
+     */
+    private void checkAnswer(Button selectedOption) {
+        if (selectedOption.getText().equals(correctAnswer)) {
+            feedbackLabel.setText("Correct! Great job!");
+            feedbackLabel.setStyle("-fx-text-fill: green; -fx-font-weight: bold;");
         } else {
-            System.out.println("Incorrect answer!");
+            feedbackLabel.setText("Incorrect! Try again.");
+            feedbackLabel.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
         }
+        feedbackLabel.setVisible(true);
     }
 
-    private boolean validateAnswer(String userAnswer) {
-        // This is an example. Replace with actual validation logic.
-        return "Hello".equals(userAnswer);
+    // Placeholder methods for the bottom bar
+    @FXML
+    private void handleHome() {
+        System.out.println("Home clicked");
     }
 
     @FXML
-    private void handleHome(MouseEvent event) {
-        System.out.println("Navigating to Home");
+    private void handleRanking() {
+        System.out.println("Ranking clicked");
     }
 
     @FXML
-    private void handleRanking(MouseEvent event) {
-        System.out.println("Navigating to Ranking");
+    private void handleFlashcards() {
+        System.out.println("Flashcards clicked");
     }
 
     @FXML
-    private void handleFlashcards(MouseEvent event) {
-        System.out.println("Navigating to Flashcards");
-    }
-
-    @FXML
-    private void handleProfile(MouseEvent event) {
-        System.out.println("Navigating to Profile");
+    private void handleProfile() {
+        System.out.println("Profile clicked");
     }
 }
