@@ -44,7 +44,7 @@
                 <Button fx:id="submitButton" onAction="#handleSubmit" prefWidth="200" style="-fx-background-color: #FFEB3B; -fx-font-size: 16px;" text="Submit" />
 
                 <!-- Next Button -->
-                <Button fx:id="nextButton" onAction="#handleNext" text="Next" visible="false" style="-fx-background-color: #4CAF50; -fx-font-size: 16px;" />
+                <Button fx:id="nextButton" onAction="#handleNext" style="-fx-background-color: #4CAF50; -fx-font-size: 16px;" text="Next" visible="false" />
 
                 <!-- Feedback Label -->
                 <Label fx:id="feedbackLabel" style="-fx-font-size: 16px; -fx-text-fill: green; -fx-font-weight: bold;" text="" visible="false" />

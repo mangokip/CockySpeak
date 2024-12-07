@@ -30,7 +30,7 @@
             <Button fx:id="submitButton" onAction="#handleSubmit" prefWidth="200" style="-fx-background-color: #4caf50; -fx-text-fill: white; -fx-font-size: 16px;" text="Submit" />
 
             <!-- Feedback Label -->
-            <Label fx:id="feedbackLabel" text="" style="-fx-font-size: 16px; -fx-text-fill: red;" visible="false" />
+            <Label fx:id="feedbackLabel" style="-fx-font-size: 16px; -fx-text-fill: red;" text="" visible="false" />
 
         </VBox>
         <Label layoutX="4.0" layoutY="35.0" prefHeight="99.0" prefWidth="423.0" style="-fx-text-fill: #ffffff; -fx-font-family: 'Arial Rounded MT Bold'; -fx-font-size: 42.0;" text="Fill in the Blank" textFill="#ab0000">

@@ -23,7 +23,7 @@
                 <Button fx:id="optionC" onAction="#handleOptionC" styleClass="option-button" text="Gracias" />
                 <Button fx:id="optionD" onAction="#handleOptionD" styleClass="option-button" text="Por favor" />
             <Label fx:id="feedbackLabel" styleClass="feedback-label" text="Label" visible="false" wrapText="true" />
-            <Button fx:id = "nextButton"  text="Next" visible = "false" onAction="#nextButtonAction"/>
+            <Button fx:id="nextButton" onAction="#nextButtonAction" text="Next" visible="false" />
             </VBox>
         </center>
 

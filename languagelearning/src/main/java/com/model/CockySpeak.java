@@ -178,6 +178,12 @@ public class CockySpeak {
         System.out.println("Password changed successfully");
     }
 
+    public void changeEmail(String newEmail) {
+        user.setEmail(newEmail);
+        writer.saveUsers(userList.getUsers());
+        System.out.println("Email changed to: " + newEmail);
+    }
+
     /**
      * Loads flashcards for the current language.
      */

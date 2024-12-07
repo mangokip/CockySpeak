@@ -5,32 +5,32 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:controller="com.controllers.LessonImageController" alignment="CENTER" spacing="20" prefHeight="750.0" prefWidth="430.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" prefHeight="750.0" prefWidth="430.0" spacing="20" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.LessonImageController">
     <!-- Top Section -->
     <VBox alignment="CENTER" spacing="10">
-        <Label text="CockySpeak Language App" style="-fx-font-size: 24; -fx-text-fill: black; -fx-font-weight: bold;" />
-        <Label text="Chapter 1: Getting Started" style="-fx-font-size: 18; -fx-text-fill: gray;" />
+        <Label style="-fx-font-size: 24; -fx-text-fill: black; -fx-font-weight: bold;" text="CockySpeak Language App" />
+        <Label style="-fx-font-size: 18; -fx-text-fill: gray;" text="Chapter 1: Getting Started" />
     </VBox>
 
     <!-- Main Button -->
-    <Button fx:id="startLessonButton" text="Start Lesson" onAction="#handleStartLesson" style="-fx-font-size: 16; -fx-background-color: lightblue; -fx-text-fill: black;" />
+    <Button fx:id="startLessonButton" onAction="#handleStartLesson" style="-fx-font-size: 16; -fx-background-color: lightblue; -fx-text-fill: black;" text="Start Lesson" />
 
     <!-- Bottom Navigation Bar -->
     <HBox alignment="CENTER" spacing="30" style="-fx-background-color: #ffffff; -fx-padding: 10;">
         <VBox alignment="CENTER" onMouseClicked="#handleHome">
-            <Label text="🏠" style="-fx-font-size: 24;" />
+            <Label style="-fx-font-size: 24;" text="🏠" />
             <Label text="Home" />
         </VBox>
         <VBox alignment="CENTER" onMouseClicked="#handleRanking">
-            <Label text="🏆" style="-fx-font-size: 24;" />
+            <Label style="-fx-font-size: 24;" text="🏆" />
             <Label text="Ranking" />
         </VBox>
         <VBox alignment="CENTER" onMouseClicked="#handleFlashcards">
-            <Label text="📘" style="-fx-font-size: 24;" />
+            <Label style="-fx-font-size: 24;" text="📘" />
             <Label text="Flashcards" />
         </VBox>
         <VBox alignment="CENTER" onMouseClicked="#handleProfile">
-            <Label text="👤" style="-fx-font-size: 24;" />
+            <Label style="-fx-font-size: 24;" text="👤" />
             <Label text="Profile" />
         </VBox>
     </HBox>
