@@ -52,34 +52,6 @@ public class VocabController {
         selectedSpanishButton.setStyle("-fx-background-color: #FFEB3B;");  // Highlight the selected word
     }
 
-    // Handles the "Submit" action to check the match
-    // @FXML
-    // private void handleSubmit() {
-    //     if (selectedEnglishButton != null && selectedSpanishButton != null) {
-    //         String englishWord = selectedEnglishButton.getText();
-    //         String spanishWord = selectedSpanishButton.getText();
-    
-    //         // Checking the matching logic
-    //         if ((englishWord.equals("Hello") && spanishWord.equals("Hola")) ||
-    //             (englishWord.equals("Goodbye") && spanishWord.equals("Adiós")) ||
-    //             (englishWord.equals("Thank you") && spanishWord.equals("Gracias")) ||
-    //             (englishWord.equals("Please") && spanishWord.equals("Por favor"))) {
-    //             feedbackLabel.setText("Correct Match!");
-    //             feedbackLabel.setStyle("-fx-text-fill: green;");
-    //             feedbackLabel.setVisible(true);  // Add this line
-    //         } else {
-    //             feedbackLabel.setText("Incorrect Match! Try Again.");
-    //             feedbackLabel.setStyle("-fx-text-fill: red;");
-    //             feedbackLabel.setVisible(true);  // Add this line
-    //         }
-    //     } else {
-    //         feedbackLabel.setText("Please select both words before submitting.");
-    //         feedbackLabel.setStyle("-fx-text-fill: orange;");
-    //         feedbackLabel.setVisible(true);  // Add this line
-    //     }
-    // }
-
-
 
 
 @FXML

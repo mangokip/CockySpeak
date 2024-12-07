@@ -61,6 +61,9 @@ public class TrueFalseController {
 
 package com.controllers;
 
+import java.io.IOException;
+
+import com.language.App;
 import com.model.Lesson;
 import com.model.Question;
 import com.model.TrueFalse;
@@ -111,12 +114,12 @@ public class TrueFalseController {
     }
 
     @FXML
-    private void handleTrueButton(MouseEvent event) {
+    private void handleTrueAction(MouseEvent event) {
         processAnswer(true);
     }
 
     @FXML
-    private void handleFalseButton(MouseEvent event) {
+    private void handleFalseAction(MouseEvent event) {
         processAnswer(false);
     }
 
@@ -140,5 +143,25 @@ public class TrueFalseController {
         trueButton.setDisable(true);
         falseButton.setDisable(true);
         feedbackLabel.setVisible(false);
+    }
+
+    @FXML
+    void handleFlashcards(MouseEvent event) throws IOException {
+        App.setRoot("flashcard");
+    }
+
+    @FXML
+    void handleHome(MouseEvent event) throws IOException {
+        App.setRoot("home");
+    }
+
+    @FXML
+    void handleProfile(MouseEvent event) throws IOException{
+        App.setRoot("profile");
+    }
+
+    @FXML
+    void handleRanking(MouseEvent event) throws IOException {
+        App.setRoot("ranking");
     }
 }
