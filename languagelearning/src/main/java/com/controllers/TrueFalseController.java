@@ -3,9 +3,6 @@ package com.controllers;
 import java.io.IOException;
 
 import com.language.App;
-import com.model.Lesson;
-import com.model.Question;
-import com.model.TrueFalse;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -19,28 +16,18 @@ public class TrueFalseController {
     @FXML
     private Label feedbackLabel;
 
-    private Lesson currentLesson;
-    private int currentQuestionIndex;
+    private String hardcodedQuestion = "Is the translation of 'gato' as 'cat' correct?"; // Hardcoded question
+    private boolean correctAnswer = true; // Hardcoded correct answer (true for correct, false for incorrect)
 
     @FXML
     public void initialize() {
         feedbackLabel.setVisible(false);
-        currentLesson = App.getCurrentLesson();
-        currentQuestionIndex = 0;
-        loadCurrentQuestion();
+        loadHardcodedQuestion();
     }
 
-    private void loadCurrentQuestion() {
-        if (currentLesson != null && currentQuestionIndex < currentLesson.getQuestions().size()) {
-            Question question = currentLesson.getCurrentQuestion(currentQuestionIndex);
-            if (question instanceof TrueFalse) {
-                TrueFalse trueFalseQuestion = (TrueFalse) question;
-                questionLabel.setText(trueFalseQuestion.getPrompt());
-                feedbackLabel.setVisible(false);
-            }
-        } else {
-            endLesson();
-        }
+    private void loadHardcodedQuestion() {
+        questionLabel.setText(hardcodedQuestion);
+        feedbackLabel.setVisible(false);
     }
 
     @FXML
@@ -54,29 +41,15 @@ public class TrueFalseController {
     }
 
     private void processAnswer(boolean userAnswer) {
-        if (currentLesson == null) return;
+        boolean isCorrect = (userAnswer == correctAnswer);
+        feedbackLabel.setText(isCorrect ? "Correct!" : "Incorrect!");
+        feedbackLabel.setStyle("-fx-text-fill: " + (isCorrect ? "green;" : "red;"));
+        feedbackLabel.setVisible(true);
 
-        Question question = currentLesson.getCurrentQuestion(currentQuestionIndex);
-        if (question instanceof TrueFalse) {
-            TrueFalse tfQuestion = (TrueFalse) question;
-
-            boolean isCorrect = tfQuestion.validateAnswer(userAnswer ? "1" : "2");
-            feedbackLabel.setText(isCorrect ? "Correct!" : "Incorrect!");
-            feedbackLabel.setStyle("-fx-text-fill: " + (isCorrect ? "green;" : "red;"));
-            feedbackLabel.setVisible(true);
-
-            currentQuestionIndex++;
-            loadCurrentQuestion();
-        }
+        System.out.println("User selected: " + (userAnswer ? "True" : "False"));
+        System.out.println(isCorrect ? "Correct answer!" : "Wrong answer!");
     }
 
-    private void endLesson() {
-        try {
-            App.setRoot("profile");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
     @FXML
     void handleFlashcards(MouseEvent event) throws IOException {
         App.setRoot("flashcard");
