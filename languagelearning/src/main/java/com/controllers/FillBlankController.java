@@ -1,11 +1,8 @@
 package com.controllers;
 
 import java.io.IOException;
-import java.util.List;
 
 import com.language.App;
-import com.model.FillBlank;
-import com.model.Word;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -14,62 +11,85 @@ import javafx.scene.input.MouseEvent;
 
 public class FillBlankController {
 
-    @FXML private Label questionPrompt;
-    @FXML private Label phraseText;
-    @FXML private Button answerOption1;
-    @FXML private Button answerOption2;
-    @FXML private Button answerOption3;
-    @FXML private Button answerOption4;
-    @FXML private Button submitButton;
+    @FXML
+    private Label questionPrompt;
 
-    private FillBlank currentQuestion;
-    private int selectedAnswer = -1;
+    @FXML
+    private Label phraseText;
+
+    @FXML
+    private Button answerOption1;
+
+    @FXML
+    private Button answerOption2;
+
+    @FXML
+    private Button answerOption3;
+
+    @FXML
+    private Button answerOption4;
+
+    @FXML
+    private Button submitButton;
+
+    @FXML
+    private Label feedbackLabel; // Label to display feedback
+
+    private int correctAnswerIndex = 1; // Hardcoded correct answer index (0-based)
+    private int selectedAnswer = -1;   // User's selected answer index (-1 means none selected)
+
+    @FXML
+    public void initialize() {
+        loadHardcodedQuestion();
+    }
 
     /**
-     * Load a new FillBlank question and update the UI.
+     * Hardcoded question and options for Fill-in-the-Blank in Spanish.
      */
-    public void loadNewQuestion(FillBlank question) {
-        this.currentQuestion = question;
+    private void loadHardcodedQuestion() {
+        questionPrompt.setText("Rellena el espacio en blanco con la palabra correcta:");
+        phraseText.setText("Marion ______ agua."); // The blank phrase in Spanish
 
-        phraseText.setText(currentQuestion.getPhraseText());
-        List<Word> options = currentQuestion.getAnswerOptions();
-        answerOption1.setText(options.get(0).getForeign());
-        answerOption2.setText(options.get(1).getForeign());
-        answerOption3.setText(options.get(2).getForeign());
-        answerOption4.setText(options.get(3).getForeign());
+        // Options in Spanish
+        answerOption1.setText("perro");
+        answerOption2.setText("necesito"); // Correct answer
+        answerOption3.setText("comer");
+        answerOption4.setText("gato");
 
-        selectedAnswer = -1;
+        feedbackLabel.setText(""); // Clear any previous feedback
         resetButtonStyles();
+        selectedAnswer = -1; // Reset the selected answer
     }
 
     // Methods to handle answer options
     @FXML
     private void handleOption1() {
-        selectedAnswer = 0;
-        highlightSelectedOption(answerOption1);
+        selectAnswer(0, answerOption1);
     }
 
     @FXML
     private void handleOption2() {
-        selectedAnswer = 1;
-        highlightSelectedOption(answerOption2);
+        selectAnswer(1, answerOption2);
     }
 
     @FXML
     private void handleOption3() {
-        selectedAnswer = 2;
-        highlightSelectedOption(answerOption3);
+        selectAnswer(2, answerOption3);
     }
 
     @FXML
     private void handleOption4() {
-        selectedAnswer = 3;
-        highlightSelectedOption(answerOption4);
+        selectAnswer(3, answerOption4);
+    }
+
+    private void selectAnswer(int index, Button button) {
+        selectedAnswer = index;
+        highlightSelectedOption(button);
     }
 
     private void highlightSelectedOption(Button selectedButton) {
         resetButtonStyles();
-        selectedButton.setStyle("-fx-background-color: #d04d3b; -fx-text-fill: white;"); // Darker shade
+        selectedButton.setStyle("-fx-background-color: #d04d3b; -fx-text-fill: white;"); // Highlight the selected option
     }
 
     private void resetButtonStyles() {
@@ -83,14 +103,12 @@ public class FillBlankController {
     @FXML
     private void handleSubmit() {
         if (selectedAnswer != -1) {
-            Word selectedWord = currentQuestion.getAnswerOptions().get(selectedAnswer);
-            if (currentQuestion.validateAnswer(String.valueOf(selectedAnswer + 1))) {
-                System.out.println("Correct!");
-            } else {
-                System.out.println("Incorrect. The correct answer is: " + currentQuestion.getCorrectAnswer().getForeign());
-            }
+            boolean isCorrect = (selectedAnswer == correctAnswerIndex);
+            feedbackLabel.setText(isCorrect ? "¡Correcto! 🎉" : "¡Incorrecto! La respuesta correcta era: 'necesito'.");
+            feedbackLabel.setStyle("-fx-text-fill: " + (isCorrect ? "green;" : "red;"));
         } else {
-            System.out.println("No option selected. Please choose an answer.");
+            feedbackLabel.setText("Por favor, selecciona una respuesta.");
+            feedbackLabel.setStyle("-fx-text-fill: orange;");
         }
     }
 

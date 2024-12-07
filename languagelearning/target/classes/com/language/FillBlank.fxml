@@ -28,43 +28,47 @@
 
             <!-- Submit Button -->
             <Button fx:id="submitButton" onAction="#handleSubmit" prefWidth="200" style="-fx-background-color: #4caf50; -fx-text-fill: white; -fx-font-size: 16px;" text="Submit" />
+
+            <!-- Feedback Label -->
+            <Label fx:id="feedbackLabel" text="" style="-fx-font-size: 16px; -fx-text-fill: red;" visible="false" />
+
         </VBox>
-      <Label layoutX="4.0" layoutY="35.0" prefHeight="99.0" prefWidth="423.0" style="-fx-text-fill: #ffffff; -fx-font-family: 'Arial Rounded MT Bold'; -fx-font-size: 42.0;" text="Fill in the Blank" textFill="#ab0000">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-         <styleClass>
-            <String fx:value="flashcard-highlight" />
-            <String fx:value="flashcard" />
-         </styleClass>
-      </Label>
-      <HBox alignment="CENTER" layoutX="-1.0" layoutY="653.0" prefHeight="71.0" prefWidth="430.0" spacing="20" styleClass="bottom-bar">
-         <children>
-            <VBox alignment="CENTER" onMouseClicked="#handleHome" spacing="5" styleClass="nav-button">
-               <children>
-                  <Label onMouseClicked="#handleHome" styleClass="icon" text="🏠" />
-                  <Label styleClass="nav-text" text="Home" />
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" onMouseClicked="#handleRanking" spacing="5" styleClass="nav-button">
-               <children>
-                  <Label onMouseClicked="#handleRanking" styleClass="icon" text="🏆" />
-                  <Label styleClass="nav-text" text="Ranking" />
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" onMouseClicked="#handleFlashcards" spacing="5" styleClass="nav-button">
-               <children>
-                  <Label onMouseClicked="#handleFlashcards" styleClass="icon" text="📘" />
-                  <Label styleClass="nav-text" text="Flashcards" />
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" onMouseClicked="#handleProfile" spacing="5" styleClass="nav-button">
-               <children>
-                  <Label onMouseClicked="#handleProfile" styleClass="icon" text="👤" />
-                  <Label styleClass="nav-text" text="Profile" />
-               </children>
-            </VBox>
-         </children>
-      </HBox>
+        <Label layoutX="4.0" layoutY="35.0" prefHeight="99.0" prefWidth="423.0" style="-fx-text-fill: #ffffff; -fx-font-family: 'Arial Rounded MT Bold'; -fx-font-size: 42.0;" text="Fill in the Blank" textFill="#ab0000">
+            <font>
+                <Font name="System Bold" size="13.0" />
+            </font>
+            <styleClass>
+                <String fx:value="flashcard-highlight" />
+                <String fx:value="flashcard" />
+            </styleClass>
+        </Label>
+        <HBox alignment="CENTER" layoutX="-1.0" layoutY="653.0" prefHeight="71.0" prefWidth="430.0" spacing="20" styleClass="bottom-bar">
+            <children>
+                <VBox alignment="CENTER" onMouseClicked="#handleHome" spacing="5" styleClass="nav-button">
+                    <children>
+                        <Label onMouseClicked="#handleHome" styleClass="icon" text="🏠" />
+                        <Label styleClass="nav-text" text="Home" />
+                    </children>
+                </VBox>
+                <VBox alignment="CENTER" onMouseClicked="#handleRanking" spacing="5" styleClass="nav-button">
+                    <children>
+                        <Label onMouseClicked="#handleRanking" styleClass="icon" text="🏆" />
+                        <Label styleClass="nav-text" text="Ranking" />
+                    </children>
+                </VBox>
+                <VBox alignment="CENTER" onMouseClicked="#handleFlashcards" spacing="5" styleClass="nav-button">
+                    <children>
+                        <Label onMouseClicked="#handleFlashcards" styleClass="icon" text="📘" />
+                        <Label styleClass="nav-text" text="Flashcards" />
+                    </children>
+                </VBox>
+                <VBox alignment="CENTER" onMouseClicked="#handleProfile" spacing="5" styleClass="nav-button">
+                    <children>
+                        <Label onMouseClicked="#handleProfile" styleClass="icon" text="👤" />
+                        <Label styleClass="nav-text" text="Profile" />
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
     </children>
 </Pane>
