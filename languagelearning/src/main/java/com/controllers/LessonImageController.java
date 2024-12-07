@@ -1,85 +1,62 @@
 package com.controllers;
 
+import com.language.App;
+import com.model.CockySpeak;
+import com.model.Language;
+import com.model.Lesson;
+
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.image.ImageView;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Ellipse;
-import javafx.scene.paint.Color;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.scene.layout.StackPane;
-import java.io.IOException;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class LessonImageController {
-    
-    @FXML
-    private ImageView flagImageView;
-    
-    @FXML
-    private Ellipse startbutton;
-    private static boolean level1Completed = false;
+
+    private CockySpeak cockySpeak;
 
     @FXML
     public void initialize() {
-        setupFlagImage();
-        //setupNavigation();
+        cockySpeak = CockySpeak.getInstance();
     }
-
-    private void setupFlagImage() {
-        if (flagImageView != null) {
-            Rectangle clip = new Rectangle(
-                flagImageView.getFitWidth(), 
-                flagImageView.getFitHeight()
-            );
-            clip.setArcWidth(30);
-            clip.setArcHeight(30);
-            clip.setStroke(Color.TRANSPARENT);
-            
-            flagImageView.setClip(clip);
-        }
-    }
-
-    // private void setupNavigation() {
-    //     if (firstCircleButton != null) {
-    //         firstCircleButton.setOnMouseClicked(event -> navigateToScreen("/fxml/VocabMatching.fxml"));
-    //     }
-    // }
 
     @FXML
-private void starbutton() {
-    navigateToScreen("/fxml/VocabMatching.fxml");
+private void handleStartLesson() {
+    try {
+        // Create a new lesson and set it in the App
+        Lesson lesson = new Lesson("Module 1", new Language("Spanish"));
+        App.setCurrentLesson(lesson);
+
+        // Navigate directly to the first lesson screen
+        App.setRoot("multipleChoice");
+    } catch (Exception e) {
+        showErrorPopup("Error", "Failed to start the lesson.");
+    }
 }
 
-    private void navigateToScreen(String fxmlPath) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-            Scene scene = new Scene(loader.load());
-            Stage stage = (Stage) startbutton.getScene().getWindow();
-            stage.setScene(scene);
-        } catch (IOException e) {
-            System.err.println("Navigation failed: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
 
     @FXML
     private void handleHome() {
-        navigateToScreen("/fxml/Home.fxml");
+        System.out.println("Home button clicked.");
     }
 
     @FXML
     private void handleRanking() {
-        navigateToScreen("/fxml/Ranking.fxml");
+        System.out.println("Ranking button clicked.");
     }
 
     @FXML
     private void handleFlashcards() {
-        navigateToScreen("/fxml/Flashcards.fxml");
+        System.out.println("Flashcards button clicked.");
     }
 
     @FXML
     private void handleProfile() {
-        navigateToScreen("/fxml/Profile.fxml");
+        System.out.println("Profile button clicked.");
+    }
+
+    private void showErrorPopup(String title, String message) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

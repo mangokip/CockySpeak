@@ -1,12 +1,12 @@
 package com.model;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * Class for a vocabulary matching question.
@@ -103,6 +103,15 @@ public class VocabularyMatching extends Question {
         }
         return allCorrect;
     }
+
+    public boolean validateAnswer(String englishWord, String spanishWord) {
+        if (wordPairs.containsKey(englishWord.toLowerCase())) {
+            String correctTranslation = wordPairs.get(englishWord.toLowerCase());
+            return correctTranslation.equals(spanishWord.toLowerCase());
+        }
+        return false;
+    }
+    
 
     public Map<String, String> getUserPairs() {
         return userPairs;

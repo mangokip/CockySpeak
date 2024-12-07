@@ -30,7 +30,7 @@ public class MultipleChoice extends Question {
     }
 
     /*
-     * Populates the answer options list with random words from the passed language. then shuffles th the list
+     * Populates the answer options list with random words from the passed language, then shuffles the list.
      * @param language - The language to be used for the multiple choice question
      */
     private void populateAnswerOptions(Language language) {
@@ -51,8 +51,8 @@ public class MultipleChoice extends Question {
     }
 
     /*
-     * Prints the question and the answer options and asks the user to select an answer
-     * this method is used in the lesson class to ask each quesiton
+     * Prints the question and the answer options and asks the user to select an answer.
+     * This method is used in the lesson class to ask each question.
      */
     @Override
     public boolean askQuestion(Scanner scanner) {
@@ -76,8 +76,8 @@ public class MultipleChoice extends Question {
         return result;
     }
 
-    //function to validate the user's answer based on the answer options list and the correct answer
-    // returns true if the user's answer is correct and false if it is not
+    // Function to validate the user's answer based on the answer options list and the correct answer.
+    // Returns true if the user's answer is correct and false if it is not.
     @Override
     public boolean validateAnswer(String userAnswer) {
         try {
@@ -89,7 +89,20 @@ public class MultipleChoice extends Question {
         }
     }
 
-    public List<Word> getAnswerOptions() {
-        return answerOptions;
+    public List<String> getAnswerOptions() {
+        // Convert each Word object in the options list to its foreign string representation
+        List<String> foreignOptions = new ArrayList<>();
+        for (Word word : answerOptions) {
+            foreignOptions.add(word.getForeign());
+        }
+        return foreignOptions;
     }
+    
+
+    // Getter for the correct answer
+    public Word getCorrectAnswer() {
+        return correctAnswer;
+    }
+
+    
 }

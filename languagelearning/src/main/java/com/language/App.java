@@ -2,23 +2,24 @@ package com.language;
 
 import java.io.IOException;
 
+import com.model.Lesson;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-/**
- * JavaFX App
- */
 public class App extends Application {
 
     private static Scene scene;
+    private static Lesson currentLesson;
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("multipleChoice"), 430, 750);
+        scene = new Scene(loadFXML("login"), 430, 750); // Start with the home screen
         stage.setScene(scene);
+        stage.setTitle("CockySpeak Language App");
         stage.show();
     }
 
@@ -35,4 +36,11 @@ public class App extends Application {
         launch();
     }
 
+    public static Lesson getCurrentLesson() {
+        return currentLesson;
+    }
+
+    public static void setCurrentLesson(Lesson lesson) {
+        currentLesson = lesson;
+    }
 }

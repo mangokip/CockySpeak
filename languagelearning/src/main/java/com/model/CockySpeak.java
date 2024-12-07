@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
+import com.language.App;
 import com.narration.Narriator;
 
 public class CockySpeak {
@@ -18,6 +19,7 @@ public class CockySpeak {
     private DataWriter writer = new DataWriter();
     private List<Flashcard> flashcards;
     private Flashcard selectedWord;
+    private Lesson currentLesson; // To track the current lesson
     private static CockySpeak instance;
 
     /**
@@ -51,7 +53,7 @@ public class CockySpeak {
             language = new Language("Spanish");
         }
         this.currentLanguage = language;
-        user.createLanguageProgress(language);  // Ensure progress is initialized
+        user.createLanguageProgress(language); // Ensure progress is initialized
         writer.saveUsers(userList.getUsers());
         System.out.println("Language set to: " + language.getLanguageCode());
     }
@@ -67,16 +69,16 @@ public class CockySpeak {
         System.out.print("Please select a language: ");
         String selectedLanguageCode = keyboard.nextLine().trim();
 
-       
         if (selectedLanguageCode.isEmpty()) {
             System.out.println("Invalid input. Defaulting to Spanish.");
-            return new Language("Spanish");  
+            return new Language("Spanish");
         }
         return new Language(selectedLanguageCode);
     }
 
     /**
      * Prompts the user to select a difficulty level.
+     *
      * @param language - the language to be used for the difficulty selection
      */
     public void promptDifficultySelection(Language language) {
@@ -103,7 +105,8 @@ public class CockySpeak {
 
     /**
      * Logs in the user with the given username and password.
-     * @param username  The username
+     *
+     * @param username The username
      * @param password The password
      */
     public boolean login(String username, String password) {
@@ -117,7 +120,6 @@ public class CockySpeak {
                     user.createLanguageProgress(spanish);
                 }
 
-               
                 writer.saveUsers(userList.getUsers());
                 return true;
 
@@ -142,11 +144,9 @@ public class CockySpeak {
         userList.addUser(username, password, email);
         System.out.println("User registered successfully!");
 
-        DataWriter writer = new DataWriter();
         writer.saveUsers(userList.getUsers());
         return true;
     }
-
 
     /**
      * Logs out the current user and saves progress.
@@ -158,6 +158,7 @@ public class CockySpeak {
 
     /**
      * Changes the username of the currently logged-in user.
+     *
      * @param newUsername The new username to be changed
      */
     public void changeUsername(String newUsername) {
@@ -168,6 +169,7 @@ public class CockySpeak {
 
     /**
      * Changes the password of the currently logged-in user.
+     *
      * @param newPassword The new password to be changed
      */
     public void changePassword(String newPassword) {
@@ -177,12 +179,10 @@ public class CockySpeak {
     }
 
     /**
-     * Changes the email of the currently logged-in user.
+     * Loads flashcards for the current language.
      */
     public void loadFlashcards() {
-
         flashcards = Flashcard.generateFlashcards();
-
         System.out.println("Flashcards loaded: " + flashcards.size());
 
         for (Flashcard card : flashcards) {
@@ -216,6 +216,7 @@ public class CockySpeak {
 
     /**
      * Starts a lesson for the currently logged-in user.
+     *
      * @param moduleName The name of the module to start
      */
     public void startModule(String moduleName) {
@@ -225,28 +226,68 @@ public class CockySpeak {
         }
 
         System.out.println("\nStarting " + moduleName + "...");
-        Lesson lesson = new Lesson(moduleName, currentLanguage);  // Use the current language
-        int score = lesson.playLesson();
+        currentLesson = new Lesson(moduleName, currentLanguage);
+        int score = currentLesson.playLesson();
 
         ProgressTracker tracker = user.getLanguageProgressTracker(currentLanguage);
         if (tracker == null) {
             System.out.println("Error: No progress tracker found for " + currentLanguage.getLanguageCode());
-            return;  // Exit if no tracker is found
+            return;
         }
 
         if (score >= 80) {
             System.out.println("You passed " + moduleName + "!");
-            tracker.completeLesson();  // Mark the lesson as completed
+            tracker.completeLesson();
         } else {
             System.out.println("You did not pass " + moduleName + ". Please try again.");
         }
 
-        writer.saveUsers(userList.getUsers());  // Save progress
+        writer.saveUsers(userList.getUsers());
+        navigateToNextScreen();
+    }
+
+    /**
+     * Navigates to the next screen based on progress.
+     */
+    private void navigateToNextScreen() {
+        try {
+            ProgressTracker tracker = user.getLanguageProgressTracker(currentLanguage);
+            int progress = tracker.getCompletedLessons();
+
+            String nextScreen;
+            switch (progress) {
+                case 0:
+                    nextScreen = "multipleChoice";
+                    break;
+                case 1:
+                    nextScreen = "vocabMatching";
+                    break;
+                case 2:
+                    nextScreen = "trueFalse";
+                    break;
+                default:
+                    nextScreen = "profile";
+            }
+
+            App.setRoot(nextScreen);
+        } catch (Exception e) {
+            System.err.println("Error navigating to the next lesson: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Gets the current lesson.
+     *
+     * @return The current lesson
+     */
+    public Lesson getCurrentLesson() {
+        return currentLesson;
     }
 
     /**
      * Resumes the user's progress from the last completed lesson.
-     * @param languageCode the language of choice
+     *
+     * @param languageCode The language of choice
      */
     public void resumeFromProgress(String languageCode) {
         ProgressTracker tracker = user.getLanguageProgressTracker(new Language(languageCode));
@@ -265,29 +306,34 @@ public class CockySpeak {
     private void pronounceTextWithPolly(String text) {
         try {
             System.out.println("Pronouncing: " + text);
-
             Narriator.playSound(text);
-
         } catch (Exception e) {
             System.err.println("Error pronouncing the text: " + e.getMessage());
         }
-    }
-
-    /**
-     * Gets the currently logged-in user.
-     *
-     * @return The currently logged-in user, or null if no user is logged in.
-     */
-    public User getCurrentUser() {
-        return user;
     }
 
     public Language getCurrentLanguage() {
         return currentLanguage;
     }
 
+    public User getCurrentUser() {
+        return user;
+    }
+
     public List<Flashcard> getFlashcards() {
-        return this.flashcards;
+        return flashcards;
+    }
+    public Lesson startLesson(String moduleName) {
+        if (currentLanguage == null) {
+            System.out.println("No language set. Defaulting to Spanish.");
+            setLanguage(new Language("Spanish"));
+        }
+    
+        System.out.println("\nStarting " + moduleName + "...");
+        Lesson lesson = new Lesson(moduleName, currentLanguage); // Create the lesson
+        this.currentLesson = lesson; // Save the current lesson
+    
+        return lesson; // Return the lesson instance
     }
     
 

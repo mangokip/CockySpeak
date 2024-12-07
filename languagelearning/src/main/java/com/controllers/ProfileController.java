@@ -106,7 +106,7 @@ public class ProfileController {
 
     @FXML
     void handleRanking(MouseEvent event) throws IOException {
-        App.setRoot("ranking");
+        App.setRoot("lesson");
     }
    
 }

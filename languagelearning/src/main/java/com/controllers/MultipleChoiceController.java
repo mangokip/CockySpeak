@@ -1,30 +1,29 @@
 package com.controllers;
 
-import com.model.WordList;
-
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import com.language.App;
-import com.model.Word;
+import com.model.Lesson;
+import com.model.MultipleChoice;
+import com.model.Question;
+import com.model.WordList;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 
 public class MultipleChoiceController {
 
-    WordList wordList = WordList.getInstance();
-    Word correctAnswer = wordList.getRandomWord("Spanish");
-
-    
-    
+    private Lesson currentLesson;
+    private int currentQuestionIndex;
+    private WordList wordList = WordList.getInstance();
 
     @FXML
     private Label questionLabel;
-    
+
     @FXML
     private Label feedbackLabel;
 
@@ -44,38 +43,94 @@ public class MultipleChoiceController {
     private Button nextButton;
 
     @FXML
+    public void initialize() {
+        feedbackLabel.setVisible(false);
+        nextButton.setVisible(false);
+
+        currentLesson = App.getCurrentLesson();
+        currentQuestionIndex = 0;
+
+        loadCurrentQuestion();
+    }
+
+    private void loadCurrentQuestion() {
+        if (currentLesson != null && currentQuestionIndex < currentLesson.getQuestions().size()) {
+            Question question = currentLesson.getCurrentQuestion(currentQuestionIndex);
+            if (question instanceof MultipleChoice) {
+                MultipleChoice mcQuestion = (MultipleChoice) question;
+                questionLabel.setText(mcQuestion.getPrompt());
+                populateOptions(mcQuestion);
+                feedbackLabel.setVisible(false);
+            }
+        } else {
+            navigateToNextLesson();
+        }
+    }
+
+    private void populateOptions(MultipleChoice mcQuestion) {
+        // Fetch the options as a list of strings
+        List<String> options = mcQuestion.getAnswerOptions();
+        Collections.shuffle(options); // Randomize the options
+    
+        // Assign the shuffled options to the buttons
+        optionA.setText(options.get(0));
+        optionB.setText(options.get(1));
+        optionC.setText(options.get(2));
+        optionD.setText(options.get(3));
+    }
+    
+
+    @FXML
     private void handleOptionA() {
-        checkAnswer(optionA);
+        checkAnswer(optionA.getText());
     }
 
     @FXML
     private void handleOptionB() {
-        checkAnswer(optionB);
+        checkAnswer(optionB.getText());
     }
 
     @FXML
     private void handleOptionC() {
-        checkAnswer(optionC);
+        checkAnswer(optionC.getText());
     }
 
     @FXML
     private void handleOptionD() {
-        checkAnswer(optionD);
+        checkAnswer(optionD.getText());
     }
 
-    /**
-     * This method checks the selected answer against the correct one and provides feedback.
-     */
-    private void checkAnswer(Button selectedOption) {
-        if (selectedOption.getText().equals(correctAnswer.getForeign())) {
-            feedbackLabel.setText("Correct! Great job!");
-            feedbackLabel.setStyle("-fx-text-fill: green; -fx-font-weight: bold;");
-        } else {
-            feedbackLabel.setText("Incorrect! The correct answer is: " + correctAnswer.getForeign());
-            feedbackLabel.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
+    private void checkAnswer(String selectedAnswer) {
+        // Assuming `currentLesson` and `currentQuestionIndex` are properly initialized
+        Question question = currentLesson.getCurrentQuestion(currentQuestionIndex);
+    
+        if (question instanceof MultipleChoice) {
+            MultipleChoice mcQuestion = (MultipleChoice) question;
+    
+            // Get the correct answer
+            String correctAnswer = mcQuestion.getCorrectAnswer().getForeign();
+    
+            // Compare the selected answer text to the correct answer
+            if (selectedAnswer.equals(correctAnswer)) {
+                feedbackLabel.setText("Correct! Great job!");
+                feedbackLabel.setStyle("-fx-text-fill: green; -fx-font-weight: bold;");
+            } else {
+                feedbackLabel.setText("Incorrect! The correct answer is: " + correctAnswer);
+                feedbackLabel.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
+            }
+    
+            // Show feedback and prepare for the next question
+            feedbackLabel.setVisible(true);
+            nextButton.setVisible(true);
+    
+            // Disable all buttons to prevent further clicks
+            disableOptions();
         }
-        feedbackLabel.setVisible(true);
-        nextButton.setVisible(true);
+    }
+    
+    
+
+    private void disableOptions() {
         optionA.setDisable(true);
         optionB.setDisable(true);
         optionC.setDisable(true);
@@ -83,62 +138,36 @@ public class MultipleChoiceController {
     }
 
     @FXML
-    private void nextButtonAction() throws IOException {
-        App.setRoot("vocabMatching");
+    private void nextButtonAction() {
+        currentQuestionIndex++;
+        loadCurrentQuestion();
     }
 
-    // Placeholder methods for the bottom bar
-    @FXML
-    private void handleHome() {
-        System.out.println("Home clicked");
-    }
-
-    @FXML
-    private void handleRanking() {
-        System.out.println("Ranking clicked");
-    }
-
-    @FXML
-    private void handleFlashcards() {
-        System.out.println("Flashcards clicked");
-    }
-
-    @FXML
-    private void handleProfile() {
-        System.out.println("Profile clicked");
-    }
-
-    @FXML
-    private void populateOptions() {
-        // Create a list to hold all the options
-        List<String> options = new ArrayList<>();
-        
-        // Add the correct answer
-        String correctTranslation = correctAnswer.getForeign();
-        options.add(correctTranslation);
-
-        // Add three random unique incorrect answers
-        while (options.size() < 4) {
-            Word randomWord = wordList.getRandomWord("Spanish");
-            String randomTranslation = randomWord.getForeign();
-            if (!options.contains(randomTranslation)) {
-                options.add(randomTranslation);
-            }
+    private void navigateToNextLesson() {
+        try {
+            App.setRoot("vocabMatching");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        // Shuffle the options to randomize the placement of the correct answer
-        Collections.shuffle(options);
-
-        // Assign the shuffled options to the buttons
-        optionA.setText(options.get(0));
-        optionB.setText(options.get(1));
-        optionC.setText(options.get(2));
-        optionD.setText(options.get(3));
+    }
+    @FXML
+    void handleFlashcards(MouseEvent event) throws IOException {
+        App.setRoot("flashcard");
     }
 
     @FXML
-    public void initialize() {
-        questionLabel.setText("What is the Spanish translation of '" + correctAnswer.getText() + "'?");
-        populateOptions();
+    void handleHome(MouseEvent event) throws IOException {
+        App.setRoot("home");
+    }
+
+    @FXML
+    void handleProfile(MouseEvent event) throws IOException {
+        App.setRoot("profile");
+    }
+
+    @FXML
+    void handleRanking(MouseEvent event) throws IOException {
+        App.setRoot("ranking");
     }
 }
+

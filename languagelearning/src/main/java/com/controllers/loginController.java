@@ -35,7 +35,7 @@ public class loginController {
         // errorMessage.setVisible(true);
 
         if(cockySpeak.login(userName, password)) {
-            App.setRoot("profile");
+            App.setRoot("home");
         } else {
             errorMessage.setVisible(true);
         }
